@@ -17,8 +17,8 @@ export default function budget_filtering() {
       <div className='trangle'> 
       </div>   
 
-      <p className='p3'>Rs:</p>    
-      <input className='input1' type="number" placeholder='Enter Your Budget Range'/>    
+     
+      <span className='span1'>Rs:</span><input className='input1' type="number" placeholder='Enter Your Budget Range'/>    
       <button className='button1'>Search</button>  
     </div>
   )

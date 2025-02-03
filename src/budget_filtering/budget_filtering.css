@@ -51,9 +51,11 @@
 .input1{
     margin-left: 20px;
     height: 40px;
-    width: 250px;
+    width: 265px;
     padding: 10px;
     font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    
     
 }
 
@@ -68,11 +70,14 @@
     background-color: rgb(0, 255, 0);
     border: none;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif;
 
 }
 
-.p3{
+.span1{
+    font-size: 25px;
     margin-left: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 

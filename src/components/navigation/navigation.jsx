@@ -15,7 +15,7 @@ export default function () {
                 <li className='list2'>Profile</li>
             </ul>
         </div>
-        <hr style={{ border: "2px solid black" }} />
+        <hr style={{ border: "1px solid black" }} />
     </div>
   )
 }

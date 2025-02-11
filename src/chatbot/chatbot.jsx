@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Chatbot() {
+export default function chatbot() {
   return (
     <div>chatbot</div>
   )

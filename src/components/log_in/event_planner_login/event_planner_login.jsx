@@ -60,7 +60,7 @@ export default function event_planner_login() {
 
           <br />
           
-          <button className={styles.b1}>Sign up</button>
+          <button className={styles.b1} type='submit'>Sign up</button>
           <p className={styles.p2}>Already have a account? <span className={styles.span}>Login</span></p>
 
         </div>

@@ -1,0 +1,49 @@
+.body{
+    background-image: url('./images/homepage.jpg');
+    /* height: 680px;*/
+    height: 700px; 
+    background-size:cover;
+    
+}
+
+.h1{
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding-top: 130px;
+    font-size: 40px;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+.p1{
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.b1{    
+    margin-top: 20px;
+   width: 220px;
+   height: 60px;
+   font-size: 15px;
+   border-radius: 50px;
+   background-color: black;
+   border: none;
+   color: rgb(255, 255, 255);
+   font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: color 0.5s ease;
+}
+
+.b1:hover{
+    color: red;
+}
+
+
+.container{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}

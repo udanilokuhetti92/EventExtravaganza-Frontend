@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function checklist() {
-    return (
-        <div>checklist</div>
-    )
+export default function chatbot() {
+  return (
+    <div>chatbot</div>
+  )
 }

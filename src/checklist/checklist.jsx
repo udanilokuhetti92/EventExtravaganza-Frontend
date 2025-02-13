@@ -1,9 +1,14 @@
-import React from 'react'
+import React , { useState } from 'react'
 import Navigation from '../components/navigation/navigation'
 import '../budget_filtering/budget_filtering.css'
 import '../checklist/checklist.css'
 
 export default function checklist() {
+  const [isPopupOpen , setIsPopupOpen] = useState(false);
+
+  const openPopup = () => setIsPopupOpen(true);
+  const closePopup = () => setIsPopupOpen(false);
+
   return (
     <div>
       <Navigation />
@@ -21,7 +26,51 @@ export default function checklist() {
 
       <div className='trangle'></div>
 
-      <button className='button1'>Create Checklist</button>
+      <button className='button1' onClick={openPopup}>Create Checklist</button>
+
+      {/* Popup Window */}
+      {isPopupOpen && (
+        <div className='popup'>
+          <div className='popup-content'>
+            <span className='close-btn' onClick={closePopup}>&times;</span>
+            <h2>Create your checklist</h2>
+            <form>
+              <div className='left-col'>
+                <p>Checklist Name:</p>
+                <input className='input1' type='text' placeholder='Enter the name of the checklist'/>
+              </div>
+              <div className='right-col'>
+                <p>Oraganizer Name:</p>
+                <input className='input1' type='text' placeholder='Enter the name of organizer'/>
+              </div>
+            </form>
+            <p><b>Start adding tasks to your event checklist</b></p>
+            <form>
+              <div className='left-col'>
+                <p>Task Name:</p>
+                <input className='input1' type='text'/>
+                <p>Status:</p>
+                <select id='status'>
+                  <option value='Not Started' selected>Not Started</option>
+                  <option value='Pending'>Pending</option>
+                  <option value='Completed'>Complete</option>
+                </select> 
+              </div>
+              <div className='right-col'>
+                <p>Due Date:</p>
+                <input type='Date' className='input1' />
+                <p>Priority Level:</p>
+                <select id='priority'>
+                  <option value='High' selected>High</option>
+                  <option value='Medium'>Medium</option>
+                  <option value='Low'>Low</option>
+                </select>
+              </div>
+            </form>
+            <button className='button1' onClick={closePopup}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }

@@ -1,6 +1,8 @@
 import {useState} from 'react'
 
-export default function chatbot() {
+export default function Chatbot() {
+  const[messages,setMessages]=useState([]);
+  const[input,setInput]=useState('');
   return (
     <div className="chatbot-container">
       <div className="messages">
@@ -9,7 +11,7 @@ export default function chatbot() {
             {msg.content}
           </div>
         ))}
-        <div ref={messagesEndRef}/>
+        
       </div>
       <div className="input-container">
         <input

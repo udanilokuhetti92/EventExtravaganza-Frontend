@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import './chatbot.css'
+import './navigation.module.css'
 
 export default function Chatbot() {
   const[messages,setMessages]=useState([]);

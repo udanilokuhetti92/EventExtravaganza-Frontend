@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import './chatbot.css'
 
 export default function Chatbot() {
   const[messages,setMessages]=useState([]);
@@ -26,6 +27,8 @@ export default function Chatbot() {
         <input
           type="text"
           value={input}
+          onChange={(e) =>setInput(e.target.value)}
+          placeholder="Type a message.."
         />
         <button onClick={sendMessage}>Send</button>
       </div>

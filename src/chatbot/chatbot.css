@@ -15,6 +15,18 @@
     flex-grow: 1;
     overflow-y: auto;
     padding: 5px;
+    display: flex;
+    flex-direction: column;
+    max-height: 320px;
+}
+
+.messages::-webkit-scrollbar{
+    width: 6px;
+}
+
+.messages::-webkit-scrollbar-thumb{
+    background-color:#007bff;
+    border-radius: 3px;
 }
 
 .message {
@@ -23,6 +35,7 @@
     border-radius: 5px;
     max-width: 80%;
     word-wrap: break-word;
+    display:inline-block;
 }
 
 .message.user {

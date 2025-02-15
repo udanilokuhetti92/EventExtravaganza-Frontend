@@ -141,9 +141,16 @@ export default function Checklist() {
                 </select>
               </div>
             </div>
-            <button className='button1' onClick={addTask}>Add Task</button>
-            <br />
-            <button className='button2' onClick={openPreview}>Create</button>
+            <div className='buttons'>
+              <div className='left-col'>
+                <br/>
+                <button className='button1' onClick={addTask}>Add Task</button>
+              </div>
+              <div className='right-col'>
+                <br/>
+                <button className='button2' onClick={openPreview}>Preview</button>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -155,7 +162,6 @@ export default function Checklist() {
             <span className='close-btn' onClick={closePreview}>&times;</span>
             <h2>Checklist Preview</h2>
             <div className='preview-section'>
-              <h3>Preview</h3>
               <p><strong>Checklist Name:</strong> {checklistName}</p>
               <p><strong>Organizer Name:</strong> {organizerName}</p>
               <table>
@@ -178,6 +184,10 @@ export default function Checklist() {
                   ))}
                 </tbody>
               </table>
+            </div>
+            <br/>
+            <div className='create-button'>
+              <button className='button2' onClick={closePreview}>Create</button>
             </div>
           </div>
         </div>

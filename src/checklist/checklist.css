@@ -71,7 +71,7 @@
     cursor: pointer;
 }
 
-.task-input{
+.task-input, .buttons{
     display:flex;
 }
 
@@ -104,25 +104,25 @@ select{
 .preview-section {
     margin-top: 20px;
     padding: 15px;
-    border: 1px solid #ccc; /* Light gray border */
-    border-radius: 8px; /* Rounded corners */
-    background-color: #f9f9f9; /* Light background color */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    font-family: 'Poppins', sans-serif; /* Consistent font */
+    border: 1px solid #ccc; 
+    border-radius: 8px;
+    background-color: #f9f9f9; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    font-family: 'Poppins', sans-serif; 
 }
 
 .preview-section h3 {
     margin-bottom: 10px;
-    color: #333; /* Darker text color for the heading */
+    color: #333; 
 }
 
 .preview-section p {
-    margin: 5px 0; /* Space between paragraphs */
-    color: #555; /* Slightly lighter text color for the content */
+    margin: 5px 0; 
+    color: #555; 
 }
 
 .preview-section strong {
-    color: #000; /* Bold text color */
+    color: #000; 
 }
 
 .preview-section table {
@@ -139,4 +139,17 @@ select{
 
 .preview-section th {
     background-color: #f2f2f2;
+}
+
+.create-button button, .buttons button{
+    height: 60px;
+    width: auto;
+    margin-left: 20px;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 30px;
+    background-color: rgb(181, 236, 181);
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
 }

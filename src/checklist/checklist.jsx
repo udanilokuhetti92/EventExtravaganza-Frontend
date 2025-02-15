@@ -286,6 +286,7 @@ export default function Checklist() {
               </div>
             </div>
             <div className='edit-button'>
+              <br/>
               <button className='button2' onClick={updateTask}>Update Task</button>
             </div>
           </div>

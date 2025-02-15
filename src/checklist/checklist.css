@@ -141,7 +141,7 @@ select{
     background-color: #f2f2f2;
 }
 
-.create-button button, .buttons button{
+.create-button button, .buttons button, .edit-button button{
     height: 60px;
     width: auto;
     margin-left: 20px;

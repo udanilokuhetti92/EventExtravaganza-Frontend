@@ -12,6 +12,7 @@ export default function Checklist() {
   const [taskStatus, setTaskStatus] = useState('Not Started');
   const [dueDate, setDueDate] = useState('');
   const [priorityLevel, setPriorityLevel] = useState('High');
+  const [tasks, setTasks] = useState([]);
 
   const openPopup = () => setIsPopupOpen(true);
   const closePopup = () => {
@@ -21,16 +22,34 @@ export default function Checklist() {
     setTaskStatus('Not Started');
     setDueDate('');
     setPriorityLevel('High');
+    setTasks([]);
     setIsPopupOpen(false);
   };
 
   const openPreview = () => {
-    setIsPopupOpen(false); // Close the input popup
-    setIsPreviewOpen(true); // Open the preview popup
+    setIsPopupOpen(false);
+    setIsPreviewOpen(true);
   };
 
   const closePreview = () => {
-    setIsPreviewOpen(false); // Close the preview popup
+    setIsPreviewOpen(false);
+  };
+
+  const addTask = () => {
+    // Record the current task and reset the input fields
+    const newTask = {
+      name: taskName,
+      status: taskStatus,
+      dueDate: dueDate,
+      priority: priorityLevel,
+    };
+    setTasks([...tasks, newTask]);
+
+    // Reset input fields
+    setTaskName('');
+    setTaskStatus('Not Started');
+    setDueDate('');
+    setPriorityLevel('High');
   };
 
   return (
@@ -81,7 +100,7 @@ export default function Checklist() {
               </div>
             </form>
             <p><b>Start adding tasks to your event checklist</b></p>
-            <form>
+            <div className='task-input'>
               <div className='left-col'>
                 <p>Task Name:</p>
                 <input
@@ -121,7 +140,9 @@ export default function Checklist() {
                   <option value='Low'>Low</option>
                 </select>
               </div>
-            </form><br />
+            </div>
+            <button className='button1' onClick={addTask}>Add Task</button>
+            <br />
             <button className='button2' onClick={openPreview}>Create</button>
           </div>
         </div>
@@ -137,10 +158,26 @@ export default function Checklist() {
               <h3>Preview</h3>
               <p><strong>Checklist Name:</strong> {checklistName}</p>
               <p><strong>Organizer Name:</strong> {organizerName}</p>
-              <p><strong>Task Name:</strong> {taskName}</p>
-              <p><strong>Status:</strong> {taskStatus}</p>
-              <p><strong>Due Date:</strong> {dueDate}</p>
-              <p><strong>Priority Level:</strong> {priorityLevel}</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Task Name</th>
+                    <th>Status</th>
+                    <th>Due Date</th>
+                    <th>Priority Level</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tasks.map((task, index) => (
+                    <tr key={index}>
+                      <td>{task.name}</td>
+                      <td>{task.status}</td>
+                      <td>{task.dueDate}</td>
+                      <td>{task.priority}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

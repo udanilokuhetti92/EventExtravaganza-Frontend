@@ -71,6 +71,10 @@
     cursor: pointer;
 }
 
+.task-input{
+    display:flex;
+}
+
 .input1{
     margin-left: 20px;
     height: 10px;
@@ -119,4 +123,20 @@ select{
 
 .preview-section strong {
     color: #000; /* Bold text color */
+}
+
+.preview-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.preview-section th, .preview-section td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.preview-section th {
+    background-color: #f2f2f2;
 }

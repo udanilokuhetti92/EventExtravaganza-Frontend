@@ -14,6 +14,7 @@ export default function Checklist() {
   const [priorityLevel, setPriorityLevel] = useState('High');
   const [tasks, setTasks] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null); // Track which task is being edited
+  const [message, setMessage] = useState(''); // Message to display after deletion
 
   const openPopup = () => setIsPopupOpen(true);
   const closePopup = () => {
@@ -34,6 +35,7 @@ export default function Checklist() {
 
   const closePreview = () => {
     setIsPreviewOpen(false);
+    setMessage(''); // Clear message when closing preview
   };
 
   const addTask = () => {
@@ -79,6 +81,15 @@ export default function Checklist() {
     setDueDate('');
     setPriorityLevel('High');
     setEditingIndex(null); // Clear editing index
+  };
+
+  const deleteTask = (index) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this task?");
+    if (confirmDelete) {
+      const updatedTasks = tasks.filter((_, i) => i !== index); // Remove the task at the specified index
+      setTasks(updatedTasks);
+      setMessage("Task deleted successfully!"); // Set the message to display
+    }
   };
 
   return (
@@ -212,12 +223,14 @@ export default function Checklist() {
                       <td>{task.priority}</td>
                       <td>
                         <button onClick={() => editTask(index)}>Edit</button>
+                        <button onClick={() => deleteTask(index)}>Delete</button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+            {message && <p className="success-message">{message}</p>} {/* Display message after deletion */}
             <br />
             <div className='create-button'>
               <button className='button2' onClick={closePreview}>Create</button>
@@ -272,7 +285,9 @@ export default function Checklist() {
                 </select>
               </div>
             </div>
-            <button className='button2' onClick={updateTask}>Update Task</button>
+            <div className='edit-button'>
+              <button className='button2' onClick={updateTask}>Update Task</button>
+            </div>
           </div>
         </div>
       )}

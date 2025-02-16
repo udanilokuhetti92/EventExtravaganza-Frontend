@@ -1,6 +1,7 @@
 import React from 'react'
 import Navigation from '../components/navigation/navigation'
 import '../budget_filtering/budget_filtering.css'
+import GoogleMapComponent from '../map/google_map_component'
 
 export default function budget_filtering() {
   return (
@@ -15,6 +16,7 @@ export default function budget_filtering() {
          price preferences.  This feature ensures <br /> that you can plan your dream event without   exceeding your financial limits,<br /> 
          making event planning hassle-free and affordable.</p>
       <div className='trangle'> 
+        
       </div>   
 
      

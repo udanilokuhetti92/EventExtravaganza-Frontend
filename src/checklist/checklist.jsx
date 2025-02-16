@@ -14,7 +14,7 @@ export default function Checklist() {
   const [priorityLevel, setPriorityLevel] = useState('High');
   const [tasks, setTasks] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null); // Track which task is being edited
-  const [message, setMessage] = useState(''); // Message to display after deletion
+  const [message, setMessage] = useState(''); // Message to display after actions
 
   const openPopup = () => setIsPopupOpen(true);
   const closePopup = () => {
@@ -26,6 +26,7 @@ export default function Checklist() {
     setPriorityLevel('High');
     setTasks([]);
     setIsPopupOpen(false);
+    setMessage(''); // Clear message when closing popup
   };
 
   const openPreview = () => {
@@ -52,6 +53,7 @@ export default function Checklist() {
     setTaskStatus('Not Started');
     setDueDate('');
     setPriorityLevel('High');
+    setMessage("Tasks added successfully!"); // Set the message to display
   };
 
   const editTask = (index) => {
@@ -81,6 +83,7 @@ export default function Checklist() {
     setDueDate('');
     setPriorityLevel('High');
     setEditingIndex(null); // Clear editing index
+    setMessage("Task updated successfully!"); // Set the message to display
   };
 
   const deleteTask = (index) => {
@@ -230,7 +233,7 @@ export default function Checklist() {
                 </tbody>
               </table>
             </div>
-            {message && <p className="success-message">{message}</p>} {/* Display message after deletion */}
+            {message && <p className="success-message">{message}</p>} {/* Display message after actions */}
             <br />
             <div className='create-button'>
               <button className='button2' onClick={closePreview}>Create</button>
@@ -286,7 +289,7 @@ export default function Checklist() {
               </div>
             </div>
             <div className='edit-button'>
-              <br/>
+              <br />
               <button className='button2' onClick={updateTask}>Update Task</button>
             </div>
           </div>

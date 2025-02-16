@@ -142,12 +142,11 @@ select{
 }
 
 .create-button button, .buttons button, .edit-button button{
-    height: 60px;
+    height: 50px;
     width: auto;
     margin-left: 20px;
-    font-size: 20px;
-    padding: 10px;
-    border-radius: 30px;
+    font-size: 18px;
+    border-radius: 20px;
     background-color: rgb(181, 236, 181);
     border: none;
     cursor: pointer;

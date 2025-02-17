@@ -24,6 +24,7 @@ export default function RatingForm({ onSubmit }) {
           <div className={styles.formHeader}>
             <h2 className={styles.title}>Rate Your Event Planner</h2>
           </div>
+
           <div className={styles.formContent}>
             <div className={styles.stars}>
               {[1, 2, 3, 4, 5].map((star) => (
@@ -39,6 +40,7 @@ export default function RatingForm({ onSubmit }) {
                 </button>
               ))}
             </div>
+
             <div className={styles.textareaWrapper}>
               <textarea
                 placeholder="Share your experience with this event planner..."
@@ -48,6 +50,7 @@ export default function RatingForm({ onSubmit }) {
               />
             </div>
           </div>
+          
           <div className={styles.formFooter}>
             <button type="submit" disabled={!rating || !comment.trim()} className={styles.submitButton}>
               Submit Review

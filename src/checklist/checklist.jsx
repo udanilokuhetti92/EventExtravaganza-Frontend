@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Navigation from '../components/navigation/navigation';
-import '../budget_filtering/budget_filtering.css';
-import '../checklist/checklist.css';
+import Styles from '../checklist/checklist.module.css';
 
 export default function Checklist() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -99,10 +98,10 @@ export default function Checklist() {
     <div>
       <Navigation />
 
-      <h3 className='h3'><span className='green-pipe'>|</span> Extravaganza unit</h3>
-      <p className='p1'>Crafted By Event Planners.<br />Perfect for Seamless <span className="box-text">Checklists</span></p>
+      <h3 className={Styles.h3}><span className={Styles["green-pipe"]}>|</span> Extravaganza unit</h3>
+      <p className={Styles.p1}>Crafted By Event Planners.<br />Perfect for Seamless <span className={Styles["box-text"]}>Checklists</span></p>
 
-      <p className='p2'>
+      <p className={Styles.p2}>
         Creating the perfect checklist for your event has never been easier! Simply <br />
         select the tasks you need, and our system will instantly generate a tailored <br />
         checklist that ensures no detail is missed. This feature makes planning your <br />
@@ -110,31 +109,31 @@ export default function Checklist() {
         throughout the planning process.
       </p>
 
-      <div className='trangle'></div>
+      <div className={Styles.trangle}></div>
 
-      <button className='button1' onClick={openPopup}>Create Checklist</button>
+      <button className={Styles.button1} onClick={openPopup}>Create Checklist</button>
 
       {/* Input Popup Window */}
       {isPopupOpen && (
-        <div className='popup'>
-          <div className='popup-content'>
-            <span className='close-btn' onClick={closePopup}>&times;</span>
+        <div className={Styles.popup}>
+          <div className={Styles["popup-content"]}>
+            <span className={Styles["close-btn"]} onClick={closePopup}>&times;</span>
             <h2>Create your checklist</h2>
             <form>
-              <div className='left-col'>
+              <div className={Styles["left-col"]}>
                 <p>Checklist Name:</p>
                 <input
-                  className='input1'
+                  className={Styles.input1}
                   type='text'
                   placeholder='Enter the name of the checklist'
                   value={checklistName}
                   onChange={(e) => setChecklistName(e.target.value)}
                 />
               </div>
-              <div className='right-col'>
+              <div className={Styles["right-col"]}>
                 <p>Organizer Name:</p>
                 <input
-                  className='input1'
+                  className={Styles.input1}
                   type='text'
                   placeholder='Enter the name of organizer'
                   value={organizerName}
@@ -143,11 +142,11 @@ export default function Checklist() {
               </div>
             </form>
             <p><b>Start adding tasks to your event checklist</b></p>
-            <div className='task-input'>
-              <div className='left-col'>
+            <div className={Styles["task-input"]}>
+              <div className={Styles["left-col"]}>
                 <p>Task Name:</p>
                 <input
-                  className='input1'
+                  className={Styles.input1}
                   type='text'
                   placeholder='Enter name of the task'
                   value={taskName}
@@ -164,11 +163,11 @@ export default function Checklist() {
                   <option value='Completed'>Complete</option>
                 </select>
               </div>
-              <div className='right-col'>
+              <div className={Styles["right-col"]}>
                 <p>Due Date:</p>
                 <input
                   type='date'
-                  className='input1'
+                  className={Styles.input1}
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
                 />
@@ -184,14 +183,14 @@ export default function Checklist() {
                 </select>
               </div>
             </div>
-            <div className='buttons'>
-              <div className='left-col'>
+            <div className={Styles.buttons}>
+              <div className={Styles["left-col"]}>
                 <br />
-                <button className='button1' onClick={addTask}>Add Task</button>
+                <button className={Styles.button1} onClick={addTask}>Add Task</button>
               </div>
-              <div className='right-col'>
+              <div className={Styles["right-col"]}>
                 <br />
-                <button className='button2' onClick={openPreview}>Preview</button>
+                <button className={Styles.button2} onClick={openPreview}>Preview</button>
               </div>
             </div>
           </div>
@@ -200,11 +199,11 @@ export default function Checklist() {
 
       {/* Preview Popup Window */}
       {isPreviewOpen && (
-        <div className='popup'>
-          <div className='popup-content'>
-            <span className='close-btn' onClick={closePreview}>&times;</span>
+        <div className={Styles.popup}>
+          <div className={Styles["popup-content"]}>
+            <span className={Styles["close-btn"]} onClick={closePreview}>&times;</span>
             <h2>Checklist Preview</h2>
-            <div className='preview-section'>
+            <div className={Styles["preview-section"]}>
               <p><strong>Checklist Name:</strong> {checklistName}</p>
               <p><strong>Organizer Name:</strong> {organizerName}</p>
               <table>
@@ -233,10 +232,10 @@ export default function Checklist() {
                 </tbody>
               </table>
             </div>
-            {message && <p className="success-message">{message}</p>} {/* Display message after actions */}
+            {message && <p className={Styles["success-message"]}>{message}</p>} {/* Display message after actions */}
             <br />
-            <div className='create-button'>
-              <button className='button2' onClick={closePreview}>Create</button>
+            <div className={Styles["create-button"]}>
+              <button className={Styles.button2} onClick={closePreview}>Create</button>
             </div>
           </div>
         </div>
@@ -244,14 +243,14 @@ export default function Checklist() {
 
       {/* Edit Task Popup */}
       {editingIndex !== null && (
-        <div className='popup'>
-          <div className='popup-content'>
+        <div className={Styles.popup}>
+          <div className={Styles["popup-content"]}>
             <h2>Edit Task</h2>
-            <div className='task-input'>
-              <div className='left-col'>
+            <div className={Styles["task-input"]}>
+              <div className={Styles["left-col"]}>
                 <p>Task Name:</p>
                 <input
-                  className='input1'
+                  className={Styles.input1}
                   type='text'
                   placeholder='Enter name of the task'
                   value={taskName}
@@ -268,11 +267,11 @@ export default function Checklist() {
                   <option value='Completed'>Complete</option>
                 </select>
               </div>
-              <div className='right-col'>
+              <div className={Styles["right-col"]}>
                 <p>Due Date:</p>
                 <input
                   type='date'
-                  className='input1'
+                  className={Styles.input1}
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
                 />
@@ -288,9 +287,9 @@ export default function Checklist() {
                 </select>
               </div>
             </div>
-            <div className='edit-button'>
+            <div className={Styles["edit-button"]}>
               <br />
-              <button className='button2' onClick={updateTask}>Update Task</button>
+              <button className={Styles.button2} onClick={updateTask}>Update Task</button>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import './chatbot.css'
-import './navigation.module.css'
+import '../components/navigation/navigation'
+import '../components/navigation/navigation.module.css'
 
 
 export default function Chatbot() {

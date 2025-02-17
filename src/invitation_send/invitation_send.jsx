@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navigation from '../components/navigation/navigation';
-
+import '../invitation_send/invitation_send.css';
 
 export default function EventInvitation() {
   const [eventDetails, setEventDetails] = useState({

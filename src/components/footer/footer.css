@@ -1,5 +1,5 @@
 footer {
-    background-color: rgb(72, 8, 86);
+    background-color: #551488;
     color: #cb73e8;
     padding: 4px;
     text-align: center;
@@ -25,6 +25,7 @@ footer {
 ul li{
     margin-bottom: 5px;
     text-align: left;
+    
 }
 
 .footer-links a {
@@ -61,7 +62,7 @@ h3,a,p{
 .card {
     width: fit-content;
     height: fit-content;
-    background-color: rgb(72, 8, 86);
+    background-color: #551488;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -124,6 +125,7 @@ h3,a,p{
 
   .left{
     flex:1;
+    
   }
 
   .right{

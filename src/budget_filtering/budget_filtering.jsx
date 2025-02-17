@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navigation from '../components/navigation/navigation';
 import '../budget_filtering/budget_filtering.css';
+import Footer from '../components/footer/footer'
 
 export default function BudgetFiltering() {
   const [budget, setBudget] = useState(''); // State to store the user's input
@@ -91,6 +92,7 @@ export default function BudgetFiltering() {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

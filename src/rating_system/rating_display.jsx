@@ -7,6 +7,7 @@ export default function RatingDisplay({ ratings }) {
       <div className={styles.ratingSection}>
         <h2 className={styles.title}>Reviews</h2>
       </div>
+      
       <div className={styles.reviewsWrapper}>
         {ratings.map((rating) => (
           <div key={rating.id} className={styles.reviewCard}>

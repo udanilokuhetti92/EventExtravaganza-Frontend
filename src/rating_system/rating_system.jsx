@@ -20,15 +20,15 @@ export default function RatingSystem() {
       rating: 4,
       comment:
         "Very professional and responsive. The corporate event was well-executed, though there were minor timing issues.",
-      organizerName: "Sarah Johnson",
+      organizerName: "Pasan De Silva",
       createdAt: "2024-02-10T15:30:00Z",
     },
     {
       id: "3",
-      rating: 5,
+      rating: 4,
       comment:
         "Outstanding service! The birthday party exceeded our expectations. Every detail was perfect, from decorations to catering.",
-      organizerName: "Michael Brown",
+      organizerName: "Sara Kalpani",
       createdAt: "2024-02-08T09:15:00Z",
     },
   ])

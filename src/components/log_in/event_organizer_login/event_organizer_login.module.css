@@ -3,6 +3,7 @@
     text-align: center;
     margin-top: 60px;
     font-family: 'Poppins', sans-serif;
+    color: rgb(0, 255, 0);
 }
 
 .p1{
@@ -16,6 +17,7 @@
     font-size: 15px;
     margin-left: 120px;
     font-family: 'Poppins', sans-serif;
+    color: white;
 }
 
 .i1{
@@ -24,9 +26,11 @@
     margin-left: 120px;
     margin-top: 5px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid white;
     padding: 2px;
     font-family: 'Poppins', sans-serif;
+    background-color: black;
+    color: white;
 }
 
 .b1{
@@ -35,8 +39,8 @@
     width: 500px;
     margin-left: 120px;
     font-size: 15px;
-    background-color: rgb(1, 118, 190);
-    color: white;
+    background-color: rgb(0, 255, 0);
+    color: black;
     border-radius: 5px;
     border: none;
     font-family: 'Poppins', sans-serif;
@@ -50,7 +54,7 @@
 }
 
 .span{
-    color: rgb(1, 118, 190);
+    color: blue;
     cursor: pointer;
 }
 
@@ -98,4 +102,5 @@
 .container{
     display: flex;
     justify-content: center;
+    background-color: black;
 }

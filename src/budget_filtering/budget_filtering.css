@@ -1,7 +1,22 @@
+  .container {
+    background-image: url('../budget_filtering/images/budget9.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100vw; 
+    height: 100vh;
+  }
+
+
+.container2{
+    display: flex;
+}
+
 .h3{
     margin-top: 50px;
     margin-left: 20px;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
 }
 
 .green-pipe{
@@ -13,15 +28,17 @@
     margin-top: 40px;
     margin-left: 20px;
     font-size: 70px;
+    color: white;
 }
 
 .box-text {
     display: inline-block; 
     padding: 5px 10px; 
-    border: 2px solid grey; 
+    border: 2px solid #560bad; 
     border-radius: 20px; 
     /* font-weight: bold;  */
-    color: rgb(0, 161, 0);
+    /* color: rgb(0, 255, 0); */
+    color: #551488;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -30,9 +47,10 @@
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
     margin-top: -30px;
+    color: grey;
 }
 
-.trangle{
+/* .trangle{
     position: absolute;
     top: 100px;
     right: 0px;
@@ -46,7 +64,7 @@
     border-top-left-radius: 100%;
     border-bottom-left-radius: 40%;
 
-}
+} */
 
 .input1{
     margin-left: 20px;
@@ -55,31 +73,205 @@
     padding: 10px;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
-    
-    
+    background-color: black;
+    color: white;
+    border: 2px solid #560bad;
+    border-radius: 6px;
+}
+
+.input1::placeholder{
+    color: white;
+    font-size: 17px;
 }
 
 
-.button1{
+/* From Uiverse.io by cssbuttons-io */ 
+.button1 {
+    --color: #560bad;
+    font-family: inherit;
+    display: inline-block;
+    width: 8em;
     height: 60px;
-    width: 150px;
-    margin-left: 20px;
-    font-size: 20px;
-    padding: 10px;
-    border-radius: 40px;
-    background-color: rgb(0, 255, 0);
-    border: none;
+    line-height: 2.5em;
+    margin: 20px;
+    position: relative;
     cursor: pointer;
+    overflow: hidden;
+    border: 2px solid var(--color);
+    transition: color 0.5s;
+    z-index: 1;
+    font-size: 17px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: white;
+    background-color: black;
     font-family: 'Poppins', sans-serif;
 
-}
+  }
+  
+  .button1:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: var(--color);
+    height: 150px;
+    width: 200px;
+    border-radius: 50%;
+  }
+  
+  .button1:hover {
+    color: #fff;
+  }
+  
+  .button1:before {
+    top: 100%;
+    left: 100%;
+    transition: all 0.7s;
+  }
+  
+  .button1:hover:before {
+    top: -30px;
+    left: -30px;
+  }
+  
+  .button1:active:before {
+    background: #3a0ca3;
+    transition: background 0s;
+  }
+  
 
 .span1{
     font-size: 25px;
     margin-left: 20px;
     font-family: 'Poppins', sans-serif;
+    color:white;
 }
 
+.box1{
+    height: 625px;
+    width: 900px;
+    border: 0px solid white;
+    position: relative;
+}
 
+.box2{
+    height: 550px;
+    width: 600px;
+    /* border: 2px solid #560bad; */
+    position: relative;
+    border-radius: 20px;
+    margin-top: 50px;
+    
+    
+    
+}
 
+.box2h1{
+    text-align: center;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 30px;
 
+}
+
+.smallbox {
+    height: 440px;
+    padding: 10px;
+    border: 2px solid #551488;
+    border-radius: 5px;
+    background-color: none;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 20px;
+    color: white;
+  }
+  
+  .smallbox div {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 0px solid #551488;
+    background-color: black;
+    border-radius: 20px;
+    color: white;
+    border: 2px solid #551488;
+  }
+  
+  .smallbox p {
+    margin: 0;
+    font-size: 14px;
+    color: white;
+  }
+
+  .boxp1{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: black;
+  }
+
+/* From Uiverse.io by AbanoubMagdy1 */ 
+.loader {
+    --dim: 3rem;
+    width: var(--dim);
+    height: var(--dim);
+    position: relative;
+    animation: spin988 2s linear infinite;
+    margin-top: 20px;
+   
+  }
+  
+  .loader .circle {
+    --color: white;
+    --dim: 1.2rem;
+    width: var(--dim);
+    height: var(--dim);
+    background-color: var(--color);
+    border-radius: 50%;
+    position: absolute;
+  }
+  
+  .loader .circle:nth-child(1) {
+    top: 0;
+    left: 0;
+  }
+  
+  .loader .circle:nth-child(2) {
+    top: 0;
+    right: 0;
+  }
+  
+  .loader .circle:nth-child(3) {
+    bottom: 0;
+    left: 0;
+  }
+  
+  .loader .circle:nth-child(4) {
+    bottom: 0;
+    right: 0;
+  }
+  
+  @keyframes spin988 {
+    0% {
+      transform: scale(1) rotate(0);
+    }
+  
+    20%, 25% {
+      transform: scale(1.3) rotate(90deg);
+    }
+  
+    45%, 50% {
+      transform: scale(1) rotate(180deg);
+    }
+  
+    70%, 75% {
+      transform: scale(1.3) rotate(270deg);
+    }
+  
+    95%, 100% {
+      transform: scale(1) rotate(360deg);
+    }
+  }
+
+  .boxloader{
+    display: flex;
+    justify-content: center;
+  }
+  

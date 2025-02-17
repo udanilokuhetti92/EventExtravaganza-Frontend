@@ -1,8 +1,11 @@
+
+
 h1{
     font-size: 30px;
     text-align: center;
-    margin-top: 60px;
+    /* margin-top: 60px; */
     font-family: 'Poppins', sans-serif;
+    color: rgb(0, 255, 0);
 }
 
 .p1{
@@ -14,29 +17,35 @@ h1{
 
 .box1{
     margin-top: 20px;
-    height: 500px;
+    height: 600px;
     width: 100%;
     border: 2px solid black;
 }
 
 .box2{
     margin-top: 20px;
-    height: 500px;
+    height: 600px;
     width: 100%;
     border: 2px solid black;
     
     
 }
 
-.container{
-    display: flex;
+/* .container{
     justify-content: center;
+    display: flex;
+} */
+
+.container2{
+    justify-content: center;
+    display: flex;
 }
 
 .l1{
     font-size: 15px;
     margin-left: 120px;
     font-family: 'Poppins', sans-serif;
+    color: white;
 }
 
 .i1{
@@ -45,9 +54,11 @@ h1{
     margin-left: 120px;
     margin-top: 5px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid white;
     padding: 2px;
     font-family: 'Poppins', sans-serif;
+    background-color: black;
+    color: white;
 }
 
 .textarea{
@@ -56,9 +67,11 @@ h1{
     margin-left: 120px;
     margin-top: 5px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid white;
     padding: 2px;
     font-family: 'Poppins', sans-serif;
+    background-color: black;
+    color: white;
 }
 
 .b1{
@@ -67,8 +80,8 @@ h1{
     width: 500px;
     margin-left: 120px;
     font-size: 15px;
-    background-color: rgb(1, 118, 190);
-    color: white;
+    background-color: rgb(0, 255, 0);
+    color: black;
     border-radius: 5px;
     border: none;
     font-family: 'Poppins', sans-serif;
@@ -84,4 +97,14 @@ h1{
 .span{
     color: rgb(1, 118, 190);
     cursor: pointer;
+}
+
+.main{
+    background-color: black;
+    /* background-image: url('../images/budget9.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100vw; 
+    height: 100vh; */
 }

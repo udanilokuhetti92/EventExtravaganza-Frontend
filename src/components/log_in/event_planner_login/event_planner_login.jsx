@@ -44,7 +44,7 @@ export default function EventPlannerLogin() {
       City: formData.City,
       Gender: formData.Gender,
       Speciality: formData.Speciality,
-      Budget: parseFloat(formData.Budget), // Convert to number
+      Budget: formData.Budget, // Convert to number
       Experience: formData.Experience,
     };
 
@@ -73,12 +73,12 @@ export default function EventPlannerLogin() {
   };
 
   return (
-    <div>
+    <div className={styles.main}>
       <h1 className={styles.h1}>Create Event Planner Account</h1>
       <p className={styles.p1}>Provide correct information to setup your account</p>
 
       <div className={styles.container}>
-        <form onSubmit={handleSubmit}>
+        <form className={styles.container2} onSubmit={handleSubmit}>
           <div className={styles.box1}>
             <label className={styles.l1} htmlFor="FullName">Full Name</label> <br />
             <input
@@ -192,7 +192,7 @@ export default function EventPlannerLogin() {
               type="number"
               name="Budget"
               placeholder="Enter your highest budget value"
-              value={formData.HighestBudgetValue}
+              value={formData.Budget}
               onChange={handleInputChange}
               required
             />

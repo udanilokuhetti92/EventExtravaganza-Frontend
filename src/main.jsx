@@ -8,10 +8,10 @@ import Event_Planner_Login from './components/log_in/event_planner_login/event_p
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <Home_page/> */}
+    <Home_page/>
     {/* <BudgetFiltering/> */}
     {/* <Event_Organizer_Login/> */}
-    <Event_Planner_Login/>
+    {/* <Event_Planner_Login/> */}
     
   </StrictMode>
 )

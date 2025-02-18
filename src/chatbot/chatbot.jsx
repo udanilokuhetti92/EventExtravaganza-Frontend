@@ -2,6 +2,8 @@ import {useState} from 'react'
 import './chatbot.css'
 import '../components/navigation/navigation'
 import '../components/navigation/navigation.module.css'
+import '../components/footer/footer'
+import '../components/footer/footer.module.css'
 
 
 export default function Chatbot() {

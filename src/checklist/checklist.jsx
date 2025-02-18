@@ -119,7 +119,7 @@ export default function Checklist() {
           <div className={Styles["popup-content"]}>
             <span className={Styles["close-btn"]} onClick={closePopup}>&times;</span>
             <h2>Create your checklist</h2>
-            <form>
+            <form className='form'>
               <div className={Styles["left-col"]}>
                 <p>Checklist Name:</p>
                 <input
@@ -154,6 +154,7 @@ export default function Checklist() {
                 />
                 <p>Status:</p>
                 <select
+                  className='select'
                   id='status'
                   value={taskStatus}
                   onChange={(e) => setTaskStatus(e.target.value)}
@@ -173,6 +174,7 @@ export default function Checklist() {
                 />
                 <p>Priority Level:</p>
                 <select
+                  className='select'
                   id='priority'
                   value={priorityLevel}
                   onChange={(e) => setPriorityLevel(e.target.value)}
@@ -258,6 +260,7 @@ export default function Checklist() {
                 />
                 <p>Status:</p>
                 <select
+                  className='select'
                   id='status'
                   value={taskStatus}
                   onChange={(e) => setTaskStatus(e.target.value)}
@@ -277,6 +280,7 @@ export default function Checklist() {
                 />
                 <p>Priority Level:</p>
                 <select
+                  className='select'
                   id='priority'
                   value={priorityLevel}
                   onChange={(e) => setPriorityLevel(e.target.value)}

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../event_organizer_login/event_organizer_login.module.css';
+import { useNavigate } from "react-router-dom";
+
 
 export default function EventOrganizerLogin() {
   // State to store form data
@@ -53,6 +55,7 @@ export default function EventOrganizerLogin() {
       if (response.ok) {
         alert('Account created successfully!');
         console.log(result);
+        navigate("/Home");
       } else {
         alert(`Error: ${result.message}`);
       }
@@ -61,6 +64,8 @@ export default function EventOrganizerLogin() {
       alert('An error occurred while submitting the form.');
     }
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
@@ -142,16 +147,6 @@ export default function EventOrganizerLogin() {
         <p className={styles.p2}>
           Already have an account? <span className={styles.span}>Login</span>
         </p>
-      </div>
-
-      <div className={styles.box2}>
-        <div className={styles.box3}>
-          <p className={styles.p3}>
-            At Event Extravaganza, our platform is designed with event organizers in mind. We
-            streamline the entire event management process by offering powerful tools that let you
-            oversee every detail—from vendor coordination to real-time event updates.
-          </p>
-        </div>
       </div>
     </div>
   );

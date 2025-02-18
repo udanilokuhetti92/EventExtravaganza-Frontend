@@ -64,16 +64,10 @@ export default function BudgetFiltering() {
         </div>
 
         <div className='box2'>
-          <div className='boxloader'>
-            <div class="loader">
-              <div class="circle"></div>
-              <div class="circle"></div>
-              <div class="circle"></div>
-              <div class="circle"></div>
-            </div>
+        
 
             <h1 className='box2h1'>Available Event Planners</h1>
-          </div>
+        
 
           <hr style={{ border: "2px solid #551488" }} />
 

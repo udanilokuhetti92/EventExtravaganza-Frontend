@@ -1,3 +1,4 @@
+
 .h3{
     margin-top: 50px;
     margin-left: 20px;
@@ -45,8 +46,8 @@
     right: 0px;
 
     
-    height: 600px;
-    width: 600px;
+    height: 590px;
+    width: 520px;
     border: 0px solid black;
     background-image: url(/src/checklist/images/checklist_background.jpg);
     background-size: cover;
@@ -192,4 +193,84 @@ select{
     border: none;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
+}
+.popup-content {
+    background: rgba(255, 255, 255, 0.95); /* Slightly more opaque for readability */
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%; /* Responsive */
+    max-width: 650px; /* Prevents excessive stretching */
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+    position: relative;
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 20px; /* Ensures even spacing */
+    margin-top: 15px;
+    align-items: center;
+}
+
+.inputGroup p {
+    margin-left:20px;
+    margin-bottom: 5px;
+    font-size: 15px;
+    color: #333;
+    text-align: left;
+}
+
+.input1, .select {
+    width: 90%;
+    padding: 10px;
+    height:20px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    transition: border 0.3s ease-in-out;
+}
+
+.select{
+    height:40px;
+    width: 95%;
+}
+
+.input1:focus, .select:focus {
+    border-color: #009bd6; /* Highlight border on focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 155, 214, 0.5);
+}
+
+.buttonGroup {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Keeps buttons evenly spaced */
+}
+
+.button2 {
+    height: 50px;
+    width: 140px;
+    font-size: 18px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #008000, #00ff00); /* Darker green for better contrast */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.button2:hover {
+    background: linear-gradient(135deg, #00ff00, #008000);
+    transform: scale(1.05); /* Slight hover effect */
+}
+
+/* Ensure responsive design */
+@media (max-width: 600px) {
+    .formGrid {
+        grid-template-columns: 1fr; /* Stack inputs on smaller screens */
+    }
 }

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function EventOrganizerLogin() {
+  const navigate = useNavigate();
   // State to store form data
   const [formData, setFormData] = useState({
     FullName: '',
@@ -54,8 +55,8 @@ export default function EventOrganizerLogin() {
       const result = await response.json();
       if (response.ok) {
         alert('Account created successfully!');
+        navigate('/Home');
         console.log(result);
-        navigate("/Home");
       } else {
         alert(`Error: ${result.message}`);
       }
@@ -65,7 +66,8 @@ export default function EventOrganizerLogin() {
     }
   };
 
-  const navigate = useNavigate();
+  
+
 
   return (
     <div className={styles.container}>

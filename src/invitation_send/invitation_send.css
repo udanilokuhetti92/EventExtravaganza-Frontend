@@ -1,12 +1,10 @@
-/* General Styles */
-body {
+/* body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
   }
   
-  /* Container */
   .box1 {
     width: 90%;
     max-width: 800px;
@@ -18,7 +16,6 @@ body {
     text-align: center;
   }
   
-  /* Header */
   .h3 {
     font-size: 24px;
     color: #333;
@@ -35,7 +32,6 @@ body {
     margin-bottom: 15px;
   }
   
-  /* Form Styles */
   .event-form {
     display: flex;
     flex-direction: column;
@@ -61,7 +57,6 @@ body {
     font-size: 16px;
   }
   
-  /* Button */
   .button1 {
     width: 100%;
     max-width: 500px;
@@ -80,7 +75,6 @@ body {
     background-color: #218838;
   }
   
-  /* Responsive Design */
   @media (max-width: 768px) {
     .box1 {
       width: 95%;
@@ -105,4 +99,4 @@ body {
       padding: 10px;
     }
   }
-  
+   */

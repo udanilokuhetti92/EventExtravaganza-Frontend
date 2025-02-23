@@ -8,19 +8,25 @@ import Event_Organizer_Login from './components/log_in/event_organizer_login/eve
 import Event_Planner_Login from './components/log_in/event_planner_login/event_planner_login'
 import EventInvitation from "./invitation_send/invitation_send";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Event_Organizer_Signin from './components/sign_in/event_organizer_signin/event_organizer_signin'
+import Event_Planner_Signin from './components/sign_in/event_planner_signin/event_planner_signin'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
+      {/* <Home/> */}
+      {/* {<Event_Organizer_Signin/>} */}
+      {/* {<Event_Planner_Signin/>} */}
+      {<BudgetFiltering/>}
       <Routes>
-        <Route path='/' element={<Home_page/>} />
+        {/* <Route path='/' element={<Home_page/>} />
         <Route path='/organizer_login' element={<Event_Organizer_Login/>} />
         <Route path='/planner_login' element={<Event_Planner_Login/>} />
         <Route path='/Home' element={<Home/>} />
-        <Route path='/Budget_Filtering' element={<BudgetFiltering/>} />
-        <EventInvitation/>
-        {/* <BudgetFiltering/> */}
-        {/* {<Checklist/>} */}
+        <Route path='/Budget_Filtering' element={<BudgetFiltering/>} /> */}
+        {/* { <EventInvitation/> }
+        { <BudgetFiltering/> }
+        { <Checklist/> } */}
       </Routes>
     </Router>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navigation from '../components/navigation/navigation';
-import '../budget_filtering/budget_filtering.css';
+import  '../budget_filtering/budget_filtering.css';
 import Footer from '../components/footer/footer'
 
 export default function BudgetFiltering() {

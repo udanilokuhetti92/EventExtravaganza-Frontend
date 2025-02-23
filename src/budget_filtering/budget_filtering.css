@@ -1,4 +1,4 @@
-  .container {
+  /* .container {
     background-image: url('../budget_filtering/images/budget9.jpg');
     background-size: cover; 
     background-position: center; 
@@ -36,8 +36,6 @@
     padding: 5px 10px; 
     border: 2px solid #560bad; 
     border-radius: 20px; 
-    /* font-weight: bold;  */
-    /* color: rgb(0, 255, 0); */
     color: #551488;
     font-family: 'Poppins', sans-serif;
 }
@@ -49,22 +47,6 @@
     margin-top: -30px;
     color: grey;
 }
-
-/* .trangle{
-    position: absolute;
-    top: 100px;
-    right: 0px;
-
-    
-    height: 600px;
-    width: 650px;
-    border: 0px solid black;
-    background-image: url(/src/budget_filtering/images/budget.jpg);
-    background-size: cover;
-    border-top-left-radius: 100%;
-    border-bottom-left-radius: 40%;
-
-} */
 
 .input1{
     margin-left: 20px;
@@ -85,7 +67,6 @@
 }
 
 
-/* From Uiverse.io by cssbuttons-io */ 
 .button1 {
     --color: #560bad;
     font-family: inherit;
@@ -157,7 +138,6 @@
 .box2{
     height: 550px;
     width: 600px;
-    /* border: 2px solid #560bad; */
     position: relative;
     border-radius: 20px;
     margin-top: 50px;
@@ -206,4 +186,4 @@
     font-family: 'Poppins', sans-serif;
     color: black;
   }
-
+ */

@@ -17,7 +17,7 @@ export default function Navigation() {
             Services
             <div className={styles.dropdown}>
               <li  onClick={()=> navigate("/Budget_Filtering")}>Budget Filtering</li>
-              <li>Search Venues</li>
+              <li>Location Filtering</li>
               <li>Chat Bot</li>
             </div>
           </li>

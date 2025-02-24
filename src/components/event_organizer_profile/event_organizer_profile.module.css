@@ -1,0 +1,45 @@
+.container {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .heading {
+    color: #551488;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .form input,
+  .form select {
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  .submitButton {
+    background-color: #551488;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .submitButton:hover {
+    background-color: #4a0d7c;
+  }
+  
+  .profileCard {
+    background-color: #f3f3f3;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  

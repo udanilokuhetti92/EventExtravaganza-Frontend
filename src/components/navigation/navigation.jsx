@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import styles from '../navigation/navigation.module.css';
 
 export default function Navigation() {
@@ -19,7 +20,11 @@ export default function Navigation() {
             </div>
           </li>
           <li className={styles.list2}>Inbox</li>
-          <b><li className={styles.list3}>Profile</li></b>
+          <b>
+            <li className={styles.list3}>
+              <Link to="/event-organizer-profile" className={styles.link}>Profile</Link>
+            </li>
+          </b>
         </ul>
       </div>
       <hr style={{ border: "2px solid black" }} />

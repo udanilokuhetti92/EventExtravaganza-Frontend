@@ -1,34 +1,45 @@
-.h3 {
+  .container {
+    background-image: url('../location_filtering/images/budget9.jpg');
+    /* background-color: black; */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100vw; 
+    height: 100vh;
+  }
+  .h3{
     margin-top: 50px;
     margin-left: 20px;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
 }
-
-.green-pipe {
+.green-pipe{
     color: rgb(0, 255, 0);
+   
 }
 
-.p1 {
+.p1{
     margin-top: 40px;
     margin-left: 20px;
     font-size: 70px;
+    color: white;
 }
 
 .box-text {
     display: inline-block; 
     padding: 5px 10px; 
-    border: 1px solid grey; 
+    border: 2px solid #560bad; 
     border-radius: 20px; 
-    color: rgb(179, 90, 90);
+    color: #551488;
     font-family: 'Poppins', sans-serif;
 }
 
-.p2 {
+.p2{
     margin-left: 20px;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
     margin-top: -30px;
-    max-width: 60%;
+    color: white;
 }
 
 /* Google Map Fix */
@@ -53,30 +64,81 @@
     }
 }
 
-.input1 {
+.input1{
     margin-left: 20px;
     height: 40px;
     width: 265px;
     padding: 10px;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
+    background-color: black;
+    color: white;
+    border: 2px solid #560bad;
+    border-radius: 6px;
+}
+
+.input1::placeholder{
+    color: white;
+    font-size: 17px;
 }
 
 .button1 {
+    --color: #560bad;
+    font-family: inherit;
+    display: inline-block;
+    width: 8em;
     height: 60px;
-    width: 150px;
-    margin-left: 20px;
-    font-size: 20px;
-    padding: 10px;
-    border-radius: 40px;
-    background-color: rgb(228, 120, 126);
-    border: none;
+    line-height: 2.5em;
+    margin: 20px;
+    position: relative;
     cursor: pointer;
+    overflow: hidden;
+    border: 2px solid var(--color);
+    transition: color 0.5s;
+    z-index: 1;
+    font-size: 17px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: white;
+    background-color: black;
     font-family: 'Poppins', sans-serif;
-}
 
-.span1 {
+  }
+  
+  .button1:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: var(--color);
+    height: 150px;
+    width: 200px;
+    border-radius: 50%;
+  }
+  
+  .button1:hover {
+    color: #fff;
+  }
+  
+  .button1:before {
+    top: 100%;
+    left: 100%;
+    transition: all 0.7s;
+  }
+  
+  .button1:hover:before {
+    top: -30px;
+    left: -30px;
+  }
+  
+  .button1:active:before {
+    background: #3a0ca3;
+    transition: background 0s;
+  }
+  
+
+.span1{
     font-size: 25px;
     margin-left: 20px;
     font-family: 'Poppins', sans-serif;
+    color:white;
 }

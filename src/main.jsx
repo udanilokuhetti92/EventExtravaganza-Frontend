@@ -10,14 +10,20 @@ import EventInvitation from "./invitation_send/invitation_send";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Event_Organizer_Signin from './components/sign_in/event_organizer_signin/event_organizer_signin'
 import Event_Planner_Signin from './components/sign_in/event_planner_signin/event_planner_signin'
+import Navigation from './event_planner_site/navigation/navigation'
+import Home_Page from './event_planner_site/home_page/home_page'
+import Packages from './event_planner_site/packages/packages'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
-      {/* <Home/> */}
+      <Home/>
       {/* {<Event_Organizer_Signin/>} */}
       {/* {<Event_Planner_Signin/>} */}
-      {<BudgetFiltering/>}
+      {/* {<BudgetFiltering/>} */}
+      {/* {<Home_Page/>} */}
+      {/* {<Navigation/>} */}
+      {/* {<Packages/>} */}
       <Routes>
         {/* <Route path='/' element={<Home_page/>} />
         <Route path='/organizer_login' element={<Event_Organizer_Login/>} />

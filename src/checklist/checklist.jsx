@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navigation from '../components/navigation/navigation';
-import Styles from '../checklist/checklist.module.css';
+import Styles from './checklist.module.css';
 
 export default function Checklist() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);

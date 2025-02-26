@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../home_page/home.module.css'
+import styles from './home.module.css'
 import Navigation from '../navigation/navigation'
 import Footer from '../footer/footer'
 

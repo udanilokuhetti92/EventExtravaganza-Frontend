@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../event_planner_signin/event_planner_signin.module.css';
+import styles from './event_planner_signin.module.css';
 
 
 export default function event_planner_signin() {

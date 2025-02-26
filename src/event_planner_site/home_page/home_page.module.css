@@ -1,0 +1,68 @@
+.main1{
+    width: auto;
+    background-image: url('../images/image3.jpg');
+    background-size: cover;    
+    height: 800px;
+}
+
+
+
+.h1{
+    margin-top: 100px;
+    text-align: center;
+    font-size: 60px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+
+}
+
+.box1{
+    margin-top: 50px;
+    height: 300px;
+    width: auto;
+    border: 0px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box11{
+    display: flex;
+    justify-content: center;
+}
+
+/* From Uiverse.io by reshades */ 
+.button {
+    background-color: #ffffff00;
+    color: #fff;
+    width: 500px;
+    height: 100px;
+    border: #3654ff 0.2em solid;
+    border-radius: 11px;
+    text-align: center;
+    transition: all 0.6s ease;
+    font-size: 25px;
+  }
+  
+  .button:hover {
+    background-color: #3654ff;
+    cursor: pointer;
+  }
+  
+  .button svg {
+    width: 1.6em;
+    margin: -0.2em 0.8em 1em;
+    position: absolute;
+    display: flex;
+    transition: all 0.6s ease;
+  }
+  
+  .button:hover svg {
+    transform: translateX(5px);
+  }
+  
+  .text {
+    margin: 0 1.5em
+  }
+

@@ -7,6 +7,7 @@ import Event_Organizer_Login from './components/log_in/event_organizer_login/eve
 import Event_Planner_Login from './components/log_in/event_planner_login/event_planner_login'
 import Navigation from './components/navigation/navigation'
 import EventOrganizerProfile from './components/event_organizer_profile/event_organizer_profile'
+import EventPlannerProfile from './components/event_planner_profile/event_planner_profile'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -17,7 +18,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/budget-filtering" element={<BudgetFiltering />} />
         <Route path="/organizer-login" element={<Event_Organizer_Login />} />
         <Route path="/planner-login" element={<Event_Planner_Login />} />
-        <Route path="/profile" element={<EventOrganizerProfile />} />
+        <Route path="/profile" element={<EventPlannerProfile />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

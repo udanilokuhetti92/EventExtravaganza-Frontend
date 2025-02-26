@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './event_organizer_profile.module.css';
 
 export default function EventOrganizerProfile() {
-  // This would typically come from your backend/API
+  // This would typically come from backend/API
   const organizer = {
     name: "Udani Lokuhetti",
     city: "Colombo",

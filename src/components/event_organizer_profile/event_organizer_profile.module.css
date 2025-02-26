@@ -1,45 +1,80 @@
-.container {
-    width: 50%;
-    margin: auto;
-    padding: 20px;
+.profileContainer {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 80px 1rem 0 1rem;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.profileImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background-color: #551488;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+.name {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.infoSection {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.infoItem {
+  margin-bottom: 0.5rem;
+}
+
+.infoItem label {
+  display: block;
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.infoItem p {
+  color: #333;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .profileHeader {
+    flex-direction: column;
     text-align: center;
   }
-  
-  .heading {
-    color: #551488;
-    font-size: 24px;
-    margin-bottom: 20px;
+
+  .infoGrid {
+    grid-template-columns: 1fr;
   }
   
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  .infoSection {
+    padding: 1rem;
   }
-  
-  .form input,
-  .form select {
-    padding: 8px;
-    font-size: 16px;
-  }
-  
-  .submitButton {
-    background-color: #551488;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .submitButton:hover {
-    background-color: #4a0d7c;
-  }
-  
-  .profileCard {
-    background-color: #f3f3f3;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: left;
-  }
-  
+}

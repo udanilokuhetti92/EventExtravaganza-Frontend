@@ -2,7 +2,7 @@
 
 .h1{
     margin-top: 150px;
-    color: white;
+    color: black;
 }
 
 .p1{
@@ -13,7 +13,7 @@
 
 .l1{
     margin-left: 50px;
-    color: white;
+    color: black;
 }
 
 .i1{
@@ -22,18 +22,19 @@
     width: 400px;
     margin-top: 5px;
     border-radius: 5px;
-    border: 2px solid #560bad;
+    border: 2px solid #0073e5;
     padding: 2px;
     font-family: 'Poppins', sans-serif;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .container{
-    background-image: url('../images/budget9.jpg');
+    /* background-image: url('../images/budget9.jpg'); */
+    background-color: #f5f7ff;
     display: flex;
     justify-content: center;
-    background-size: cover; 
+    /* background-size: cover;  */
     background-position: center; 
     background-repeat: no-repeat; 
     width: auto; 
@@ -47,15 +48,15 @@
     height: 45px;
     width: 400px;
     font-size: 15px;
-    background-color: black;
+    background-color: #0073e5;
     color: white;
     border-radius: 5px;
-    border: 2px solid #560bad;
+    border: 0px solid #560bad;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
     transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .b1:hover{
-    color: #560bad;
+    color: black;
 }

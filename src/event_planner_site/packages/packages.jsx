@@ -9,7 +9,7 @@ export default function () {
             {<Navigation/>}
             <p className={styles.p1}>Select best package for you</p>
             <p className={styles.p2}>We are offering you a selection of specific packages, each designed to meet different needs. These packages come <br />with various features tailored to enhance your experience and provide the best value. Whether you require basic <br /> functionalities or advanced services, we have options that suit your preferences.</p>
-            <button className={styles.b1}>Book Now</button>
+            <button className={styles.b1}>Buy Now</button>
         </div>
         <div className={styles.box2}>
             <div class={styles.card}>

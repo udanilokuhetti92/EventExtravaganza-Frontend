@@ -50,9 +50,19 @@ export default function BudgetFiltering() {
             that you can plan your dream event without exceeding your financial limits,<br />
             making event planning hassle-free and affordable.
           </p>
+        </div>
 
-          {/* Budget input and search button */}
-          <span className='span1'>Rs:</span>
+
+        <div className='box6'>
+        
+        </div>
+      </div>
+
+      <div className='container3'>
+
+        {/* Budget input and search button */}
+        <div>
+        <span className='span1'>Rs:</span>
           <input
             className='input1'
             type="number"
@@ -62,14 +72,11 @@ export default function BudgetFiltering() {
           />
           <button className='button1' onClick={handleSearch}>Search</button>
         </div>
-
         <div className='box2'>
-        
-
             <h1 className='box2h1'>Available Event Planners</h1>
         
 
-          <hr style={{ border: "2px solid #551488" }} />
+          <hr style={{ border: "2px solid #0073e5" }} />
 
           {/* Display the fetched event planners */}
           <div className='smallbox'>

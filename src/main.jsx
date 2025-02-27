@@ -17,19 +17,22 @@ import Packages from './event_planner_site/packages/packages'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
-      <Home/>
+      {/* <Home/> */}
       {/* {<Event_Organizer_Signin/>} */}
       {/* {<Event_Planner_Signin/>} */}
       {/* {<BudgetFiltering/>} */}
       {/* {<Home_Page/>} */}
       {/* {<Navigation/>} */}
-      {/* {<Packages/>} */}
+      {/* {<Packages/>}  */}
+      {/* {<Event_Organizer_Signin/>} */}
       <Routes>
-        {/* <Route path='/' element={<Home_page/>} />
+        <Route path='/' element={<Home_page/>} />
         <Route path='/organizer_login' element={<Event_Organizer_Login/>} />
         <Route path='/planner_login' element={<Event_Planner_Login/>} />
+        <Route path='/organizer_signin' element={<Event_Organizer_Signin/>}/>
+        <Route path='/planner_signin' element={<Event_Planner_Signin/>}/>
         <Route path='/Home' element={<Home/>} />
-        <Route path='/Budget_Filtering' element={<BudgetFiltering/>} /> */}
+        <Route path='/Budget_Filtering' element={<BudgetFiltering/>} />
         {/* { <EventInvitation/> }
         { <BudgetFiltering/> }
         { <Checklist/> } */}

@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import styles from '../event_planner_login/event_planner_login.module.css';
+import { useNavigate } from "react-router-dom";
+
 
 export default function EventPlannerLogin() {
+  const navigate = useNavigate();
+
   // State to store form data
   const [formData, setFormData] = useState({
     FullName: '',
@@ -70,6 +74,7 @@ export default function EventPlannerLogin() {
       console.error('Error submitting form:', error);
       alert('An error occurred while submitting the form.');
     }
+    
   };
 
   return (
@@ -213,7 +218,7 @@ export default function EventPlannerLogin() {
 
             <button className={styles.b1} type="submit">Sign up</button>
             <p className={styles.p2}>
-              Already have an account? <span className={styles.span}>Login</span>
+              Already have an account? <span onClick={()=> navigate('/planner_signin')} className={styles.span}>Login</span>
             </p>
           </div>
         </form>

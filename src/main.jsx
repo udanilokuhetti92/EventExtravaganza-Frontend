@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Event_Organizer_Signin from './components/sign_in/event_organizer_signin/event_organizer_signin'
 import Event_Planner_Signin from './components/sign_in/event_planner_signin/event_planner_signin'
 import Navigation from './event_planner_site/navigation/navigation'
-import Home_Page from './event_planner_site/home_page/home_page'
+import Home_PAGE from './event_planner_site/home_page/home_page'
 import Packages from './event_planner_site/packages/packages'
 
 createRoot(document.getElementById('root')).render(
@@ -33,6 +33,11 @@ createRoot(document.getElementById('root')).render(
         <Route path='/planner_signin' element={<Event_Planner_Signin/>}/>
         <Route path='/Home' element={<Home/>} />
         <Route path='/Budget_Filtering' element={<BudgetFiltering/>} />
+        <Route path='/Home_PAGE' element={<Home_PAGE/>} />
+        <Route path='/Packages' element={<Packages/>} />
+
+
+
         {/* { <EventInvitation/> }
         { <BudgetFiltering/> }
         { <Checklist/> } */}

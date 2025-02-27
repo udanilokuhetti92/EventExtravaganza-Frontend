@@ -1,7 +1,6 @@
-/* .mainbox {
-    padding: 20px;
-  }
-   */
+.mainbox {
+  margin-top: 90px; /* Pushes all content below the navbar */
+}
   .navbar {
     background-color: #f5f7ff;
     border: 0px solid black;
@@ -24,9 +23,14 @@
     color: black;
     font-family: 'Poppins', sans-serif;
     margin-top: 20px;
+    font-weight: bold;
+    cursor: pointer;
 
   }
 
+  .li1:hover{
+    color: #0073e5;
+  }
 
  
   

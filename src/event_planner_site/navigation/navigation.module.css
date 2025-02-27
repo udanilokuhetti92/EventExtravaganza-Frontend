@@ -1,0 +1,32 @@
+/* .mainbox {
+    padding: 20px;
+  }
+   */
+  .navbar {
+    background-color: #f5f7ff;
+    border: 0px solid black;
+    height: 100px;
+    width: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .navList {
+    list-style: none;
+    display: flex;
+    gap: 70px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .li1{
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 20px;
+
+  }
+
+
+ 
+  

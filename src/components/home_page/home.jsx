@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../home_page/home.module.css'
+import styles from './home.module.css'
 import Navigation from '../navigation/navigation'
 import Footer from '../footer/footer'
 
@@ -7,7 +7,7 @@ export default function home() {
   return (
     <div>
       
-      <div className={styles.container}>
+      {/* <div className={styles.container}>
         <Navigation/>
         <p className={styles.p1}>Event</p>
         <p className={styles.p2}>Extravaganza</p>
@@ -95,7 +95,69 @@ export default function home() {
         <Footer/>
         
 
+      </div> */}
+      <Navigation/>
+      <div className={styles.c1}>
+        <div className={styles.box1}>
+          <p className={styles.p1}>Event</p>
+          <p className={styles.p2}>Extravaganza</p>
+          <p className={styles.p3}>Weddings & Parties</p>
+          <p className={styles.p4}>Design a system that enables quick and easy access to Event <br /> Planners, ensuring efficient task completion.</p>
+          <button className={styles.b1}>Book Now</button>
+
+        </div>
+
+        <div className={styles.box2}>
+
+        </div>
       </div>
+
+      <p className={styles.p6}>Here are the key Features</p>
+      <p className={styles.p7}>Now, you can easily book your planner and receive daily updates.</p>
+
+      <div className={styles.c2}>
+        <div className={styles.box3}>
+          <p className={styles.p8}>Location Filter</p>
+          <p className={styles.p9}>Easily search for event planners in your desired area. This helps you find local professionals who are best suited to your event location.</p>
+        </div>
+        <div className={styles.box3}>
+          <p className={styles.p8}>Budget Filter</p>
+          <p className={styles.p9}>Set a budget range to discover event planners who fit within your financial plan. This ensures you get the best options within your budget.</p>
+        </div>
+        <div className={styles.box3}>
+          <p className={styles.p8}>Chat Bot</p>
+          <p className={styles.p9}>Instantly interact with a chatbot to receive tailored recommendations and answers for your event planning needs.</p>
+        </div>
+      </div>
+
+      <div className={styles.box4}>
+        <div className={styles.box5}>
+          <p className={styles.p10}>5000+</p>
+          <p className={styles.p11}> Event Organizers</p>
+        </div>
+        <div className={styles.box5}>
+          <p className={styles.p10}>2000+</p>
+          <p className={styles.p11}> Event Planners</p>
+        </div>
+        <div className={styles.box5}>
+          <p className={styles.p10}>8.1/10</p>
+          <p className={styles.p11}>User Feedback</p>
+        </div>
+      </div>
+
+      <p className={styles.p6}>Send your comments</p>
+      <p className={styles.p7}>If you have any doubts, please send them to us, and we will check.</p>
+
+      
+
+      <div className={styles.box7}>
+        <input className={styles.i1} type="text" placeholder='Enter your Name'/> <br /> 
+        <input className={styles.i1} type="text" placeholder='Enter your Email'/> <br /> 
+        <textarea className={styles.i2} type="text" placeholder='Enter your Message'/> <br /> 
+        <button className={styles.b2}>Submit</button>
+
+      </div>
+
 
     </div>
   )

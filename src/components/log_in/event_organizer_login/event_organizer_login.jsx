@@ -64,6 +64,8 @@ export default function EventOrganizerLogin() {
       console.error('Error submitting form:', error);
       alert('An error occurred while submitting the form.');
     }
+
+    const navigate = useNavigate();
   };
 
   
@@ -147,7 +149,7 @@ export default function EventOrganizerLogin() {
         </form>
 
         <p className={styles.p2}>
-          Already have an account? <span className={styles.span}>Login</span>
+          Already have an account? <span onClick={()=> navigate('/organizer_signin')} className={styles.span} >Login</span>
         </p>
       </div>
     </div>

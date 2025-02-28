@@ -8,10 +8,10 @@ export default function () {
             <h1 className={styles.h1}>Extravaganza</h1>
 
             <ul className={styles.list}>
-                <li className={styles.li}>Budget <br/> Filtering</li>
-                <li className={styles.li}>Search <br/> Venues</li>
-                <li className={styles.li}>Customer <br/> Support</li>
-                <li className={styles.list2}>Notifications</li>
+                <li className={styles.list2}>Home</li>
+                <li className={styles.list2}>About</li>
+                <li className={styles.list2}>Services</li>
+                <li className={styles.list2}>Inbox</li>
                 <li className={styles.list2}>Profile</li>
             </ul>
         </div>

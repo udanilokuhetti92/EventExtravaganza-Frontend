@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navigation from '../components/navigation/navigation';
 import Styles from '../checklist/checklist.module.css';
 
+
 export default function Checklist() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -151,7 +152,7 @@ export default function Checklist() {
 
       <div className={Styles.trangle}></div>
       <button className={Styles.button1} onClick={openPopup}>Create Checklist</button>
-
+      
       {isPopupOpen && (
   <div className={Styles.popup}>
     <div className={Styles["popup-content"]}>
@@ -230,8 +231,8 @@ export default function Checklist() {
                       <td>{task.dueDate}</td>
                       <td>{task.priority}</td>
                       <td>
-                        <button className={Styles.button2} onClick={() => editTask(index)}>Edit</button>
-                        <button className={Styles.button2} onClick={() => deleteTask(index)}>Delete</button>
+                        <button className={Styles.optionButton} onClick={() => editTask(index)}>Edit</button>
+                        <button className={Styles.optionButton} onClick={() => deleteTask(index)}>Delete</button>
                       </td>
                     </tr>
                   ))}

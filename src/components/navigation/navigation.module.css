@@ -1,5 +1,5 @@
-.nav {
-    background-color: #1A1A1A;
+/* .nav {
+    background-color: #551488;
 }
 
 .h1 {
@@ -14,7 +14,6 @@
     width: 100%;
     align-items: center;
     display: flex;
-    
 }
 
 .list {
@@ -39,8 +38,7 @@
 .li:hover,
 .list2:hover,
 .list3:hover {
-    /* color: rgb(0, 255, 0); */
-    color: #FF4081;
+    color: rgb(4, 189, 251);
     cursor: pointer;
 }
 
@@ -60,22 +58,21 @@
     margin-left: 250px;
 }
 
-/* Dropdown styles */
 .dropdown {
     width: 200px;
     position: absolute;
-    top: 60px; /* Position below the "Services" item */
+    top: 60px; 
     left: 0;
     margin-left: -40px;
-    background-color: black;
+    background-color: #551488;
+    border: 1px solid black;
     border-radius: 10px;
     padding: 10px;
     z-index: 1;
-    display: none; /* Hide dropdown by default */
+    display: none;
     
 }
 
-/* Show dropdown on hover */
 .list2:hover .dropdown {
     display: block;
 }
@@ -91,8 +88,92 @@
 }
 
 .dropdown li:hover {
-    /* color: rgb(0, 255, 0); */
     color: rgb(4, 189, 251);
     cursor: pointer;
     width: 200px;
+} */
+
+
+.mainbox {
+    margin-top: 90px; /* Pushes all content below the navbar */
+}
+   .navbar {
+    background-color: #f5f7ff;
+    border: 0px solid black;
+    height: 100px;
+    width: auto;
+    position: fixed;
+    z-index: 1000; /* High value to place it above other elements */
+    top: 0;
+    width: 100%;
+  }
+  
+  .navList {
+    list-style: none;
+    display: flex;
+    gap: 70px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .li1{
+    
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+
+  .dropdown {
+    width: 200px;
+    position: absolute;
+    top: 60px; 
+    left: 0;
+    margin-left: -40px;
+    background-color: #f5f7ff;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 1;
+    display: none;
+    
+}
+
+.list2:hover .dropdown {
+    display: block;
+}
+
+.dropdown li {
+    list-style-type: none;
+    padding: 5px 0;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 50px;
+    width: 200px;
+
+}
+
+.dropdown li:hover {
+    color: #0073e5;
+    cursor: pointer;
+    width: 200px;
+} 
+
+.li1:hover,
+.list2:hover{
+    color: #0073e5;
+    transition: background-color 0.3s, color 0.3s;
+}
+  
+.list2{
+    line-height: 50px;
+    border-radius: 50px;
+    padding: 5px;
+    transition: background-color 0.5s, color 0.3s;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    font-weight: bold;
+
 }

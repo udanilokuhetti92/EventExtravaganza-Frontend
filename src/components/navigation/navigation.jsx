@@ -1,11 +1,15 @@
 import React from 'react';
 import styles from './navigation.module.css';
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+
 
 export default function Navigation() {
 
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   return (
+
     <div className={styles.nav}>
       {/* <div className={styles.navbox}>
         <h1 className={styles.h1}>Extravaganza</h1>
@@ -28,7 +32,10 @@ export default function Navigation() {
       <hr style={{ border: "1px solid black" }} /> */}
       <div className={styles.mainbox}>
         <nav className={styles.navbar}>
-            <ul className={styles.navList}>
+          <button className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
+            ☰
+          </button>
+            <ul className={`${styles.navList} ${isOpen ? styles.open : ""}`}>
                 <li onClick={()=> navigate('/Home')} className={styles.li1}> Home</li>
                 <li className={styles.list2}>
                   Services

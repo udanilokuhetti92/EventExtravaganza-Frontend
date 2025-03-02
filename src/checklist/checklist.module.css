@@ -117,10 +117,10 @@ body{
 }
 
 
-
+/* 
 form{
     display:flex;
-}
+} */
 
 .left-col{
     flex:1;

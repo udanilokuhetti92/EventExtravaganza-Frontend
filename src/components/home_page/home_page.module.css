@@ -1,29 +1,42 @@
-.body{
+/* .body{
     background-image: url('./images/homepage.jpg');
-    /* height: 680px;*/
     height: 700px; 
     background-size:cover;
     
-}
+    
+} */
 
 .h1{
     color: white;
     font-family: 'Poppins', sans-serif;
     text-align: center;
     padding-top: 130px;
-    font-size: 40px;
+    font-size: 50px;
     font-family: 'Poppins', sans-serif;
-    
+   
 }
 
 .p1{
     color: white;
     text-align: center;
-    font-size: 15px;
+    font-size: 20px;
     font-family: 'Poppins', sans-serif;
 }
 
-.b1{    
+.pbox{
+    height: auto;
+    width: auto;
+    border: 2px solid black;
+    margin-top: 60px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: black;
+    color: white;
+    opacity: 70%;
+    border-radius: 30px;
+}
+
+/* .b1{    
     margin-top: 20px;
    width: 220px;
    height: 60px;
@@ -35,7 +48,7 @@
    font-family: 'Poppins', sans-serif;
     cursor: pointer;
     transition: color 0.5s ease;
-}
+} */
 
 .b1:hover{
     color: red;
@@ -47,3 +60,149 @@
     justify-content: center;
     gap: 20px;
 }
+
+.vedio{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* Ensures video fills the entire screen */
+    z-index: -1;
+}
+
+
+/* From Uiverse.io by gharsh11032000 */ 
+.button {
+    position: relative;
+    background-color: transparent;
+    color: #e8e8e8;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 10px;
+    width: 250px;
+    height: 80px;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(51, 51, 51, 0.2);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .button::before {
+    content: "Welcome!";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(135deg,#7b4397,#dc2430 );
+    transform: translate(0%,90%);
+    z-index: 99;
+    position: relative;
+    transform-origin: bottom;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .button::after {
+    content: "Logging as Event Planner";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #333;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transform-origin: top;
+    transform: translate(0%,-100%);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .button:hover::before {
+    transform: translate(0%,0%);
+  }
+  
+  .button:hover::after {
+    transform: translate(0%,-200%);
+  }
+  
+  .button:focus {
+    outline: none;
+  }
+  
+  .button:active {
+    scale: 0.95;
+  }
+  
+  
+  .button1 {
+    position: relative;
+    background-color: transparent;
+    color: #e8e8e8;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 10px;
+    width: 250px;
+    height: 80px;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(51, 51, 51, 0.2);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .button1::before {
+    content: "Welcome!";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(135deg,#7b4397,#dc2430 );
+    transform: translate(0%,90%);
+    z-index: 99;
+    position: relative;
+    transform-origin: bottom;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .button1::after {
+    content: "Logging as Event Organizer";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #333;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transform-origin: top;
+    transform: translate(0%,-100%);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .button1:hover::before {
+    transform: translate(0%,0%);
+  }
+  
+  .button1:hover::after {
+    transform: translate(0%,-200%);
+  }
+  
+  .button1:focus {
+    outline: none;
+  }
+  
+  .button1:active {
+    scale: 0.95;
+  }
+  
+
+
+
+
+

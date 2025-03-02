@@ -1,9 +1,37 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Star } from 'lucide-react';
-import styles from './event_planner_profile.module.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Star } from "lucide-react";
+import RatingSystem from "../../rating_system/rating_system"; // Import rating system
+import styles from "./event_planner_profile.module.css";
 
 export default function EventPlannerProfile() {
+  const [ratings, setRatings] = useState([
+    {
+      id: "1",
+      rating: 5,
+      comment:
+        "Excellent attention to detail and great communication throughout the event planning process. The wedding was perfectly organized!",
+      organizerName: "John Doe",
+      createdAt: "2024-02-12T10:00:00Z",
+    },
+    {
+      id: "2",
+      rating: 4,
+      comment:
+        "Very professional and responsive. The corporate event was well-executed, though there were minor timing issues.",
+      organizerName: "Pasan De Silva",
+      createdAt: "2024-02-10T15:30:00Z",
+    },
+    {
+      id: "3",
+      rating: 4,
+      comment:
+        "Outstanding service! The birthday party exceeded our expectations. Every detail was perfect, from decorations to catering.",
+      organizerName: "Sara Kalpani",
+      createdAt: "2024-02-08T09:15:00Z",
+    },
+  ]);
+
   const plannerData = {
     name: "Sarah Johnson",
     profilePicture: "/placeholder.svg?height=200&width=200",
@@ -16,29 +44,18 @@ export default function EventPlannerProfile() {
     budget: "200000",
     experience: "8 years",
     rating: 4.5,
-    reviews: [
-      {
-        id: 1,
-        name: "John Doe",
-        rating: 5,
-        comment: "Amazing event planner! Made our wedding day perfect. Very professional and attentive to details.",
-        date: "2024-02-15"
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        rating: 4,
-        comment: "Very organized and helped us stay within our budget. Great communication throughout the process.",
-        date: "2024-02-10"
-      },
-      {
-        id: 3,
-        name: "Mike Wilson",
-        rating: 5,
-        comment: "Exceptional service! Our corporate event was flawless thanks to Sarah's expertise.",
-        date: "2024-02-05"
-      }
-    ]
+  };
+
+  const handleSubmitRating = (rating, comment) => {
+    const newRating = {
+      id: Date.now().toString(),
+      rating,
+      comment,
+      organizerName: "Current User",
+      createdAt: new Date().toISOString(),
+    };
+
+    setRatings((prevRatings) => [newRating, ...prevRatings]);
   };
 
   const renderStars = (rating) => {
@@ -46,9 +63,7 @@ export default function EventPlannerProfile() {
       <Star
         key={index}
         className={`w-5 h-5 ${
-          index < rating
-            ? styles.starFilled
-            : styles.starEmpty
+          index < rating ? styles.starFilled : styles.starEmpty
         }`}
       />
     ));
@@ -59,20 +74,16 @@ export default function EventPlannerProfile() {
       <div className={styles.profileCard}>
         <div className={styles.profileHeader}>
           <div className={styles.profileImageContainer}>
-            <img 
-              src={plannerData.profilePicture || "/placeholder.svg"} 
-              alt={plannerData.name} 
+            <img
+              src={plannerData.profilePicture || "/placeholder.svg"}
+              alt={plannerData.name}
               className={styles.profileImage}
             />
           </div>
           <h1 className={styles.profileName}>{plannerData.name}</h1>
           <div className={styles.ratingContainer}>
-            <div className={styles.stars}>
-              {renderStars(plannerData.rating)}
-            </div>
-            <span className={styles.ratingText}>
-              {plannerData.rating} out of 5
-            </span>
+            <div className={styles.stars}>{renderStars(plannerData.rating)}</div>
+            <span className={styles.ratingText}>{plannerData.rating} out of 5</span>
           </div>
           <Link to="/checklist" className={styles.checklistButton}>
             Go to Checklist
@@ -126,24 +137,9 @@ export default function EventPlannerProfile() {
 
           <div className={styles.infoSection}>
             <h2>Reviews & Ratings</h2>
-            <div className={styles.reviewsContainer}>
-              {plannerData.reviews.map((review) => (
-                <div key={review.id} className={styles.reviewCard}>
-                  <div className={styles.reviewHeader}>
-                    <h3 className={styles.reviewerName}>{review.name}</h3>
-                    <div className={styles.reviewStars}>
-                      {renderStars(review.rating)}
-                    </div>
-                  </div>
-                  <p className={styles.reviewComment}>{review.comment}</p>
-                  <span className={styles.reviewDate}>
-                    {new Date(review.date).toLocaleDateString()}
-                  </span>
-                </div>
-              ))}
+            <RatingSystem ratings={ratings} onSubmit={handleSubmitRating} />
             </div>
           </div>
-        </div>
       </div>
     </div>
   );

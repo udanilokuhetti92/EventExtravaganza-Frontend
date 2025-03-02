@@ -5,17 +5,14 @@ import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
 export default function GoogleMapComponent({ location }) {
   const [points, setPoints] = useState([]); // To store the coordinates
   const [error, setError] = useState(null); // To store error message
-
+  const [center, setCenter] = useState({ lat: 7.290572, lng:  80.633728 });
 
   const containerStyle = {
     width: "50%",
     height: "300px",
   };
 
-  const center = {
-    lat: 7.290572, // Default center
-    lng: 80.633728,
-  };
+ 
 
   useEffect(
     function () {
@@ -41,7 +38,8 @@ export default function GoogleMapComponent({ location }) {
                 lng: response.data[i].longitude,
               });
             }
-
+            const calculatedCenter = getCenter(locationData);
+            setCenter(calculatedCenter); 
             setPoints(locationData);
             setError(null); // Clear any previous errors
           
@@ -52,6 +50,24 @@ export default function GoogleMapComponent({ location }) {
         
         }
       }
+      function getCenter(locations) {
+        if (locations.length === 0) return null;
+      
+        let totalLat = 0, totalLng = 0;
+      
+        locations.forEach(loc => {
+          totalLat += loc.lat;
+          totalLng += loc.lng;
+        });
+      
+        const center = {
+          lat: totalLat / locations.length,
+          lng: totalLng / locations.length
+        };
+      
+        return center;
+      }
+      
 
       fetchLocation();
     },

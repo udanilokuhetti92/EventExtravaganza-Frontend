@@ -20,7 +20,7 @@
 }
 
 .green-pipe{
-    color: rgb(0, 255, 0);
+    color: #0073e5;
    
 }
 
@@ -190,3 +190,66 @@
     background-image: url('./images/money2.png');
     background-size: cover;
   }
+
+  /* Responsive Design */
+@media (max-width: 768px) {
+  .p1 {
+      font-size: 40px;
+      text-align: center;
+      margin:10px;
+  }
+  .p2 {
+      font-size: 18px;
+      text-align: left;
+      text-align: center;
+      margin:10px 15px;
+  }
+  .button1 {
+      width: 120px;
+      height: 45px;
+  }
+  .box6 {
+      display:none;
+  }
+
+  .container3{
+    margin:10px;
+  }
+
+  .span1{
+    font-size: 15px;
+}
+
+.input1{
+  margin-left: 20px;
+  margin-top:10px;
+  height: 30px;
+  width: 200px;
+  font-size: 15px;
+}
+
+.button1 {
+  width: 100px;
+  height: 50px;
+  margin-left:100px;
+}
+
+.box2h1{
+  font-size: 20px;
+}
+
+.box2{
+  height: 400px;
+  width: 700px;
+  position: relative;
+  border-radius: 20px;
+  margin: 10px;
+  border: 0px solid black;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+hr{
+  border: 1px solid #0073e5;
+  width:300px;
+}
+}

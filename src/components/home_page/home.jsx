@@ -158,7 +158,7 @@ export default function home() {
 
       </div>
 
-
+    <Footer/>
     </div>
   )
 }

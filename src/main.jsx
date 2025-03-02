@@ -21,11 +21,12 @@ createRoot(document.getElementById('root')).render(
       {/* {<Event_Organizer_Signin/>} */}
       {/* {<Event_Planner_Signin/>} */}
       {/* {<BudgetFiltering/>} */}
-      {/* {<Home_Page/>} */}
+      {/* {<Home_PAGE/>} */}
       {/* {<Navigation/>} */}
       {/* {<Packages/>}  */}
       {/* {<Event_Organizer_Signin/>} */}
       <Routes>
+
         <Route path='/' element={<Home_page/>} />
         <Route path='/organizer_login' element={<Event_Organizer_Login/>} />
         <Route path='/planner_login' element={<Event_Planner_Login/>} />
@@ -35,8 +36,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/Budget_Filtering' element={<BudgetFiltering/>} />
         <Route path='/Home_PAGE' element={<Home_PAGE/>} />
         <Route path='/Packages' element={<Packages/>} />
-
-
+        <Route path='/Checklist' element={<Checklist/>} />
 
         {/* { <EventInvitation/> }
         { <BudgetFiltering/> }

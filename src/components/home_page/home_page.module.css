@@ -108,7 +108,7 @@
   }
   
   .button::after {
-    content: "Logging as Event Planner";
+    content: "Logging as Event Organizer";
     display: flex;
     align-items: center;
     justify-content: center;
@@ -172,7 +172,7 @@
   }
   
   .button1::after {
-    content: "Logging as Event Organizer";
+    content: "Logging as Event Planner";
     display: flex;
     align-items: center;
     justify-content: center;

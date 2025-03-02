@@ -69,7 +69,10 @@ export default function Checklist() {
     setDueDate(taskToEdit.dueDate);
     setPriorityLevel(taskToEdit.priority);
     setEditingIndex(index);
+    setIsPreviewOpen(false);
+    setIsPopupOpen(true);
   };
+  
 
   const updateTask = () => {
     if (editingIndex === null) {
@@ -150,7 +153,7 @@ export default function Checklist() {
         throughout the planning process.
       </p>
 
-      <div className={Styles.trangle}></div>
+      <div className={Styles.image}></div>
       <button className={Styles.button1} onClick={openPopup}>Create Checklist</button>
       
       {isPopupOpen && (
@@ -194,24 +197,30 @@ export default function Checklist() {
             <option value="Low">Low</option>
           </select>
         </div>
+        <div className={Styles.buttonGroup}>
+        {editingIndex !== null ? (
+          <button className={Styles.button2} onClick={updateTask}>Update Task</button>
+        ) : (
+          <button className={Styles.button2} onClick={addTask}>Add Task</button>
+        )}
+          <button className={Styles.button2} onClick={openPreview}>Preview</button>
+        </div>
       </div>
 
-      <div className={Styles.buttonGroup}>
-        <button className={Styles.button2} onClick={addTask}>Add Task</button>
-        <button className={Styles.button2} onClick={openPreview}>Preview</button>
-      </div>
+      
+
     </div>
   </div>
-)}
+  )} 
 
 
       {isPreviewOpen && (
         <div className={Styles.popup}>
           <div className={Styles["popup-content"]}>
             <span className={Styles["close-btn"]} onClick={closePreview}>&times;</span>
-            <h2>Checklist Preview</h2>
-            <p><strong>Checklist Name:</strong> {checklistName}</p>
-            <p><strong>Organizer Name:</strong> {organizerName}</p>
+            <h2 className={Styles.preview}>Checklist Preview</h2>
+            <p className={Styles.previewData}><strong>Checklist Name:</strong> {checklistName}</p>
+            <p ><strong>Organizer Name:</strong> {organizerName}</p>
             <div className={Styles.previewSection}>
               <table>
                 <thead>

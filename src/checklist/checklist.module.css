@@ -1,32 +1,32 @@
-.container {
-    background-color: #000;
+body{
+    background-color: #f5f7ff;
 }
 
 .h3{
     margin-top: 50px;
     margin-left: 20px;
-    color:white;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: black;
 }
 
 .green-pipe{
-    color: #FF4081;
+    color: #0073e5;
 }
 
 .p1 .box-text {
     display: inline-block; 
     padding: 5px 10px; 
-    border: 2px solid #FF4081; 
+    border: 2px solid #0073e5; 
     border-radius: 20px; 
-    color: white;
+    color: #0073e5;
     font-family: 'Poppins', sans-serif;
 }
 
 .p1{
-    color:white;
+    font-size: 70px;
+    color: black;
     margin-top: 40px;
     margin-left: 20px;
-    font-size: 70px;
 }
 
 .p2{
@@ -34,7 +34,7 @@
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
     margin-top: -30px;
-    color: white;
+    color: grey;
 }
 
 .span1{
@@ -43,45 +43,39 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.button1{
+.button1 , .button2 {
+    background-color: #0073e5;
+    width: 150px;
     height: 60px;
-    width: auto;
-    margin-left: 20px;
-    font-size: 20px;
-    padding: 10px;
-    border-radius: 40px;
-    background-color: black;
-    border: 2px solid #FF4081;
-    color:white;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-}
-
-.button1:hover{
-    background-color: #FF4081;
-    border: 2px solid white;
-    color:black;
-}
-
-.button2 {
-    height: 60px;
-    min-width: 150px; 
-    font-size: 20px;
-    padding: 10px 20px;
-    border-radius: 30px;
-    background-color: black;
-    border: 2px solid #FF4081;
+    margin: 20px;
+    font-size: 17px;
+    border-radius: 60px;
+    font-weight: 500;
     color: white;
-    cursor: pointer;
     font-family: 'Poppins', sans-serif;
-    transition: 0.3s ease-in-out; 
-}
+    cursor: pointer;
+    border: none;
+  }
 
-.button2:hover {
-    background-color: #FF4081;
-    color: black;
-    border: 2px solid black;
-}
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .image{
+    height: 450px;
+    width: 450px;
+    border: 0px solid black;
+    background-image: url('./images/checklist_image.jpg');
+    background-size: cover;
+    float:right;
+    margin-right:50px;
+    margin-top:-300px;
+    background-color: #f5f7ff;
+    mix-blend-mode: multiply;
+    border-radius: 25px;
+  }
 
 .popup{
     position:fixed;
@@ -111,24 +105,18 @@
     right:20px;
     font-size: 24px;
     cursor: pointer;
+    color:black;
 }
 
 .close-btn:hover{
-    color:#FF4081;
+    color:#0073e5;
 }
 
 .task-input, .buttons{
     display:flex;
 }
 
-.input1{
-    margin-left: 20px;
-    height: 10px;
-    width: 265px;
-    padding: 10px;
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-}
+
 
 form{
     display:flex;
@@ -138,23 +126,15 @@ form{
     flex:1;
 }
 
-select{
-    margin-left:20px;
-    height:35px;
-    width:280px;
-    padding:6px;
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-}
-
 .preview-section {
     margin-top: 20px;
     padding: 15px;
-    border: 2px solid #FF4081;
+    border: 2px solid #0073e5;
     border-radius: 8px;
     background-color: black; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
     font-family: 'Poppins', sans-serif; 
+    color: #000;
 }
 
 .preview-section h3 {
@@ -178,33 +158,66 @@ select{
 }
 
 .preview-section th, .preview-section td {
-    border: 1px solid #ccc;
+    border: 1px solid black;
     padding: 8px;
     text-align: left;
+    color: #000;
 }
 
 .preview-section th {
     background-color: #f2f2f2;
+    color: black;
 }
 
-.create-button button, .buttons button, .edit-button button{
-    height: 50px;
-    width: auto;
-    margin-left: 20px;
-    font-size: 18px;
-    border-radius: 20px;
-    background-color: rgb(181, 236, 181);
-    border: none;
-    cursor: pointer;
+table {
+    width: 100%;
+    border-collapse: collapse; 
+  }
+
+th, td {
+    border: 1px solid black; 
+    padding: 2px;
+    text-align: center;
+  }
+
+.createButton, .buttons button, .edit-button button{
+    background-color: #0073e5;
+    width: 150px;
+    height: 60px;
+    margin: 20px;
+    font-size: 17px;
+    border-radius: 60px;
+    font-weight: 500;
+    color: white;
     font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    border: none;
+}
+
+.optionButton{
+    background-color:#f2f2f2;
+    border: 2px solid #0073e5;
+    width: 90px;
+    height: 35px;
+    margin: 20px;
+    font-size: 17px;
+    border-radius: 60px;
+    font-weight: 500;
+    color:#000;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+h2{
+    color:#0073e5;
 }
 
 .popup-content {
-    background: black; /* Slightly more opaque for readability */
+    background: #f5f7ff; /* Slightly more opaque for readability */
     backdrop-filter: blur(10px);
     padding: 30px;
-    border: 2px solid #FF4081;
-    color:white;
+    border: 3px solid #0073e5;
+    color:black;
     border-radius: 15px;
     width: 90%; /* Responsive */
     max-width: 650px; /* Prevents excessive stretching */
@@ -216,17 +229,16 @@ select{
 
 .formGrid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px 20px; /* Ensures even spacing */
-    margin-top: 15px;
-    align-items: center;
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px;
+    width: 100%;
 }
 
 .inputGroup p {
-    margin-left:20px;
+    margin-left:-1px;
     margin-bottom: 5px;
     font-size: 15px;
-    color: white;
+    color: black;
     text-align: left;
 }
 
@@ -237,7 +249,7 @@ select{
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    background: #fff;
+    background: rgba(233, 228, 228, 0.932);
     transition: border 0.3s ease-in-out;
 }
 
@@ -247,7 +259,7 @@ select{
 }
 
 .input1:focus, .select:focus {
-    border-color: #FF4081; /* Highlight border on focus */
+    border-color: #0073e5; /* Highlight border on focus */
     outline: none;
     box-shadow: 0 0 5px rgba(0, 155, 214, 0.5);
 }
@@ -259,27 +271,124 @@ select{
     gap: 15px; /* Keeps buttons evenly spaced */
 }
 
-.button2 {
-    height: 50px;
-    width: 140px;
-    font-size: 18px;
-    border: 2px solid #FF4081;
-    border-radius: 25px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
-}
-
-.button2:hover {
-    background-color: #FF4081;
-    border: 2px solid white;
-    color:black;
-    transform: scale(1.05); /* Slight hover effect */
+.previewData{
+    color:#000;
 }
 
 /* Ensure responsive design */
-@media (max-width: 600px) {
-    .formGrid {
-        grid-template-columns: 1fr; /* Stack inputs on smaller screens */
+@media (max-width: 768px) {
+
+    .p1{
+        font-size: 40px;
+        text-align: center;
+        margin:10px;
     }
+
+    .p2{
+        font-size: 18px;
+        text-align: left;
+        text-align: center;
+        margin:10px 15px;
+    }
+
+    .image{
+        display: none;
+    }
+
+    .button1 {
+        width: 180px;
+        height: 50px;
+        margin:10px 85px;
+    }
+
+    .preview-section table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .popup-content {
+        width: 95%;
+        max-width: 500px;
+        padding: 20px;
+        margin:10px;
+    }
+
+    .createButton, .buttons button, .edit-button button {
+        width: 100%;
+        max-width: 180px;
+        font-size: 0.9rem;
+    }
+
+    .input1, select {
+        width: 100%;
+    }
+
+    .optionButton {
+        max-width: 100px;
+    }
+
+    .formGrid {
+        margin: 5px;
+        margin-top: 4px;
+        grid-template-columns: 1fr; /* Single column layout */
+        gap: 10px;
+        max-height: 80vh; /* Limit height to 80% of viewport */
+        overflow-y: auto; /* Enable vertical scrolling */
+        padding-bottom: 20px;
+    }
+
+    .input1 {
+        width: 100%; 
+        margin-left:10px;
+        margin-right: 10px;
+    }
+
+    .inputGroup{
+        width:90%;
+    }
+
+    .select{
+        width:105%;
+        margin-left: 14px;
+    }
+
+    .createButton, .button2{
+        width: 90px;
+        height: 40px;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        font-size: 17px;
+        border-radius: 60px;
+        font-weight: 500;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+        border: none;
+    }
+
+    .createButton{
+        margin-top: 10px;
+    }
+
+    h2{
+        font-size: 20px;
+        margin-top: 120px;
+    }
+
+    .preview{
+        margin-top: -10px;
+    }
+
+    .optionButton{
+        width: 80px;
+        height: 25px;
+        margin: 10px;
+        border-radius: 60px;
+        font-weight: 500;
+        color:#000;
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+    }
+
 }

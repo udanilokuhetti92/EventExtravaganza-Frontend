@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navigation from '../components/navigation/navigation';
-import Styles from './checklist.module.css';
+import Styles from '../checklist/checklist.module.css';
+
 
 export default function Checklist() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -12,8 +13,9 @@ export default function Checklist() {
   const [dueDate, setDueDate] = useState('');
   const [priorityLevel, setPriorityLevel] = useState('High');
   const [tasks, setTasks] = useState([]);
-  const [editingIndex, setEditingIndex] = useState(null); // Track which task is being edited
-  const [message, setMessage] = useState(''); // Message to display after actions
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const openPopup = () => setIsPopupOpen(true);
   const closePopup = () => {
@@ -24,8 +26,9 @@ export default function Checklist() {
     setDueDate('');
     setPriorityLevel('High');
     setTasks([]);
+    setEditingIndex(null);
     setIsPopupOpen(false);
-    setMessage(''); // Clear message when closing popup
+    setMessage('');
   };
 
   const openPreview = () => {
@@ -35,24 +38,28 @@ export default function Checklist() {
 
   const closePreview = () => {
     setIsPreviewOpen(false);
-    setMessage(''); // Clear message when closing preview
+    setMessage('');
   };
 
   const addTask = () => {
+    if (!taskName) {
+      setMessage("Task name cannot be empty.");
+      return;
+    }
+
     const newTask = {
       name: taskName,
       status: taskStatus,
-      dueDate: dueDate,
+      dueDate,
       priority: priorityLevel,
     };
-    setTasks([...tasks, newTask]);
 
-    // Reset input fields
+    setTasks([...tasks, newTask]);
     setTaskName('');
     setTaskStatus('Not Started');
     setDueDate('');
     setPriorityLevel('High');
-    setMessage("Tasks added successfully!"); // Set the message to display
+    setMessage("Task added successfully!");
   };
 
   const editTask = (index) => {
@@ -61,46 +68,83 @@ export default function Checklist() {
     setTaskStatus(taskToEdit.status);
     setDueDate(taskToEdit.dueDate);
     setPriorityLevel(taskToEdit.priority);
-    setEditingIndex(index); // Set the index of the task being edited
+    setEditingIndex(index);
+    setIsPreviewOpen(false);
+    setIsPopupOpen(true);
   };
+  
 
   const updateTask = () => {
+    if (editingIndex === null) {
+      setMessage("No task selected for editing.");
+      return;
+    }
+
     const updatedTask = {
       name: taskName,
       status: taskStatus,
-      dueDate: dueDate,
+      dueDate,
       priority: priorityLevel,
     };
 
     const updatedTasks = [...tasks];
-    updatedTasks[editingIndex] = updatedTask; // Replace the task at the editing index
+    updatedTasks[editingIndex] = updatedTask;
     setTasks(updatedTasks);
-
-    // Reset input fields and editing index
     setTaskName('');
     setTaskStatus('Not Started');
     setDueDate('');
     setPriorityLevel('High');
-    setEditingIndex(null); // Clear editing index
-    setMessage("Task updated successfully!"); // Set the message to display
+    setEditingIndex(null);
+    setMessage("Task updated successfully!");
   };
 
   const deleteTask = (index) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this task?");
     if (confirmDelete) {
-      const updatedTasks = tasks.filter((_, i) => i !== index); // Remove the task at the specified index
-      setTasks(updatedTasks);
-      setMessage("Task deleted successfully!"); // Set the message to display
+      setTasks(tasks.filter((_, i) => i !== index));
+      setMessage("Task deleted successfully!");
+    }
+  };
+
+  const createChecklist = async () => {
+    if (!checklistName || !organizerName || tasks.length === 0) {
+      setMessage("Please fill in all fields and add at least one task.");
+      return;
+    }
+
+    setLoading(true);
+    setMessage("Creating checklist...");
+
+    try {
+      const response = await fetch('http://localhost:5000/api/checklists', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ checklistName, organizerName, tasks }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      setMessage("Checklist created successfully!");
+      closePopup();
+    } catch (error) {
+      setMessage("Failed to create checklist. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div>
+    <div className={Styles.container}>
       <Navigation />
-
-      <h3 className={Styles.h3}><span className={Styles["green-pipe"]}>|</span> Extravaganza unit</h3>
-      <p className={Styles.p1}>Crafted By Event Planners.<br />Perfect for Seamless <span className={Styles["box-text"]}>Checklists</span></p>
-
+      <h3 className={Styles.h3}>
+        <span className={Styles["green-pipe"]}>|</span> Extravaganza Unit
+      </h3>
+      <p className={Styles.p1}>
+        Crafted By Event Planners.<br />Perfect for Seamless{' '}
+        <span className={Styles["box-text"]}>Checklists</span>
+      </p>
       <p className={Styles.p2}>
         Creating the perfect checklist for your event has never been easier! Simply <br />
         select the tasks you need, and our system will instantly generate a tailored <br />
@@ -109,112 +153,82 @@ export default function Checklist() {
         throughout the planning process.
       </p>
 
-      <div className={Styles.trangle}></div>
-
+      <div className={Styles.image}></div>
       <button className={Styles.button1} onClick={openPopup}>Create Checklist</button>
-
-      {/* Input Popup Window */}
+      
       {isPopupOpen && (
-        <div className={Styles.popup}>
-          <div className={Styles["popup-content"]}>
-            <span className={Styles["close-btn"]} onClick={closePopup}>&times;</span>
-            <h2>Create your checklist</h2>
-            <form className='form'>
-              <div className={Styles["left-col"]}>
-                <p>Checklist Name:</p>
-                <input
-                  className={Styles.input1}
-                  type='text'
-                  placeholder='Enter the name of the checklist'
-                  value={checklistName}
-                  onChange={(e) => setChecklistName(e.target.value)}
-                />
-              </div>
-              <div className={Styles["right-col"]}>
-                <p>Organizer Name:</p>
-                <input
-                  className={Styles.input1}
-                  type='text'
-                  placeholder='Enter the name of organizer'
-                  value={organizerName}
-                  onChange={(e) => setOrganizerName(e.target.value)}
-                />
-              </div>
-            </form>
-            <p><b>Start adding tasks to your event checklist</b></p>
-            <div className={Styles["task-input"]}>
-              <div className={Styles["left-col"]}>
-                <p>Task Name:</p>
-                <input
-                  className={Styles.input1}
-                  type='text'
-                  placeholder='Enter name of the task'
-                  value={taskName}
-                  onChange={(e) => setTaskName(e.target.value)}
-                />
-                <p>Status:</p>
-                <select
-                  className='select'
-                  id='status'
-                  value={taskStatus}
-                  onChange={(e) => setTaskStatus(e.target.value)}
-                >
-                  <option value='Not Started'>Not Started</option>
-                  <option value='Pending'>Pending</option>
-                  <option value='Completed'>Complete</option>
-                </select>
-              </div>
-              <div className={Styles["right-col"]}>
-                <p>Due Date:</p>
-                <input
-                  type='date'
-                  className={Styles.input1}
-                  value={dueDate}
-                  onChange={(e) => setDueDate(e.target.value)}
-                />
-                <p>Priority Level:</p>
-                <select
-                  className='select'
-                  id='priority'
-                  value={priorityLevel}
-                  onChange={(e) => setPriorityLevel(e.target.value)}
-                >
-                  <option value='High'>High</option>
-                  <option value='Medium'>Medium</option>
-                  <option value='Low'>Low</option>
-                </select>
-              </div>
-            </div>
-            <div className={Styles.buttons}>
-              <div className={Styles["left-col"]}>
-                <br />
-                <button className={Styles.button1} onClick={addTask}>Add Task</button>
-              </div>
-              <div className={Styles["right-col"]}>
-                <br />
-                <button className={Styles.button2} onClick={openPreview}>Preview</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+  <div className={Styles.popup}>
+    <div className={Styles["popup-content"]}>
+      <span className={Styles["close-btn"]} onClick={closePopup}>&times;</span>
+      <h2>Create your checklist</h2>
 
-      {/* Preview Popup Window */}
+      <div className={Styles.formGrid}>
+        <div className={Styles.inputGroup}>
+          <p>Checklist Name:</p>
+          <input className={Styles.input1} type="text" value={checklistName} onChange={(e) => setChecklistName(e.target.value)} />
+        </div>
+        <div className={Styles.inputGroup}>
+          <p>Organizer Name:</p>
+          <input className={Styles.input1} type="text" value={organizerName} onChange={(e) => setOrganizerName(e.target.value)} />
+        </div>
+
+        <div className={Styles.inputGroup}>
+          <p>Task Name:</p>
+          <input className={Styles.input1} type="text" value={taskName} onChange={(e) => setTaskName(e.target.value)} />
+        </div>
+        <div className={Styles.inputGroup}>
+          <p>Status:</p>
+          <select className={Styles.select} value={taskStatus} onChange={(e) => setTaskStatus(e.target.value)}>
+            <option value="Not Started">Not Started</option>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Complete</option>
+          </select>
+        </div>
+
+        <div className={Styles.inputGroup}>
+          <p>Due Date:</p>
+          <input className={Styles.input1} type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+        </div>
+        <div className={Styles.inputGroup}>
+          <p>Priority Level:</p>
+          <select className={Styles.select} value={priorityLevel} onChange={(e) => setPriorityLevel(e.target.value)}>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+        <div className={Styles.buttonGroup}>
+        {editingIndex !== null ? (
+          <button className={Styles.button2} onClick={updateTask}>Update Task</button>
+        ) : (
+          <button className={Styles.button2} onClick={addTask}>Add Task</button>
+        )}
+          <button className={Styles.button2} onClick={openPreview}>Preview</button>
+        </div>
+      </div>
+
+      
+
+    </div>
+  </div>
+  )} 
+
+
       {isPreviewOpen && (
         <div className={Styles.popup}>
           <div className={Styles["popup-content"]}>
             <span className={Styles["close-btn"]} onClick={closePreview}>&times;</span>
-            <h2>Checklist Preview</h2>
-            <div className={Styles["preview-section"]}>
-              <p><strong>Checklist Name:</strong> {checklistName}</p>
-              <p><strong>Organizer Name:</strong> {organizerName}</p>
+            <h2 className={Styles.preview}>Checklist Preview</h2>
+            <p className={Styles.previewData}><strong>Checklist Name:</strong> {checklistName}</p>
+            <p ><strong>Organizer Name:</strong> {organizerName}</p>
+            <div className={Styles.previewSection}>
               <table>
                 <thead>
                   <tr>
                     <th>Task Name</th>
                     <th>Status</th>
                     <th>Due Date</th>
-                    <th>Priority Level</th>
+                    <th>Priority</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -226,75 +240,18 @@ export default function Checklist() {
                       <td>{task.dueDate}</td>
                       <td>{task.priority}</td>
                       <td>
-                        <button onClick={() => editTask(index)}>Edit</button>
-                        <button onClick={() => deleteTask(index)}>Delete</button>
+                        <button className={Styles.optionButton} onClick={() => editTask(index)}>Edit</button>
+                        <button className={Styles.optionButton} onClick={() => deleteTask(index)}>Delete</button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            {message && <p className={Styles["success-message"]}>{message}</p>} {/* Display message after actions */}
-            <br />
-            <div className={Styles["create-button"]}>
-              <button className={Styles.button2} onClick={closePreview}>Create</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Edit Task Popup */}
-      {editingIndex !== null && (
-        <div className={Styles.popup}>
-          <div className={Styles["popup-content"]}>
-            <h2>Edit Task</h2>
-            <div className={Styles["task-input"]}>
-              <div className={Styles["left-col"]}>
-                <p>Task Name:</p>
-                <input
-                  className={Styles.input1}
-                  type='text'
-                  placeholder='Enter name of the task'
-                  value={taskName}
-                  onChange={(e) => setTaskName(e.target.value)}
-                />
-                <p>Status:</p>
-                <select
-                  className='select'
-                  id='status'
-                  value={taskStatus}
-                  onChange={(e) => setTaskStatus(e.target.value)}
-                >
-                  <option value='Not Started'>Not Started</option>
-                  <option value='Pending'>Pending</option>
-                  <option value='Completed'>Complete</option>
-                </select>
-              </div>
-              <div className={Styles["right-col"]}>
-                <p>Due Date:</p>
-                <input
-                  type='date'
-                  className={Styles.input1}
-                  value={dueDate}
-                  onChange={(e) => setDueDate(e.target.value)}
-                />
-                <p>Priority Level:</p>
-                <select
-                  className='select'
-                  id='priority'
-                  value={priorityLevel}
-                  onChange={(e) => setPriorityLevel(e.target.value)}
-                >
-                  <option value='High'>High</option>
-                  <option value='Medium'>Medium</option>
-                  <option value='Low'>Low</option>
-                </select>
-              </div>
-            </div>
-            <div className={Styles["edit-button"]}>
-              <br />
-              <button className={Styles.button2} onClick={updateTask}>Update Task</button>
-            </div>
+            {message && <p className={Styles["success-message"]}>{message}</p>}
+            <button className={Styles.createButton} disabled={loading || !checklistName || !organizerName || tasks.length === 0} onClick={createChecklist}>
+              {loading ? "Creating..." : "Create"}
+            </button>
           </div>
         </div>
       )}

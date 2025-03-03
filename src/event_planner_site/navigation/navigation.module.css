@@ -22,7 +22,6 @@
   .li1{
     color: black;
     font-family: 'Poppins', sans-serif;
-    margin-top: 20px;
     font-weight: bold;
     cursor: pointer;
 
@@ -32,5 +31,44 @@
     color: #0073e5;
   }
 
+  .dropdown {
+    width: 200px;
+    position: absolute;
+    top: 60px; 
+    left: 0;
+    margin-left: -40px;
+    background-color: #f5f7ff;
+    border: 1px solid #0073e5;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 1;
+    display: none;
+
+    
+}
+
+
+.list2{
+  line-height: 50px;
+  border-radius: 50px;
+  padding: 5px;
+  transition: background-color 0.5s, color 0.3s;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  font-weight: bold;
+
+}
+
+.list2:hover .dropdown {
+  display: block;
+}
+
+
+.dropdown li:hover {
+  color: #0073e5;
+  cursor: pointer;
+  width: 200px;
+} 
  
   

@@ -1,6 +1,7 @@
-body{
+/* body{
     background-color: #f5f7ff;
-}
+} */
+
 
 .h3{
     margin-top: 50px;
@@ -71,7 +72,7 @@ body{
     background-size: cover;
     float:right;
     margin-right:50px;
-    margin-top:-300px;
+    margin-top:-500px;
     background-color: #f5f7ff;
     mix-blend-mode: multiply;
     border-radius: 25px;
@@ -117,10 +118,10 @@ body{
 }
 
 
-
+/* 
 form{
     display:flex;
-}
+} */
 
 .left-col{
     flex:1;

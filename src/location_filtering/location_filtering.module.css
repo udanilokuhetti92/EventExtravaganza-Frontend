@@ -1,0 +1,151 @@
+  
+  .container {
+    /* background-image: url('../location_filtering/images/budget9.jpg'); */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100vw; 
+    height: 100vh;
+    padding: 20px;
+    position: relative; /* Ensures absolute children are positioned relative to this */
+}
+
+
+.h3 {
+    margin-top: 50px;
+    margin-left: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+}
+
+.green-pipe {
+    color: rgb(0, 255, 0);
+}
+
+.p1 {
+    margin-top: 40px;
+    margin-left: 20px;
+    font-size: 50px;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+}
+
+.box-text {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 2px solid #0b2f3f;
+    border-radius: 20px;
+    color: #15c9e9;
+    font-family: 'Poppins', sans-serif;
+    font-size: 50px;
+}
+
+.p2 {
+    margin-left: 20px;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    margin-top: -30px;
+    color: white;
+}
+
+.google-map {
+    position: absolute;
+    top: 50px; /* Adjusted for better placement */
+    right: -80%; /* Moves it correctly to the right */
+    width: 800px; /* Adjust width as needed */
+    height: 300px; /* Adjust height as needed */
+    border-radius: 10px;
+   
+}
+
+@media (max-width: 768px) {
+    .google-map {
+        position: relative;
+        width: 90%;
+        height: 200px;
+        margin: 20px auto;
+    }
+}
+
+.input1 {
+    margin-left: 20px;
+    height: 40px;
+    width: 265px;
+    padding: 10px;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    background-color: black;
+    color: white;
+    border: 2px solid #560bad;
+    border-radius: 6px;
+}
+
+.input1::placeholder {
+    color: white;
+    font-size: 17px;
+}
+
+.button1 {
+    --color: #560bad;
+    font-family: inherit;
+    display: inline-block;
+    width: 8em;
+    height: 60px;
+    line-height: 2.5em;
+    margin: 20px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid var(--color);
+    transition: color 0.5s;
+    z-index: 1;
+    font-size: 17px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: white;
+    background-color: black;
+    font-family: 'Poppins', sans-serif;
+}
+
+.button1:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: var(--color);
+    height: 150px;
+    width: 200px;
+    border-radius: 50%;
+    transition: all 0.7s;
+}
+
+.button1:hover {
+    color: #fff;
+}
+
+.button1:hover:before {
+    top: -30px;
+    left: -30px;
+}
+
+.button1:active:before {
+    background: #3a0ca3;
+    transition: background 0s;
+}
+
+.span1 {
+    font-size: 25px;
+    margin-left: 20px;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filter-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}

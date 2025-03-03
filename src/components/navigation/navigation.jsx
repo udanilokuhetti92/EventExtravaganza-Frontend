@@ -20,6 +20,7 @@ export default function Navigation() {
               <div className={styles.dropdown}>
                 <li onClick={() => navigate('/budget_filtering')}>Budget Filtering</li>
                 <li>Location Filtering</li>
+                <li onClick={()=> navigate('/Invitation')}>Send Invitations</li>
                 <li>Chat Bot</li>
               </div>
             </li>

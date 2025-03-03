@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navigation from '../components/navigation/navigation';
+import Navigation from '../event_planner_site/navigation/navigation';
 import Styles from '../checklist/checklist.module.css';
 
 

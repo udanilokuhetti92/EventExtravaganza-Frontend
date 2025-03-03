@@ -35,6 +35,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/Budget_Filtering' element={<BudgetFiltering/>} />
         <Route path='/Home_PAGE' element={<Home_PAGE/>} />
         <Route path='/Packages' element={<Packages/>} />
+        <Route path='/Checklist' element={<Checklist/>} />
 
 
 

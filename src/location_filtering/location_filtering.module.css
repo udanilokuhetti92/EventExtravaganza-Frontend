@@ -211,3 +211,14 @@
     font-weight: bold;
     transition: color 0.3s;
 }
+
+.table a:hover {
+    color: #3a0ca3;
+    text-decoration: underline;
+}
+
+/* No Profile styling */
+.no-profile {
+    color: red;
+    font-weight: bold;
+}

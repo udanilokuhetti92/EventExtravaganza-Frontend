@@ -25,7 +25,7 @@
 .p1 {
     margin-top: 40px;
     margin-left: 20px;
-    font-size: 50px;
+    font-size: 60px;
     color: black;
     font-family: 'Poppins', sans-serif;
 }
@@ -37,7 +37,7 @@
     border-radius: 20px;
     color: #15c9e9;
     font-family: 'Poppins', sans-serif;
-    font-size: 50px;
+    font-size: 60px;
 }
 
 .p2 {
@@ -45,13 +45,13 @@
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
     margin-top: -30px;
-    color: white;
+    color: gray;
 }
 
 .google-map {
     position: absolute;
     top: 50px; /* Adjusted for better placement */
-    right: -80%; /* Moves it correctly to the right */
+    right: -85%; /* Moves it correctly to the right */
     width: 800px; /* Adjust width as needed */
     height: 300px; /* Adjust height as needed */
     border-radius: 10px;
@@ -133,10 +133,10 @@
 }
 
 .span1 {
-    font-size: 25px;
+    font-size: 28px;
     margin-left: 20px;
     font-family: 'Poppins', sans-serif;
-    color: white;
+    color: black;
 }
 
 .header {

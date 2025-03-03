@@ -67,6 +67,7 @@ export default function EventPlannerLogin() {
       if (response.ok) {
         alert('Account created successfully!');
         console.log(result);
+        navigate('/Home_PAGE');
       } else {
         alert(`Error: ${result.message}`);
       }

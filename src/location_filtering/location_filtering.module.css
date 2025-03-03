@@ -186,3 +186,15 @@
     border-bottom: 1px solid #ddd;
     transition: background 0.3s ease-in-out;
 }
+
+/* Alternating row colors */
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Table cell styling */
+.table td {
+    padding: 15px;
+    font-size: 16px;
+    color: #333;
+}

@@ -180,3 +180,9 @@
     text-align: left;
     font-size: 18px;
 }
+
+/* Table rows */
+.table tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background 0.3s ease-in-out;
+}

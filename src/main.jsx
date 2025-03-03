@@ -7,6 +7,7 @@ import EventOrganizerLogin from './components/log_in/event_organizer_login/event
 import EventPlannerLogin from './components/log_in/event_planner_login/event_planner_login';
 import Navigation from './components/navigation/navigation';
 import EventPlannerProfile from './components/event_planner_profile/event_planner_profile';
+import EventInvitation from './invitation_send/invitation_send';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/organizer-login" element={<EventOrganizerLogin />} />
         <Route path="/planner-login" element={<EventPlannerLogin />} />
         <Route path="/profile" element={<EventPlannerProfile />} />
+        <Route path="/invitation" element={<EventInvitation />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

@@ -4,11 +4,21 @@ import "../location_filtering/location_filtering.css";
 import GoogleMapComponent from "../map/google_map_component";
 
 export default function LocationFiltering() {
-  const [location, setLocation] = useState(""); // State for input value
-  const [searchLocation, setSearchLocation] = useState(""); // State for triggering API call
+  const [eventPlanners, setEventPlanners] = useState([]);
+  const [location, setLocation] = useState("");
+  const [searchedLocation, setSearchedLocation] = useState("");
+
+  // Function to receive nameData from child
+  const handlePlannerData = (data) => {
+    if (Array.isArray(data)) {
+      setEventPlanners(data); // Ensure data is an array before setting state
+    } else {
+      console.error("Invalid data received: ", data);
+    }
+  };
 
   function handleSearch() {
-    setSearchLocation(location); // Update search location on button click
+    setSearchedLocation(location); // Trigger search with the inputted location
   }
 
   return (
@@ -16,7 +26,7 @@ export default function LocationFiltering() {
       <div className="container">
         <Navigation />
         <h3 className="h3">
-          <span className="green-pipe">|</span> Extravaganza unit
+          <span className="green-pipe">|</span> Extravaganza Unit
         </h3>
         <p className="p1">
           Loved By Event Organizers.
@@ -26,23 +36,64 @@ export default function LocationFiltering() {
         <p className="p2">
           Finding the perfect event planner within your area. Simply <br />
           enter your location, and our system will instantly display a list of
-          available event planners in your area.
+          available event planners.
         </p>
         <div className="google-map">
-          <GoogleMapComponent location={searchLocation} />
+          <GoogleMapComponent
+            location={searchedLocation}
+            sendEventPlanners={handlePlannerData}
+          />
         </div>
 
-        <span className="span1">Location:</span>
+        <label className="span1" htmlFor="location-input">Location:</label>
         <input
+          id="location-input"
           className="input1"
           type="text"
           placeholder="Enter Your Location"
           value={location}
-          onChange={(e) => setLocation(e.target.value)} // Update state on input change
+          onChange={(e) => setLocation(e.target.value)}
+          aria-label="Enter your location"
         />
-        <button className="button1" onClick={handleSearch}>
+        <button className="button1" onClick={handleSearch} aria-label="Search for event planners">
           Search
         </button>
+        <p className="event-count">Total Event Planners Found: {eventPlanners.length}</p>
+
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Event Planner Name</th>
+                <th>City</th>
+                <th>Profile</th>
+              </tr>
+            </thead>
+            <tbody>
+              {eventPlanners.length > 0 ? (
+                eventPlanners.map((planner, index) => (
+                  <tr key={index}>
+                    <td>{planner.FullName || "N/A"}</td>
+                    <td>{planner.City || "N/A"}</td>
+                    <td>
+                      {planner.profile ? (
+                        <a href={planner.profile} target="_blank" rel="noopener noreferrer">
+                          View Profile
+                        </a>
+                      ) : (
+                        "No Profile"
+                      )}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3" style={{ textAlign: "center" }}>No event planners found</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

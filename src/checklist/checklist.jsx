@@ -143,7 +143,7 @@ export default function Checklist() {
       </h3>
       <p className={Styles.p1}>
         Crafted By Event Planners.<br />Perfect for Seamless{' '}
-        <span className={Styles["box-text"]}>Checklists</span>
+        <br /> <span className={Styles["box-text"]}>Checklists</span>
       </p>
       <p className={Styles.p2}>
         Creating the perfect checklist for your event has never been easier! Simply <br />

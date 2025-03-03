@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
 
-export default function GoogleMapComponent({ location }) {
+export default function GoogleMapComponent({ location,sendEventPlanners}) {
   const [points, setPoints] = useState([]); // To store the coordinates
   const [error, setError] = useState(null); // To store error message
   const [center, setCenter] = useState({ lat: 7.290572, lng:  80.633728 });
@@ -27,15 +27,17 @@ export default function GoogleMapComponent({ location }) {
           );
 
           if (response.data.length === 0) {
-           
+            sendEventPlanners([]);
 
             setError("No event planners found in this location."); // Set error if no data
           } else {
+            // eventPlanners = response.data;
+            sendEventPlanners( response.data);
             const locationData = [];
             for (let i = 0; i < response.data.length; i++) {
               locationData.push({
-                lat: response.data[i].latitude,
-                lng: response.data[i].longitude,
+                lat: parseFloat( response.data[i].latitude),
+                lng: parseFloat(response.data[i].longitude),
               });
             }
             const calculatedCenter = getCenter(locationData);
@@ -93,6 +95,7 @@ export default function GoogleMapComponent({ location }) {
         </LoadScript>
       )}
   </div>
+  
     </div>
   );
 }

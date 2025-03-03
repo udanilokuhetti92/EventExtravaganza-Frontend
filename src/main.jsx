@@ -13,6 +13,7 @@ import Event_Planner_Signin from './components/sign_in/event_planner_signin/even
 import Navigation from './event_planner_site/navigation/navigation'
 import Home_PAGE from './event_planner_site/home_page/home_page'
 import Packages from './event_planner_site/packages/packages'
+import LocationFiltering from './location_filtering/location_filtering'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -35,6 +36,8 @@ createRoot(document.getElementById('root')).render(
         <Route path='/Budget_Filtering' element={<BudgetFiltering/>} />
         <Route path='/Home_PAGE' element={<Home_PAGE/>} />
         <Route path='/Packages' element={<Packages/>} />
+        <Route path='/LocationBase_Filtering' element={<LocationFiltering/>} />
+
 
 
 

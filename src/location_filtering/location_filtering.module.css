@@ -174,3 +174,9 @@
     background-color: #560bad;
     color: white;
 }
+
+.table th {
+    padding: 15px;
+    text-align: left;
+    font-size: 18px;
+}

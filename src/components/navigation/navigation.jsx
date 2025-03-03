@@ -1,29 +1,55 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../navigation/navigation.module.css';
+import styles from './navigation.module.css';
+import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+
 
 export default function Navigation() {
+
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   return (
+
     <div className={styles.nav}>
-      <div className={styles.navbox}>
+      {/* <div className={styles.navbox}>
         <h1 className={styles.h1}>Extravaganza</h1>
 
         <ul className={styles.list}>
-          <li className={styles.list2}><Link to="/" className={styles.link}>Home</Link></li>
-          <li className={styles.list2}><Link to="/about" className={styles.link}>About</Link></li>
+          <li onClick={()=> navigate("/Home")} className={styles.list2}>Home</li>
+          <li className={styles.list2}>About</li>
           <li className={styles.list2}>
             Services
             <div className={styles.dropdown}>
-              <li><Link to="/budget-filtering" className={styles.link}>Budget Filtering</Link></li>
-              <li><Link to="/search-venues" className={styles.link}>Search Venues</Link></li>
-              <li><Link to="/chat-bot" className={styles.link}>Chat Bot</Link></li>
+              <li  onClick={()=> navigate("/Budget_Filtering")}>Budget Filtering</li>
+              <li>Location Filtering</li>
+              <li>Chat Bot</li>
             </div>
           </li>
-          <li className={styles.list2}><Link to="/inbox" className={styles.link}>Inbox</Link></li>
-          <b><li className={styles.list3}><Link to="/profile" className={styles.link}>Profile</Link></li></b>
+          <li className={styles.list2}>Inbox</li>
+          <b><li className={styles.list3}>Profile</li></b>
         </ul>
       </div>
-      <hr style={{ border: "2px solid black" }} />
+      <hr style={{ border: "1px solid black" }} /> */}
+      <div className={styles.mainbox}>
+        <nav className={styles.navbar}>
+          <button className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
+            ☰
+          </button>
+            <ul className={`${styles.navList} ${isOpen ? styles.open : ""}`}>
+                <li onClick={()=> navigate('/Home')} className={styles.li1}> Home</li>
+                <li className={styles.list2}>
+                  Services
+                  <div className={styles.dropdown}>
+                    <li onClick={()=> navigate("/Budget_Filtering")}>Budget Filtering</li>
+                    <li>Location Filtering</li>
+                    <li>Chat Bot</li>
+                  </div>
+                </li>
+                <li className={styles.li1}>Inbox</li>
+                <li className={styles.li1}>Profile</li>
+            </ul>
+        </nav>
+      </div>
     </div>
   );
 }

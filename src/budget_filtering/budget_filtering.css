@@ -1,10 +1,10 @@
   .container {
-    background-image: url('../budget_filtering/images/budget9.jpg');
+    /* background-image: url('../budget_filtering/images/budget9.jpg');
     background-size: cover; 
     background-position: center; 
-    background-repeat: no-repeat; 
-    width: 100vw; 
-    height: 100vh;
+    background-repeat: no-repeat;  */
+    background-color: #f5f7ff;
+
   }
 
 
@@ -16,11 +16,11 @@
     margin-top: 50px;
     margin-left: 20px;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: white;
+    color: black;
 }
 
 .green-pipe{
-    color: rgb(0, 255, 0);
+    color: #0073e5;
    
 }
 
@@ -28,17 +28,15 @@
     margin-top: 40px;
     margin-left: 20px;
     font-size: 70px;
-    color: white;
+    color: black;
 }
 
 .box-text {
     display: inline-block; 
     padding: 5px 10px; 
-    border: 2px solid #560bad; 
+    border: 2px solid #0073e5; 
     border-radius: 20px; 
-    /* font-weight: bold;  */
-    /* color: rgb(0, 255, 0); */
-    color: #551488;
+    color: #0073e5;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -50,22 +48,6 @@
     color: grey;
 }
 
-/* .trangle{
-    position: absolute;
-    top: 100px;
-    right: 0px;
-
-    
-    height: 600px;
-    width: 650px;
-    border: 0px solid black;
-    background-image: url(/src/budget_filtering/images/budget.jpg);
-    background-size: cover;
-    border-top-left-radius: 100%;
-    border-bottom-left-radius: 40%;
-
-} */
-
 .input1{
     margin-left: 20px;
     height: 40px;
@@ -73,132 +55,116 @@
     padding: 10px;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
-    background-color: black;
-    color: white;
-    border: 2px solid #560bad;
+    background-color: white;
+    color: black;
+    border: 0px solid #560bad;
     border-radius: 6px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+
+    
 }
 
 .input1::placeholder{
-    color: white;
+    color: black;
     font-size: 17px;
+    text-align: center;
 }
 
 
-/* From Uiverse.io by cssbuttons-io */ 
 .button1 {
-    --color: #560bad;
-    font-family: inherit;
-    display: inline-block;
-    width: 8em;
+    background-color: #0073e5;
+    width: 150px;
     height: 60px;
-    line-height: 2.5em;
     margin: 20px;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    border: 2px solid var(--color);
-    transition: color 0.5s;
-    z-index: 1;
     font-size: 17px;
-    border-radius: 6px;
+    border-radius: 60px;
     font-weight: 500;
     color: white;
-    background-color: black;
     font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    border: none;
+  }
 
-  }
-  
-  .button1:before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    background: var(--color);
-    height: 150px;
-    width: 200px;
-    border-radius: 50%;
-  }
-  
-  .button1:hover {
-    color: #fff;
-  }
-  
-  .button1:before {
-    top: 100%;
-    left: 100%;
-    transition: all 0.7s;
-  }
-  
-  .button1:hover:before {
-    top: -30px;
-    left: -30px;
-  }
-  
-  .button1:active:before {
-    background: #3a0ca3;
-    transition: background 0s;
-  }
-  
 
 .span1{
     font-size: 25px;
     margin-left: 20px;
     font-family: 'Poppins', sans-serif;
-    color:white;
+    color:black;
 }
 
 .box1{
     height: 625px;
     width: 900px;
-    border: 0px solid white;
+    border: 0px solid black;
     position: relative;
 }
 
 .box2{
-    height: 550px;
-    width: 600px;
-    /* border: 2px solid #560bad; */
+    height: 400px;
+    width: 700px;
     position: relative;
     border-radius: 20px;
-    margin-top: 50px;
-    
+    margin-top: 10px;
+    border: 0px solid black;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+
     
     
 }
 
 .box2h1{
     text-align: center;
-    color: white;
+    color:#0073e5;
     font-family: 'Poppins', sans-serif;
     margin-left: 30px;
 
 }
 
 .smallbox {
-    height: 440px;
-    padding: 10px;
-    border: 2px solid #551488;
-    border-radius: 5px;
-    background-color: none;
-    font-family: 'Poppins', sans-serif;
-    border-radius: 20px;
-    color: white;
-  }
+  height: 250px;  /* Fixed height to enable scrolling */
+  padding: 10px;
+  border: 0px solid #551488; /* Added border to make it more visible */
+  border-radius: 20px;
+  background-color: white;
+  font-family: 'Poppins', sans-serif;
+  color: black;
+  overflow-y: auto; /* Enables vertical scrolling */
+  overflow-x: hidden; /* Hides horizontal scrolling */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #0073e5 #f1f1f1; /* Custom scrollbar colors */
+}
+
+/* Scrollbar styling for WebKit browsers (Chrome, Edge, Safari) */
+.smallbox::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.smallbox::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track background */
+  border-radius: 10px;
+}
+
+.smallbox::-webkit-scrollbar-thumb {
+  background: #0073e5; /* Scrollbar color */
+  border-radius: 10px;
+}
+
+.smallbox div {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 20px;
+  color: black;
+  border: 2px solid #0073e5;
   
-  .smallbox div {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-bottom: 0px solid #551488;
-    background-color: black;
-    border-radius: 20px;
-    color: white;
-    border: 2px solid #551488;
-  }
+}
+
   
   .smallbox p {
     margin: 0;
     font-size: 14px;
-    color: white;
+    color: black;
   }
 
   .boxp1{
@@ -207,71 +173,83 @@
     color: black;
   }
 
-/* From Uiverse.io by AbanoubMagdy1 */ 
-.loader {
-    --dim: 3rem;
-    width: var(--dim);
-    height: var(--dim);
-    position: relative;
-    animation: spin988 2s linear infinite;
-    margin-top: 20px;
-   
-  }
-  
-  .loader .circle {
-    --color: white;
-    --dim: 1.2rem;
-    width: var(--dim);
-    height: var(--dim);
-    background-color: var(--color);
-    border-radius: 50%;
-    position: absolute;
-  }
-  
-  .loader .circle:nth-child(1) {
-    top: 0;
-    left: 0;
-  }
-  
-  .loader .circle:nth-child(2) {
-    top: 0;
-    right: 0;
-  }
-  
-  .loader .circle:nth-child(3) {
-    bottom: 0;
-    left: 0;
-  }
-  
-  .loader .circle:nth-child(4) {
-    bottom: 0;
-    right: 0;
-  }
-  
-  @keyframes spin988 {
-    0% {
-      transform: scale(1) rotate(0);
-    }
-  
-    20%, 25% {
-      transform: scale(1.3) rotate(90deg);
-    }
-  
-    45%, 50% {
-      transform: scale(1) rotate(180deg);
-    }
-  
-    70%, 75% {
-      transform: scale(1.3) rotate(270deg);
-    }
-  
-    95%, 100% {
-      transform: scale(1) rotate(360deg);
-    }
+  .container3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 0px solid black;
+    background-color: white;
   }
 
-  .boxloader{
-    display: flex;
-    justify-content: center;
+
+  .box6{
+    height: 625px;
+    width: 600px;
+    border: 0px solid black;
+    position: relative;
+    background-image: url('./images/money2.png');
+    background-size: cover;
   }
-  
+
+  /* Responsive Design */
+@media (max-width: 768px) {
+  .p1 {
+      font-size: 40px;
+      text-align: center;
+      margin:10px;
+  }
+  .p2 {
+      font-size: 18px;
+      text-align: left;
+      text-align: center;
+      margin:10px 15px;
+  }
+  .button1 {
+      width: 120px;
+      height: 45px;
+  }
+  .box6 {
+      display:none;
+  }
+
+  .container3{
+    margin:10px;
+  }
+
+  .span1{
+    font-size: 15px;
+}
+
+.input1{
+  margin-left: 20px;
+  margin-top:10px;
+  height: 30px;
+  width: 200px;
+  font-size: 15px;
+}
+
+.button1 {
+  width: 100px;
+  height: 50px;
+  margin-left:100px;
+}
+
+.box2h1{
+  font-size: 20px;
+}
+
+.box2{
+  height: 400px;
+  width: 700px;
+  position: relative;
+  border-radius: 20px;
+  margin: 10px;
+  border: 0px solid black;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+hr{
+  border: 1px solid #0073e5;
+  width:300px;
+}
+}

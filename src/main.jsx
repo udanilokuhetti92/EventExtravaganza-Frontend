@@ -36,6 +36,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/Home_PAGE' element={<Home_PAGE/>} />
         <Route path='/Packages' element={<Packages/>} />
         <Route path='/Checklist' element={<Checklist/>} />
+        <Route path='/Invitation' element={<EventInvitation/>} />
 
 
 

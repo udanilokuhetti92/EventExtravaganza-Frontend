@@ -231,3 +231,12 @@
     color: gray;
     padding: 20px;
 }
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .table th,
+    .table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

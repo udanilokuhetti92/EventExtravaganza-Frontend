@@ -7,6 +7,7 @@ export default function LocationFiltering() {
   const [eventPlanners, setEventPlanners] = useState([]);
   const [location, setLocation] = useState("");
   const [searchedLocation, setSearchedLocation] = useState("");
+  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
   // Function to receive nameData from child
   const handlePlannerData = (data) => {
@@ -26,18 +27,30 @@ export default function LocationFiltering() {
       <div className="container">
         <Navigation />
         <h3 className="h3">
-          <span className="green-pipe">|</span> Extravaganza Unit
+          <span className={styles["green-pipe"]}>|</span> Extravaganza Unit
         </h3>
         <p className={styles.p1}>
           Loved By Event Organizers.
           <br />
           Built for <span className={styles["box-text"]}>Location Filtering</span>
         </p>
-        <p className={styles.p2}>
-          Finding the perfect event planner within your area. Simply <br />
-          enter your location, and our system will instantly display a list of
-          available event planners.
-        </p>
+
+        {/* Accordion for p2 */}
+        <div className={styles.accordion}>
+          <button className={styles.accordionButton} onClick={() => setIsAccordionOpen(!isAccordionOpen)}>
+            About Location Filtering {isAccordionOpen ? "▲" : "▼"}
+          </button>
+          {isAccordionOpen && (
+            <div className={styles.accordionContent}>
+              <p>
+                Finding the perfect event planner within your area. Simply <br />
+                enter your location, and our system will instantly display a list of
+                available event planners.
+              </p>
+            </div>
+          )}
+        </div>
+
         <div className={styles["google-map"]}>
           <GoogleMapComponent
             location={searchedLocation}
@@ -58,7 +71,7 @@ export default function LocationFiltering() {
         <button className="button1" onClick={handleSearch} aria-label="Search for event planners">
           Search
         </button>
-        <p className="event-count">Total Event Planners Found: {eventPlanners.length}</p>
+        <p className={styles["event-count"]}>Total Event Planners Found: {eventPlanners.length}</p>
 
         <div className={styles.tablediv}>
           <table className={styles.table}>

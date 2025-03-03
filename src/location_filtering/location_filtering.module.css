@@ -222,3 +222,12 @@
     color: red;
     font-weight: bold;
 }
+
+/* Centering no results row */
+.table td[colspan="3"] {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+    padding: 20px;
+}

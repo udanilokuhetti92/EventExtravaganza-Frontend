@@ -6,7 +6,6 @@ import styles from '../invitation_send/invitation_send.module.css';
 
 emailjs.init("1SLJDJFAIftTWfyS1");
 
-// Add this function right after your imports and initialization, before your EventInvitation component
 const compressImage = (base64String, maxWidth = 800) => {
   return new Promise((resolve) => {
     const img = new Image();
@@ -92,7 +91,6 @@ export default function EventInvitation() {
     return true;
   };
 
-  // Replace your existing handleGenerateInvitation function with this one
   const handleGenerateInvitation = async () => {
     try {
       if (!selectedTemplate) {
@@ -109,7 +107,7 @@ export default function EventInvitation() {
       }
 
       // Show loading state
-      const button = document.querySelector('.button1');
+      const button = document.querySelector(`.${styles.button1}`);
       if (button) {
         button.textContent = 'Sending...';
         button.disabled = true;
@@ -142,7 +140,7 @@ export default function EventInvitation() {
       alert(err.message || 'Failed to send invitation. Please try again.');
     } finally {
       // Reset button state
-      const button = document.querySelector('.button1');
+      const button = document.querySelector(`.${styles.button1}`);
       if (button) {
         button.textContent = 'Generate & Send Invitation';
         button.disabled = false;
@@ -150,7 +148,6 @@ export default function EventInvitation() {
     }
   };
 
-  // Replace your existing sendEmail function with this one
   const sendEmail = async (image) => {
     const serviceID = 'service_44creeq';
     const templateID = 'template_id6fdig';
@@ -158,7 +155,6 @@ export default function EventInvitation() {
   
     const inviteesArray = eventDetails.invitees.split(',').map(email => email.trim());
   
-    // Match these parameters with your template variables
     const templateParams = {
       to_email: inviteesArray[0], // Send to first email in list
       event_name: eventDetails.eventName,
@@ -182,7 +178,7 @@ export default function EventInvitation() {
     switch (selectedTemplate) {
       case 'template1':
         return (
-          <div className="template1">
+          <div className={styles.template1}>
             <h2>You're Cordially Invited to {eventDetails.eventName}</h2>
             <p><strong>Date:</strong> {eventDetails.eventDate}</p>
             <p><strong>Time:</strong> {eventDetails.eventTime}</p>
@@ -192,7 +188,7 @@ export default function EventInvitation() {
         );
       case 'template2':
         return (
-          <div className="template2">
+          <div className={styles.template2}>
             <h2>Invitation to {eventDetails.eventName}</h2>
             <p><strong>Date:</strong> {eventDetails.eventDate}</p>
             <p><strong>Time:</strong> {eventDetails.eventTime}</p>
@@ -202,7 +198,7 @@ export default function EventInvitation() {
         );
       case 'template3':
         return (
-          <div className="template3">
+          <div className={styles.template3}>
             <h2>{eventDetails.eventName}</h2>
             <p><strong>Date:</strong> {eventDetails.eventDate}</p>
             <p><strong>Time:</strong> {eventDetails.eventTime}</p>
@@ -219,18 +215,18 @@ export default function EventInvitation() {
     <>
       <Navigation />
 
-      <div className='box1'>
-        <h3 className='h3'>
-          <span className='green-pipe'>|</span> Event Invitation Generator
+      <div className={styles.box1}>
+        <h3 className={styles.h3}>
+          <span className={styles['green-pipe']}>|</span> Event Invitation Generator
         </h3>
-        <p className='p1'>
+        <p className={styles.p1}>
           Event Owners can generate and send invitations via email.
         </p>
 
-        {error && <div className="error-message">{error}</div>}
-        {success && <div className="success-message">{success}</div>}
+        {error && <div className={styles['error-message']}>{error}</div>}
+        {success && <div className={styles['success-message']}>{success}</div>}
 
-        <form className='event-form'>
+        <form className={styles['event-form']}>
           <label>Event Name:</label>
           <input
             type="text"
@@ -279,22 +275,22 @@ export default function EventInvitation() {
           />
 
           <h4>Select Invitation Template:</h4>
-          <div className="template-container">
+          <div className={styles['template-container']}>
             <ul>
               <li
-                className={`template ${selectedTemplate === 'template1' ? 'selected' : ''}`}
+                className={`${styles.template} ${selectedTemplate === 'template1' ? styles.selected : ''}`}
                 onClick={() => handleTemplateSelect('template1')}
               >
                 Template 1
               </li>
               <li
-                className={`template ${selectedTemplate === 'template2' ? 'selected' : ''}`}
+                className={`${styles.template} ${selectedTemplate === 'template2' ? styles.selected : ''}`}
                 onClick={() => handleTemplateSelect('template2')}
               >
                 Template 2
               </li>
               <li
-                className={`template ${selectedTemplate === 'template3' ? 'selected' : ''}`}
+                className={`${styles.template} ${selectedTemplate === 'template3' ? styles.selected : ''}`}
                 onClick={() => handleTemplateSelect('template3')}
               >
                 Template 3
@@ -302,13 +298,13 @@ export default function EventInvitation() {
             </ul>
           </div>
 
-          <div ref={invitationRef} className={`invitation-preview ${selectedTemplate}`}>
+          <div ref={invitationRef} className={`${styles['invitation-preview']} ${selectedTemplate ? styles[selectedTemplate] : ''}`}>
             {getTemplatePreview()}
           </div>
 
           <button 
             type="button" 
-            className="button1" 
+            className={styles.button1} 
             onClick={handleGenerateInvitation}
             disabled={isLoading}
           >

@@ -1,0 +1,290 @@
+  
+  .container {
+    /* background-image: url('../location_filtering/images/budget9.jpg'); */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100vw; 
+    height: 100vh;
+    padding: 20px;
+    position: relative; /* Ensures absolute children are positioned relative to this */
+}
+
+
+.h3 {
+    margin-top: 50px;
+    margin-left: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+}
+
+.green-pipe {
+    color: rgb(0, 255, 0);
+}
+
+.p1 {
+    margin-top: 40px;
+    margin-left: 20px;
+    font-size: 60px;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+}
+
+.box-text {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 2px solid #0b2f3f;
+    border-radius: 20px;
+    color: #34707a;
+    font-family: 'Poppins', sans-serif;
+    font-size: 60px;
+}
+
+.p2 {
+    margin-left: 20px;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    margin-top: -30px;
+    color: gray;
+}
+/* Accordion Container */
+.accordion {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* Accordion Button */
+.accordionButton {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #275d75;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.accordionButton:hover {
+    background-color: #3a0ca3;
+}
+
+/* Accordion Content */
+.accordionContent {
+    background-color: #f9f9f9;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.google-map {
+    position: absolute;
+    top: 50px; /* Adjusted for better placement */
+    right: -85%; /* Moves it correctly to the right */
+    width: 800px; /* Adjust width as needed */
+    height: 300px; /* Adjust height as needed */
+    border-radius: 10px;
+    
+   
+}
+
+@media (max-width: 768px) {
+    .google-map {
+        position: relative;
+        width: 90%;
+        height: 200px;
+        margin: 20px auto;
+    }
+}
+
+.input1 {
+    margin-left: 20px;
+    height: 40px;
+    width: 265px;
+    padding: 10px;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    background-color: black;
+    color: white;
+    border: 2px solid #560bad;
+    border-radius: 6px;
+}
+
+.input1::placeholder {
+    color: white;
+    font-size: 17px;
+}
+
+.button1 {
+    --color: #560bad;
+    font-family: inherit;
+    display: inline-block;
+    width: 8em;
+    height: 60px;
+    line-height: 2.5em;
+    margin: 20px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid var(--color);
+    transition: color 0.5s;
+    z-index: 1;
+    font-size: 17px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: white;
+    background-color: black;
+    font-family: 'Poppins', sans-serif;
+}
+
+.button1:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: var(--color);
+    height: 150px;
+    width: 200px;
+    border-radius: 50%;
+    transition: all 0.7s;
+}
+
+.button1:hover {
+    color: #fff;
+}
+
+.button1:hover:before {
+    top: -30px;
+    left: -30px;
+}
+
+.button1:active:before {
+    background: #3a0ca3;
+    transition: background 0s;
+}
+
+.span1 {
+    font-size: 28px;
+    margin-left: 20px;
+    font-family: 'Poppins', sans-serif;
+    color: black;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filter-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Container for the table */
+.tablediv {
+    width: 90%;
+    max-width: 900px;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-x: auto;
+}
+
+/* Styling the table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Header row */
+.table thead {
+    background-color: #2a6697;
+    color: white;
+}
+
+.table th {
+    padding: 15px;
+    text-align: left;
+    font-size: 18px;
+}
+
+/* Table rows */
+.table tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Alternating row colors */
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Table cell styling */
+.table td {
+    padding: 15px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Hover effect */
+.table tbody tr:hover {
+    background-color: rgba(86, 11, 173, 0.1);
+}
+
+/* Profile link styling */
+.table a {
+    text-decoration: none;
+    color: #560bad;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.table a:hover {
+    color: #3a0ca3;
+    text-decoration: underline;
+}
+
+/* No Profile styling */
+.no-profile {
+    color: red;
+    font-weight: bold;
+}
+
+/* Centering no results row */
+.table td[colspan="3"] {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+    padding: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .table th,
+    .table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

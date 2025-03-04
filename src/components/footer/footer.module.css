@@ -1,7 +1,7 @@
 footer {
   margin-top: 30px;
-    background-color: #551488;
-    color: #cb73e8;
+  background-color: rgb(30 31 54 / var(--tw-bg-opacity, 1));
+  color: blue;
     padding: 4px;
     text-align: center;
     /* border-top-left-radius: 25px;
@@ -17,10 +17,12 @@ footer {
 .footer-links {
     list-style: none;
     padding: 10px;
+    
 }
 
 .footer-links li {
     margin: 5 15px;
+    
 }
 
 ul li{
@@ -30,7 +32,7 @@ ul li{
 }
 
 .footer-links a {
-    color: #cdd8e4; 
+    color: rgb(167, 167, 167); 
     text-decoration: none;
 }
 
@@ -57,13 +59,13 @@ ul li{
 }
 
 h3,a,p{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family:'Poppins', sans-serif;
 }
 
 .card {
     width: fit-content;
     height: fit-content;
-    background-color: #551488;
+    background-color: rgb(30 31 54 / var(--tw-bg-opacity, 1));
     display: flex;
     align-items: center;
     justify-content: center;

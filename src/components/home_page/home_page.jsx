@@ -10,9 +10,9 @@ export default function () {
   const navigate = useNavigate();
   return (
     <div className={styles.body}>
-      <video autoPlay loop muted playsInline className={styles.vedio}>
+      {/* <video autoPlay loop muted playsInline className={styles.vedio}>
         <source src={video} type="video/mp4" />
-      </video>
+      </video> */}
         <h1 className={styles.h1}>WELCOME TO EXTRAVAGANZA</h1>
         
         <div className={styles.container}>

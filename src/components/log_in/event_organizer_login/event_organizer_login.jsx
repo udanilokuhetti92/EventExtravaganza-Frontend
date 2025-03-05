@@ -64,8 +64,6 @@ export default function EventOrganizerLogin() {
       console.error('Error submitting form:', error);
       alert('An error occurred while submitting the form.');
     }
-
-    const navigate = useNavigate();
   };
 
   

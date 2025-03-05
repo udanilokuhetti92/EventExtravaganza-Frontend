@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styles from '../event_organizer_login/event_organizer_login.module.css';
 import { useNavigate } from "react-router-dom";
 
-
 export default function EventOrganizerLogin() {
   const navigate = useNavigate();
+  
   // State to store form data
   const [formData, setFormData] = useState({
     FullName: '',
@@ -12,6 +12,7 @@ export default function EventOrganizerLogin() {
     Password: '',
     ConfirmPassword: '',
     City: '',
+    ContactNumber: '', // Added Contact Number
   });
 
   // Handle input changes
@@ -39,6 +40,7 @@ export default function EventOrganizerLogin() {
       Email: formData.Email,
       Password: formData.Password,
       City: formData.City,
+      ContactNumber: formData.ContactNumber, // Sending Contact Number
     };
 
     try {
@@ -65,9 +67,6 @@ export default function EventOrganizerLogin() {
       alert('An error occurred while submitting the form.');
     }
   };
-
-  
-
 
   return (
     <div className={styles.container}>
@@ -141,13 +140,27 @@ export default function EventOrganizerLogin() {
             required
           />
 
+          <br /> <br />
+
+          {/* New Contact Number Field */}
+          <label className={styles.l1} htmlFor="ContactNumber">Contact Number</label> <br />
+          <input
+            className={styles.i1}
+            type="text"
+            name="ContactNumber"
+            placeholder="Enter your contact number"
+            value={formData.ContactNumber}
+            onChange={handleInputChange}
+            required
+          />
+
           <br />
 
           <button className={styles.b1} type="submit">Sign up</button>
         </form>
 
         <p className={styles.p2}>
-          Already have an account? <span onClick={()=> navigate('/organizer_signin')} className={styles.span} >Login</span>
+          Already have an account? <span onClick={() => navigate('/organizer_signin')} className={styles.span}>Login</span>
         </p>
       </div>
     </div>

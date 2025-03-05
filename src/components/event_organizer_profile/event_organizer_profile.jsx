@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './event_organizer_profile.module.css';
+import Navigation from '../navigation/navigation';
+import Footer from '../footer/footer';
 
 export default function EventOrganizerProfile() {
   // This would typically come from backend/API
@@ -11,34 +13,40 @@ export default function EventOrganizerProfile() {
   };
 
   return (
-    <div className={styles.profileContainer}>
-      <div className={styles.profileHeader}>
-        <div className={styles.profileImage}>
-          <div className={styles.imagePlaceholder}>
-            {organizer.name.charAt(0)}
+    <div>
+      <Navigation/>
+      <div className={styles.profileContainer}>
+        
+        <div className={styles.profileHeader}>
+          <div className={styles.profileImage}>
+            <div className={styles.imagePlaceholder}>
+              {organizer.name.charAt(0)}
+            </div>
           </div>
+          <h1 className={styles.name}>{organizer.name}</h1>
         </div>
-        <h1 className={styles.name}>{organizer.name}</h1>
-      </div>
 
-      <div className={styles.profileContent}>
-        <div className={styles.infoSection}>
-          <div className={styles.infoGrid}>
-            <div className={styles.infoItem}>
-              <label>City</label>
-              <p>{organizer.city}</p>
-            </div>
-            <div className={styles.infoItem}>
-              <label>Email</label>
-              <p>{organizer.email}</p>
-            </div>
-            <div className={styles.infoItem}>
-              <label>Contact Number</label>
-              <p>{organizer.contactNumber}</p>
+        <div className={styles.profileContent}>
+          <div className={styles.infoSection}>
+            <div className={styles.infoGrid}>
+              <div className={styles.infoItem}>
+                <label>City</label>
+                <p>{organizer.city}</p>
+              </div>
+              <div className={styles.infoItem}>
+                <label>Email</label>
+                <p>{organizer.email}</p>
+              </div>
+              <div className={styles.infoItem}>
+                <label>Contact Number</label>
+                <p>{organizer.contactNumber}</p>
+                <button className={styles.b1}>Log out</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

@@ -25,7 +25,7 @@ export default function Navigation() {
               </div>
             </li>
             <li className={styles.li1}>Inbox</li>
-            <li className={styles.li1} onClick={() => navigate('/profile')}>Profile</li>
+            <li className={styles.li1} onClick={() => navigate('/Organizer_Profile')}>Profile</li>
           </ul>
         </nav>
       </div>

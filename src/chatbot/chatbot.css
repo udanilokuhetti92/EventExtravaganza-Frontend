@@ -48,8 +48,10 @@
     text-align: right;
 }
 
+
+
 .message.bot {
-    background-color: #e5e5ea;
+    background-color: #af0a89;
     color: black;
     align-self: flex-start;
     text-align: center;

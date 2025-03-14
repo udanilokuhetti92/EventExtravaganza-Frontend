@@ -14,6 +14,7 @@ import Navigation from './event_planner_site/navigation/navigation'
 import Home_PAGE from './event_planner_site/home_page/home_page'
 import Packages from './event_planner_site/packages/packages'
 import LocationFiltering from './location_filtering/location_filtering'
+import Event_Organizer_Profile from './components/event_organizer_profile/event_organizer_profile'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -26,6 +27,8 @@ createRoot(document.getElementById('root')).render(
       {/* {<Navigation/>} */}
       {/* {<Packages/>}  */}
       {/* {<Event_Organizer_Signin/>} */}
+      {/* {<Event_Organizer_Profile/>} */}
+    
       <Routes>
         <Route path='/' element={<Home_page/>} />
         <Route path='/organizer_login' element={<Event_Organizer_Login/>} />
@@ -39,6 +42,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/Checklist' element={<Checklist/>} />
         <Route path='/Invitation' element={<EventInvitation/>} />
         <Route path='/LocationBase_Filtering' element={<LocationFiltering/>} />
+        <Route path='Organizer_Profile' element={<Event_Organizer_Profile/>}/>
 
 
 

@@ -6,7 +6,7 @@ import '../components/navigation/navigation.module.css'
 import '../components/footer/footer'
 import '../components/footer/footer.module.css'
 
-const OPENAI_BASE_URL="http://localhost:5000";
+const OPENAI_BASE_URL= "http://localhost:5001";
 
 
 export default function Chatbot() {
@@ -39,17 +39,15 @@ export default function Chatbot() {
           message: input,
       });
 
-      if (response.data && response.data.reply) {
-          const botMessage = { role: 'bot', content: response.data.reply };
+      if (response.data?.reply) {
+          const botMessage = { role: "bot", content: response.data.reply };
           setMessages((prevMessages) => [...prevMessages, botMessage]);
       } else {
           setError('Invalid response from the chatbot.');
       }
     } catch (err) {
         console.error('Error: ', err);
-        setError(
-            'Failed to get response .'
-        );
+        setError(err.response?.data?.error||"Error generating response");
     } finally {
         setLoading(false);
     }

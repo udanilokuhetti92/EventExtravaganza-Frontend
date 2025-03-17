@@ -51,10 +51,11 @@
 
 
 .message.bot {
-    background-color: #af0a89;
+    background-color: palevioletred;
     color: black;
     align-self: flex-start;
-    text-align: center;
+    text-align:center;
+    white-space:pre-wrap;
 }
 
 .input-container {

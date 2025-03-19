@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./event_organizer_signin.module.css";
 import { useNavigate } from "react-router-dom";
-import { Mail, Lock } from 'lucide-react';
 
 export default function EventOrganizerSignin() {
   const [email, setEmail] = useState("");
@@ -18,6 +17,7 @@ export default function EventOrganizerSignin() {
     }
 
     try {
+      // Step 1: Authenticate the user
       const loginResponse = await fetch("http://localhost:5000/organizerLogin/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -27,10 +27,11 @@ export default function EventOrganizerSignin() {
       const loginData = await loginResponse.json();
 
       if (!loginResponse.ok) {
-        setError("Incorrect email or password");
+        alert("Incorrect password or email");
         return;
       }
 
+      // Step 2: Fetch organizer details using the email
       const organizerResponse = await fetch("http://localhost:5000/organizerProfile2/getOrganizerByMail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -44,6 +45,7 @@ export default function EventOrganizerSignin() {
         return;
       }
 
+      // Step 3: Store organizer details in local storage
       localStorage.setItem('organizer', JSON.stringify({
         name: organizerData.FullName,
         city: organizerData.City,
@@ -51,6 +53,7 @@ export default function EventOrganizerSignin() {
         contactNumber: organizerData.ContactNumber,
       }));
 
+      // Step 4: Redirect to the profile page
       navigate("/Home");
     } catch (error) {
       setError("An error occurred. Please try again later.");
@@ -59,58 +62,46 @@ export default function EventOrganizerSignin() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.formWrapper}>
-        <div className={styles.formHeader}>
-          <h1>Welcome Back!</h1>
-          <p>Sign in to your Event Organizer account</p>
-        </div>
+      <div className={styles.box1}>
+        <h1 className={styles.h1}>Event Organizer Sign In</h1>
+        <br />
+        <p className={styles.p1}>Provide correct information to sign in</p>
+        <br />
 
-        {error && <div className={styles.errorMessage}>{error}</div>}
+        {error && <p className={styles.error}>{error}</p>}
 
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.inputGroup}>
-            <label htmlFor="email">
-              <Mail size={18} />
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
+        <form onSubmit={handleSubmit}>
+          <label className={styles.l1} htmlFor="email">Email</label>
+          <br />
+          <input
+            className={styles.i1}
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-          <div className={styles.inputGroup}>
-            <label htmlFor="password">
-              <Lock size={18} />
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+          <br />
+          <br />
 
-          <button type="submit" className={styles.submitButton}>
-            Sign in
-          </button>
+          <label className={styles.l1} htmlFor="password">Password</label>
+          <br />
+          <input
+            className={styles.i1}
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <br />
+
+          <button className={styles.b1} type="submit">Sign in</button>
         </form>
-
-        <p className={styles.registerLink}>
-          Don't have an account?
-          <span onClick={() => navigate('/organizer_login')}>
-            Register
-          </span>
-        </p>
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './event_organizer_login.module.css';
 import { useNavigate } from 'react-router-dom';
-import { User, Mail, Lock, MapPin, Phone } from 'lucide-react';
 
 export default function EventOrganizerLogin() {
   const navigate = useNavigate();
@@ -51,12 +50,14 @@ export default function EventOrganizerLogin() {
       const result = await response.json();
       if (response.ok) {
         alert('Account created successfully!');
+
         localStorage.setItem('organizer', JSON.stringify({
           name: formData.FullName,
           city: formData.City,
           email: formData.Email,
           contactNumber: formData.ContactNumber,
         }));
+
         navigate('/Home');
       } else {
         alert(`Error: ${result.message}`);
@@ -69,119 +70,88 @@ export default function EventOrganizerLogin() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.formWrapper}>
-        <div className={styles.formHeader}>
-          <h1>Create Event Organizer Account</h1>
-          <p>Provide correct information to setup your account</p>
-        </div>
+      <div className={styles.box1}>
+        <h1 className={styles.h1}>Create Event Organizer Account</h1>
+        <p className={styles.p1}>Provide correct information to setup your account</p>
 
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.inputGroup}>
-            <label htmlFor="FullName">
-              <User size={18} />
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="FullName"
-              name="FullName"
-              placeholder="Enter your name"
-              value={formData.FullName}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+        <form onSubmit={handleSubmit}>
+          <label className={styles.l1} htmlFor="FullName">Full Name</label>
+          <input
+            className={styles.i1}
+            type="text"
+            id="FullName"
+            name="FullName"
+            placeholder="Enter your name"
+            value={formData.FullName}
+            onChange={handleInputChange}
+            required
+          />
 
-          <div className={styles.inputGroup}>
-            <label htmlFor="Email">
-              <Mail size={18} />
-              Email
-            </label>
-            <input
-              type="email"
-              id="Email"
-              name="Email"
-              placeholder="Enter your email"
-              value={formData.Email}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+          <label className={styles.l1} htmlFor="Email">Email</label>
+          <input
+            className={styles.i1}
+            type="email"
+            id="Email"
+            name="Email"
+            placeholder="Enter your email"
+            value={formData.Email}
+            onChange={handleInputChange}
+            required
+          />
 
-          <div className={styles.inputGroup}>
-            <label htmlFor="Password">
-              <Lock size={18} />
-              Create Password
-            </label>
-            <input
-              type="password"
-              id="Password"
-              name="Password"
-              placeholder="Enter a password"
-              value={formData.Password}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+          <label className={styles.l1} htmlFor="Password">Create Password</label>
+          <input
+            className={styles.i1}
+            type="password"
+            id="Password"
+            name="Password"
+            placeholder="Enter a password"
+            value={formData.Password}
+            onChange={handleInputChange}
+            required
+          />
 
-          <div className={styles.inputGroup}>
-            <label htmlFor="ConfirmPassword">
-              <Lock size={18} />
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              id="ConfirmPassword"
-              name="ConfirmPassword"
-              placeholder="Enter password again"
-              value={formData.ConfirmPassword}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+          <label className={styles.l1} htmlFor="ConfirmPassword">Confirm Password</label>
+          <input
+            className={styles.i1}
+            type="password"
+            id="ConfirmPassword"
+            name="ConfirmPassword"
+            placeholder="Enter password again"
+            value={formData.ConfirmPassword}
+            onChange={handleInputChange}
+            required
+          />
 
-          <div className={styles.inputGroup}>
-            <label htmlFor="City">
-              <MapPin size={18} />
-              City
-            </label>
-            <input
-              type="text"
-              id="City"
-              name="City"
-              placeholder="Enter city"
-              value={formData.City}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+          <label className={styles.l1} htmlFor="City">City</label>
+          <input
+            className={styles.i1}
+            type="text"
+            id="City"
+            name="City"
+            placeholder="Enter city"
+            value={formData.City}
+            onChange={handleInputChange}
+            required
+          />
 
-          <div className={styles.inputGroup}>
-            <label htmlFor="ContactNumber">
-              <Phone size={18} />
-              Contact Number
-            </label>
-            <input
-              type="text"
-              id="ContactNumber"
-              name="ContactNumber"
-              placeholder="Enter your contact number"
-              value={formData.ContactNumber}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+          <label className={styles.l1} htmlFor="ContactNumber">Contact Number</label>
+          <input
+            className={styles.i1}
+            type="tel"
+            id="ContactNumber"
+            name="ContactNumber"
+            placeholder="Enter your contact number"
+            value={formData.ContactNumber}
+            onChange={handleInputChange}
+            required
+          />
 
-          <button type="submit" className={styles.submitButton}>
-            Sign up
-          </button>
+          <button className={styles.b1} type="submit">Create Account</button>
         </form>
 
-        <p className={styles.loginLink}>
-          Already have an account? 
-          <span onClick={() => navigate('/organizer_signin')}>
-            Login
-          </span>
+        <p className={styles.p2}>
+          Already have an account? <span onClick={() => navigate('/organizer_signin')} className={styles.span}>Login</span>
         </p>
       </div>
     </div>

@@ -17,7 +17,7 @@
     padding: 2rem;
   }
   
-  .formWrapper {
+  .box1 {
     background: var(--background-color);
     border-radius: 20px;
     padding: 2.5rem;
@@ -26,62 +26,50 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   }
   
-  .formHeader {
+  .h1 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  
+  .p1 {
+    color: var(--secondary-text);
+    font-size: 0.9rem;
     text-align: center;
     margin-bottom: 2rem;
   }
   
-  .formHeader h1 {
-    color: var(--primary-color);
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .formHeader p {
-    color: var(--secondary-text);
-    font-size: 0.9rem;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .inputGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .inputGroup label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  .l1 {
+    display: block;
     color: var(--secondary-text);
     font-size: 0.9rem;
     font-weight: 500;
+    margin-bottom: 0.5rem;
   }
   
-  .inputGroup input {
+  .i1 {
+    width: 100%;
     padding: 0.75rem;
     border: 1px solid var(--neutral-color);
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.3s ease;
+    margin-bottom: 1rem;
   }
   
-  .inputGroup input:focus {
+  .i1:focus {
     outline: none;
     border-color: var(--secondary-color);
     box-shadow: 0 0 0 2px rgba(60, 110, 113, 0.2);
   }
   
-  .inputGroup input::placeholder {
+  .i1::placeholder {
     color: #999;
   }
   
-  .submitButton {
+  .b1 {
+    width: 100%;
     background-color: var(--secondary-color);
     color: var(--background-color);
     border: none;
@@ -91,26 +79,26 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
   }
   
-  .submitButton:hover {
+  .b1:hover {
     background-color: var(--primary-color);
     transform: translateY(-2px);
   }
   
-  .submitButton:active {
+  .b1:active {
     transform: translateY(0);
   }
   
-  .loginLink {
+  .p2 {
     text-align: center;
     margin-top: 1.5rem;
     color: var(--secondary-text);
     font-size: 0.9rem;
   }
   
-  .loginLink span {
+  .span {
     color: var(--secondary-color);
     margin-left: 0.5rem;
     font-weight: 600;
@@ -118,7 +106,7 @@
     transition: color 0.3s ease;
   }
   
-  .loginLink span:hover {
+  .span:hover {
     color: var(--primary-color);
     text-decoration: underline;
   }
@@ -128,25 +116,25 @@
       padding: 1rem;
     }
   
-    .formWrapper {
+    .box1 {
       padding: 1.5rem;
     }
   
-    .formHeader h1 {
+    .h1 {
       font-size: 1.5rem;
     }
   }
   
   @media (max-width: 480px) {
-    .formWrapper {
+    .box1 {
       padding: 1.25rem;
     }
   
-    .inputGroup input {
+    .i1 {
       padding: 0.6rem;
     }
   
-    .submitButton {
+    .b1 {
       padding: 0.8rem;
     }
   }

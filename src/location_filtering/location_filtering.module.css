@@ -98,19 +98,19 @@
 .google-map {
     position: absolute;
     top: 50px; /* Adjusted for better placement */
-    right: -85%; /* Moves it correctly to the right */
-    width: 800px; /* Adjust width as needed */
-    height: 300px; /* Adjust height as needed */
+    right: -88%; /* Moves it correctly to the right */
+    width: 850px; /* Adjust width as needed */
+    height: 400px; /* Adjust height as needed */
     border-radius: 10px;
     
    
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .google-map {
         position: relative;
         width: 90%;
-        height: 200px;
+        height: 300px;
         margin: 20px auto;
     }
 }

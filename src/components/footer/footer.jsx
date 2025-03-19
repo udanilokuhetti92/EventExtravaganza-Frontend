@@ -29,12 +29,12 @@ export default function Footer() {
             <div className={styles.linksColumn}>
               <a href="/Home">Home</a>
               <a href="/Budget_Filtering">Budget Filtering</a>
-              <a href="#search-venues">Search Venues</a>
+              <a href="/LocationBase_Filtering">Search Venues</a>
             </div>
             <div className={styles.linksColumn}>
               <a href="#chatbot">Chatbot</a>
-              <a href="#invitation-management">Invitation Management</a>
-              <a href="#checklist-management">Checklist Management</a>
+              <a href="/Invitation">Invitation Management</a>
+              {/* <a href="#checklist-management">Checklist Management</a> */}
             </div>
           </div>
         </div>

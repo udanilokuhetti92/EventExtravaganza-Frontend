@@ -24,7 +24,7 @@ export default function Navigation() {
             <li className={styles.navItem}>
               <span className={styles.servicesTrigger}>Services</span>
               <ul className={styles.dropdown}>
-                <li onClick={() => navigate('/budget_filtering')}>Budget Filtering</li>
+                <li onClick={() => navigate('/Budget_Filtering')}>Budget Filtering</li>
                 <li onClick={() => navigate('/LocationBase_Filtering')}>Location Filtering</li>
                 <li onClick={() => navigate('/Invitation')}>Send Invitations</li>
                 <li>Chat Bot</li>

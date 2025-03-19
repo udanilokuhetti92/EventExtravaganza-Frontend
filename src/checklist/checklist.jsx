@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navigation from '../event_planner_site/navigation/navigation';
 import Styles from '../checklist/checklist.module.css';
+import Footer from '../event_planner_site/footer/planner_footer';
 
 
 export default function Checklist() {
@@ -255,6 +256,7 @@ export default function Checklist() {
           </div>
         </div>
       )}
+      <Footer/>
     </div>
   );
 }

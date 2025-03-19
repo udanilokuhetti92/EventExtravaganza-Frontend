@@ -12,7 +12,7 @@ export default function Navigation() {
       <div className={styles.container}>
         <nav className={styles.navbar}>
           <div className={styles.logo}>
-            EventPro
+            Extravaganza
           </div>
           
           <ul className={styles.navList}>

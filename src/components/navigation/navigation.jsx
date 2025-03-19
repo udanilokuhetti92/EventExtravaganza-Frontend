@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './navigation.module.css';
+import styles from './Navigation.module.css';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,22 +10,33 @@ export default function Navigation() {
     <div className={styles.nav}>
       <div className={styles.mainbox}>
         <nav className={styles.navbar}>
-          <button className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
+          <button 
+            className={styles.hamburger} 
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle navigation menu"
+          >
             ☰
           </button>
           <ul className={`${styles.navList} ${isOpen ? styles.open : ""}`}>
-            <li onClick={() => navigate('/Home')} className={styles.li1}>Home</li>
-            <li className={styles.list2}>
-              Services
-              <div className={styles.dropdown}>
+            <li onClick={() => navigate('/Home')} className={styles.navItem}>
+              Home
+            </li>
+            <li className={styles.navItem}>
+              <span className={styles.servicesTrigger}>Services</span>
+              <ul className={styles.dropdown}>
                 <li onClick={() => navigate('/budget_filtering')}>Budget Filtering</li>
                 <li onClick={() => navigate('/LocationBase_Filtering')}>Location Filtering</li>
-                <li onClick={()=> navigate('/Invitation')}>Send Invitations</li>
+                <li onClick={() => navigate('/Invitation')}>Send Invitations</li>
                 <li>Chat Bot</li>
-              </div>
+              </ul>
             </li>
-            <li className={styles.li1}>Inbox</li>
-            <li className={styles.li1} onClick={() => navigate('/Organizer_Profile')}>Profile</li>
+            <li className={styles.navItem}>Inbox</li>
+            <li 
+              className={styles.navItem} 
+              onClick={() => navigate('/Organizer_Profile')}
+            >
+              Profile
+            </li>
           </ul>
         </nav>
       </div>

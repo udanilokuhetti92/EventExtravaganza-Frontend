@@ -20,7 +20,7 @@ export default function Navigation() {
                     </li>
                     
                     <li className={styles.li1}>Inbox</li>
-                    <li className={styles.li1}>Profile</li>
+                    <li className={styles.li1} onClick={()=>navigate('/Planner_Profile')}>Profile</li>
                 </ul>
             </nav>
         </div>

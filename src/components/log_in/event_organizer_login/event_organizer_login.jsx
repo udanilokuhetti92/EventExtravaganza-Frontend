@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import styles from '../event_organizer_login/event_organizer_login.module.css';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export default function EventOrganizerLogin() {
   const navigate = useNavigate();
-  
-  // State to store form data
+
   const [formData, setFormData] = useState({
     FullName: '',
     Email: '',
     Password: '',
     ConfirmPassword: '',
     City: '',
-    ContactNumber: '', // Added Contact Number
+    ContactNumber: '',
   });
 
-  // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -24,9 +22,8 @@ export default function EventOrganizerLogin() {
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
     // Validate passwords match
     if (formData.Password !== formData.ConfirmPassword) {
@@ -40,7 +37,7 @@ export default function EventOrganizerLogin() {
       Email: formData.Email,
       Password: formData.Password,
       City: formData.City,
-      ContactNumber: formData.ContactNumber, // Sending Contact Number
+      ContactNumber: formData.ContactNumber,
     };
 
     try {
@@ -57,8 +54,18 @@ export default function EventOrganizerLogin() {
       const result = await response.json();
       if (response.ok) {
         alert('Account created successfully!');
+
+        // Store organizer data in local storage
+        localStorage.setItem('organizer', JSON.stringify({
+          name: formData.FullName,
+          city: formData.City,
+          email: formData.Email,
+          contactNumber: formData.ContactNumber,
+        }));
+
+
+        // Navigate to the home page or another desired page
         navigate('/Home');
-        console.log(result);
       } else {
         alert(`Error: ${result.message}`);
       }
@@ -142,7 +149,6 @@ export default function EventOrganizerLogin() {
 
           <br /> <br />
 
-          {/* New Contact Number Field */}
           <label className={styles.l1} htmlFor="ContactNumber">Contact Number</label> <br />
           <input
             className={styles.i1}

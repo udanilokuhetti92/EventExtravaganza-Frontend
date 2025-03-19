@@ -17,23 +17,44 @@ export default function EventOrganizerSignin() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/organizerLogin/start", {
+      // Step 1: Authenticate the user
+      const loginResponse = await fetch("http://localhost:5000/organizerLogin/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ Email: email, Password: password }),
       });
 
-      const data = await response.json();
+      const loginData = await loginResponse.json();
 
-      if (response.ok) {
-        // Successful login
-        alert("Login successful!");
-        navigate("/Home"); // Redirect to the dashboard page
-      } else {
-        // Invalid credentials
-        // setError(data.message || "Invalid email or password.");
-        alert("Incorrect password");
+      if (!loginResponse.ok) {
+        alert("Incorrect password or email");
+        return;
       }
+
+      // Step 2: Fetch organizer details using the email
+      const organizerResponse = await fetch("http://localhost:5000/organizerProfile2/getOrganizerByMail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }), // Send email in the request body
+      });
+
+      const organizerData = await organizerResponse.json();
+
+      if (!organizerResponse.ok) {
+        setError("Failed to fetch organizer details.");
+        return;
+      }
+
+      // Step 3: Store organizer details in local storage
+      localStorage.setItem('organizer', JSON.stringify({
+        name: organizerData.FullName, // Map FullName to name
+        city: organizerData.City,     // Map City to city
+        email: organizerData.Email,   // Map Email to email
+        contactNumber: organizerData.ContactNumber, // Map ContactNumber to contactNumber
+      }));
+
+      // Step 4: Redirect to the profile page
+      navigate("/Home");
     } catch (error) {
       setError("An error occurred. Please try again later.");
     }

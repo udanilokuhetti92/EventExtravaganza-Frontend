@@ -17,23 +17,49 @@ export default function EventPlannerSignin() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/plannerLogin/start", {
+      // Step 1: Authenticate the user
+      const loginResponse = await fetch("http://localhost:5000/plannerLogin/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ Email: email, Password: password }),
       });
 
-      const data = await response.json();
+      const loginData = await loginResponse.json();
 
-      if (response.ok) {
-        // Successful login
-        alert("Login successful!");
-        navigate("/Home_PAGE"); // Redirect to the dashboard page
-      } else {
-        // Invalid credentials
-        // setError(data.message || "Invalid email or password.");
-        alert("Incorrect Password");
+      if (!loginResponse.ok) {
+        alert("Incorrect password or email");
+        return;
       }
+
+      // Step 2: Fetch planner details using the email
+      const plannerResponse = await fetch("http://localhost:5000/plannerProfile2/getPlannerByMail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }), // Send email in the request body
+      });
+
+      const plannerData = await plannerResponse.json();
+
+      if (!plannerResponse.ok) {
+        setError("Failed to fetch planner details.");
+        return;
+      }
+
+      // Step 3: Store planner details in local storage
+      localStorage.setItem('planner', JSON.stringify({
+        name: plannerData.FullName,
+        email: plannerData.Email,
+        contactNumber: plannerData.ContactNumber,
+        address: plannerData.Address,
+        city: plannerData.City,
+        gender: plannerData.Gender,
+        speciality: plannerData.Speciality,
+        budget: plannerData.Budget,
+        experience: plannerData.Experience,
+      }));
+
+      // Step 4: Redirect to the profile page
+      navigate("/Home_PAGE");
     } catch (error) {
       setError("An error occurred. Please try again later.");
     }

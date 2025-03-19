@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from '../event_planner_login/event_planner_login.module.css';
 import { useNavigate } from "react-router-dom";
 
-
 export default function EventPlannerLogin() {
   const navigate = useNavigate();
 
@@ -10,6 +9,7 @@ export default function EventPlannerLogin() {
   const [formData, setFormData] = useState({
     FullName: '',
     Email: '',
+    ContactNumber: '', // Added Contact Number
     Password: '',
     ConfirmPassword: '',
     Address: '',
@@ -43,12 +43,13 @@ export default function EventPlannerLogin() {
     const dataToSend = {
       FullName: formData.FullName,
       Email: formData.Email,
+      ContactNumber: formData.ContactNumber, // Include Contact Number
       Password: formData.Password,
       Address: formData.Address,
       City: formData.City,
       Gender: formData.Gender,
       Speciality: formData.Speciality,
-      Budget: formData.Budget, // Convert to number
+      Budget: formData.Budget,
       Experience: formData.Experience,
     };
 
@@ -67,6 +68,21 @@ export default function EventPlannerLogin() {
       if (response.ok) {
         alert('Account created successfully!');
         console.log(result);
+
+        localStorage.setItem('planner', JSON.stringify({
+          name: formData.FullName,
+          email: formData.Email,
+          contactNumber:formData.ContactNumber,
+          password: formData.Password, // Optional (avoid storing plaintext passwords)
+          confirmPassword: formData.ConfirmPassword, // Optional
+          address: formData.Address,
+          city: formData.City,
+          gender: formData.Gender,
+          speciality: formData.Speciality,
+          budget: formData.Budget,
+          experience: formData.Experience
+      }));
+
         navigate('/Home_PAGE');
       } else {
         alert(`Error: ${result.message}`);
@@ -75,7 +91,6 @@ export default function EventPlannerLogin() {
       console.error('Error submitting form:', error);
       alert('An error occurred while submitting the form.');
     }
-    
   };
 
   return (
@@ -106,6 +121,19 @@ export default function EventPlannerLogin() {
               name="Email"
               placeholder="Enter your email"
               value={formData.Email}
+              onChange={handleInputChange}
+              required
+            />
+
+            <br /> <br />
+
+            <label className={styles.l1} htmlFor="ContactNumber">Contact Number</label> <br />
+            <input
+              className={styles.i1}
+              type="tel"
+              name="ContactNumber"
+              placeholder="Enter your contact number"
+              value={formData.ContactNumber}
               onChange={handleInputChange}
               required
             />

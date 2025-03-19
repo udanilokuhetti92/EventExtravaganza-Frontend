@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styles from '../event_planner_login/event_planner_login.module.css';
 import { useNavigate } from "react-router-dom";
+import GoogleMapEditableMakerComponent from '../../../map/google_map_editable_maker_component';
 
 
 export default function EventPlannerLogin() {
+  const [latitude, setLatitude] = useState([]); // To store the coordinates
+  const [longitude, setLongitude] = useState(null); // To store error message
   const navigate = useNavigate();
 
   // State to store form data
@@ -19,7 +22,8 @@ export default function EventPlannerLogin() {
     Budget: '',
     Experience: '',
   });
-
+  
+ 
   // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +54,8 @@ export default function EventPlannerLogin() {
       Speciality: formData.Speciality,
       Budget: formData.Budget, // Convert to number
       Experience: formData.Experience,
+      latitude,
+      longitude
     };
 
     try {
@@ -75,8 +81,20 @@ export default function EventPlannerLogin() {
       console.error('Error submitting form:', error);
       alert('An error occurred while submitting the form.');
     }
-    
   };
+
+      // Function to handle city name update from child component
+      const handleCityUpdate = (cityName, latitude, longitude) => {
+        // Update the city state
+        setFormData({
+          ...formData,
+          ['City']: cityName,
+        });
+
+        setLatitude(latitude);
+        setLongitude(longitude);
+
+      };
 
   return (
     <div className={styles.main}>
@@ -161,6 +179,11 @@ export default function EventPlannerLogin() {
               onChange={handleInputChange}
               required
             />
+
+          <div className={styles.l1} >
+                <h1>Select your location</h1>
+                <GoogleMapEditableMakerComponent onCityUpdate={handleCityUpdate} />
+              </div>
           </div>
 
           <div className={styles.box2}>

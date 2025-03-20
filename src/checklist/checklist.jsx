@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navigation from '../components/navigation/navigation';
+import Navigation from '../event_planner_site/navigation/navigation';
 import Styles from '../checklist/checklist.module.css';
 
 
@@ -143,7 +143,7 @@ export default function Checklist() {
       </h3>
       <p className={Styles.p1}>
         Crafted By Event Planners.<br />Perfect for Seamless{' '}
-        <span className={Styles["box-text"]}>Checklists</span>
+        <br /> <span className={Styles["box-text"]}>Checklists</span>
       </p>
       <p className={Styles.p2}>
         Creating the perfect checklist for your event has never been easier! Simply <br />

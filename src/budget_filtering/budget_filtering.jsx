@@ -85,6 +85,7 @@ export default function BudgetFiltering() {
                 <div key={index}>
                   <b><p>Full Name: {planner.FullName}</p></b>
                   <b><p>Email: {planner.Email}</p></b>
+                  <button className="profile">View Profile</button>
                 </div>
               ))
             ) : (

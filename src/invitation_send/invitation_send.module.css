@@ -119,7 +119,7 @@ body {
 }
 
 .template1 {
-  background: linear-gradient(to right, #d8d9de, #5f85a3); /* Elegant gold gradient */
+  background: linear-gradient(to right, #f39c12, #f1c40f); /* Elegant gold gradient */
   color: white;
   font-family: 'Georgia', serif;
   padding: 40px;
@@ -160,7 +160,7 @@ body {
 
 
 .template2 {
-  background: linear-gradient(to right, #2a9b79, #5cdfa6); /* Soft blue and purple gradient */
+  background: linear-gradient(to right, #3498db, #8e44ad); /* Soft blue and purple gradient */
   color: white;
   font-family: 'Times New Roman', serif;
   padding: 40px;

@@ -25,7 +25,7 @@ body {
 }
 
 .green-pipe {
-  color: #28a745;
+  color:  #0073e5;
   font-weight: bold;
 }
 
@@ -160,7 +160,7 @@ body {
 
 
 .template2 {
-  background: linear-gradient(to right, #000d14, #8e44ad); /* Soft blue and purple gradient */
+  background: linear-gradient(to right, #000d14, #8e44ad); 
   color: white;
   font-family: 'Times New Roman', serif;
   padding: 40px;
@@ -201,7 +201,7 @@ body {
 
 
 .template3 {
-  background: #2c3e50; /* Dark, classy background */
+  background: #2c3e50; 
   color: #ecf0f1;
   font-family: 'Verdana', sans-serif;
   padding: 40px;
@@ -218,7 +218,7 @@ body {
   margin-bottom: 20px;
   letter-spacing: 2px;
   font-weight: 700;
-  color: #f39c12; /* Subtle gold for headers */
+  color: #f39c12; 
 }
 
 .template3 p {
@@ -227,7 +227,7 @@ body {
 }
 
 .template3 .buttons button {
-  background-color: #f39c12; /* Gold button */
+  background-color: #f39c12; 
   color: #34495e;
   border: none;
   padding: 15px 30px;
@@ -239,7 +239,7 @@ body {
 }
 
 .template3 .buttons button:hover {
-  background-color: #e67e22; /* Darker gold on hover */
+  background-color: #e67e22; 
 }
 
 

@@ -2,13 +2,63 @@ import React, { useState } from "react";
 import Navigation from "../components/navigation/navigation";
 import Footer from "../components/footer/footer";
 import styles from "./budget_filtering.module.css";
-import { Search, DollarSign, Users } from "lucide-react";
+import { Search, DollarSign, Users, X } from "lucide-react";
+
+// Modal component
+function PlannerProfileModal({ planner, onClose }) {
+  if (!planner) return null;
+
+  return (
+    <div className={styles.modal}>
+      <div className={styles.modalContent}>
+        <button onClick={onClose} className={styles.closeButton}>
+          <X size={24} />
+        </button>
+        
+        <h2 className={styles.modalTitle}>{planner.FullName}</h2>
+        
+        <div className={styles.detailsGrid}>
+          <div className={styles.detailItem}>
+            <label>Address:</label>
+            <p>{planner.Address}</p>
+          </div>
+          
+          <div className={styles.detailItem}>
+            <label>City:</label>
+            <p>{planner.City}</p>
+          </div>
+          
+          <div className={styles.detailItem}>
+            <label>Gender:</label>
+            <p>{planner.Gender}</p>
+          </div>
+          
+          <div className={styles.detailItem}>
+            <label>Speciality:</label>
+            <p>{planner.Speciality}</p>
+          </div>
+          
+          <div className={styles.detailItem}>
+            <label>Budget:</label>
+            <p>${planner.Budget.toLocaleString()}</p>
+          </div>
+          
+          <div className={styles.detailItem}>
+            <label>Experience:</label>
+            <p>{planner.Experience}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function BudgetFiltering() {
   const [budget, setBudget] = useState("");
   const [eventPlanners, setEventPlanners] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [selectedPlanner, setSelectedPlanner] = useState(null);
 
   const handleSearch = async () => {
     if (!budget) {
@@ -44,6 +94,28 @@ export default function BudgetFiltering() {
       console.error("Error fetching event planners:", error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleViewProfile = async (email) => {
+    try {
+      const response = await fetch("http://localhost:5000/plannerProfile2/getPlannerByMail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch planner profile");
+      }
+
+      const plannerData = await response.json();
+      setSelectedPlanner(plannerData);
+    } catch (error) {
+      console.error("Error fetching planner profile:", error);
+      setError("Failed to load planner profile");
     }
   };
 
@@ -138,7 +210,10 @@ export default function BudgetFiltering() {
                     <h3 className={styles.plannerName}>{planner.FullName}</h3>
                     <p className={styles.plannerEmail}>{planner.Email}</p>
                   </div>
-                  <button className={styles.viewProfileButton}>
+                  <button 
+                    className={styles.viewProfileButton}
+                    onClick={() => handleViewProfile(planner.Email)}
+                  >
                     View Profile
                   </button>
                 </div>
@@ -153,6 +228,13 @@ export default function BudgetFiltering() {
           </div>
         </div>
       </div>
+
+      {selectedPlanner && (
+        <PlannerProfileModal
+          planner={selectedPlanner}
+          onClose={() => setSelectedPlanner(null)}
+        />
+      )}
 
       <Footer />
     </div>

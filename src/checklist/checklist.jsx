@@ -8,6 +8,7 @@ export default function Checklist() {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [checklistName, setChecklistName] = useState('');
   const [organizerName, setOrganizerName] = useState('');
+  const [plannerName, setPlannerName] = useState('');
   const [taskName, setTaskName] = useState('');
   const [taskStatus, setTaskStatus] = useState('Not Started');
   const [dueDate, setDueDate] = useState('');
@@ -21,6 +22,7 @@ export default function Checklist() {
   const closePopup = () => {
     setChecklistName('');
     setOrganizerName('');
+    setPlannerName('');
     setTaskName('');
     setTaskStatus('Not Started');
     setDueDate('');
@@ -106,7 +108,7 @@ export default function Checklist() {
   };
 
   const createChecklist = async () => {
-    if (!checklistName || !organizerName || tasks.length === 0) {
+    if (!checklistName || !organizerName || !plannerName || tasks.length === 0) {
       setMessage("Please fill in all fields and add at least one task.");
       return;
     }
@@ -118,7 +120,7 @@ export default function Checklist() {
       const response = await fetch('http://localhost:5000/api/checklists', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ checklistName, organizerName, tasks }),
+        body: JSON.stringify({ checklistName, organizerName, plannerName, tasks }),
       });
 
       if (!response.ok) {
@@ -207,6 +209,10 @@ export default function Checklist() {
               <div className={Styles.inputGroup}>
                 <p>Organizer Name:</p>
                 <input className={Styles.input1} type="text" value={organizerName} onChange={(e) => setOrganizerName(e.target.value)} />
+              </div>
+              <div className={Styles.inputGroup}>
+                <p>Event Planner Name:</p>
+                <input className={Styles.input1} type="text" value={plannerName} onChange={(e) => setPlannerName(e.target.value)} />
               </div>
 
               <div className={Styles.inputGroup}>

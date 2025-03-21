@@ -281,101 +281,103 @@
   border: 2px solid #29084e;
 }
 
-/* Popup Overlay */
+/* Overlay to darken background when popup appears */
 .popupOverlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6); 
-  backdrop-filter: blur(2px); /* Blurred background effect */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 1000;
 }
 
-/* Popup Content */
+/* Popup window */
 .popupContent {
   background: white;
   padding: 20px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 50%;
+  max-width: 600px;
   animation: fadeIn 0.3s ease-in-out;
+  position: relative;
 }
 
-/* Checklist Name */
-.popupContent h2 {
-  color: #00415a;
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-/* Organizer Name */
-.popupContent p {
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 15px;
-}
-
-/* Task Details */
-.popupContent h3 {
-  color: #00719c;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-/* Task List */
-.popupContent ul {
-  list-style-type: none;
-  padding: 0;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.popupContent ul li {
-  background: #f0f8ff;
-  margin: 5px 0;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 14px;
-  color: #001f2b;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Close Button */
-.popupContent button {
-  background: #009bd6;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: 0.3s;
-}
-
-.popupContent button:hover {
-  background: #00719c;
-}
-
-/* Fade In Animation */
+/* Smooth fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
   to {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+/* Popup header */
+.popupContent h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #00719c; /* Theme color */
+}
+
+/* Task Table */
+.taskTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+/* Table Headers */
+.taskTable th {
+  background-color: #009bd6;
+  color: white;
+  padding: 8px;
+  text-align: left;
+  border-radius: 6px 6px 0 0;
+}
+
+/* Table Rows */
+.taskTable td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Alternating row background */
+.taskTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Dropdown (Select Box) Styling */
+.taskTable select {
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: white;
+}
+
+/* Close Button */
+.closeButton {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+.closeButton:hover {
+  background: #c0392b;
 }
 
 

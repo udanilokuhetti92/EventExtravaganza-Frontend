@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Star } from "lucide-react";
-import RatingSystem from "../../rating_system/rating_system"; // Import rating system
 import styles from "./event_planner_profile.module.css";
 import Navigation from "../../event_planner_site/navigation/navigation";
 import Footer from "../../event_planner_site/footer/planner_footer";
@@ -12,8 +10,7 @@ export default function EventPlannerProfile() {
   const [loading, setLoading] = useState(true);
   const [selectedChecklist, setSelectedChecklist] = useState(null);
 
-  // Fetch planner data from localStorage
-  const plannerData = JSON.parse(localStorage.getItem('planner')) || {
+  const plannerData = JSON.parse(localStorage.getItem("planner")) || {
     name: "Udani Lokuhetti",
     city: "Colombo",
     email: "udanilokuhetti22@gmail.com",
@@ -24,29 +21,47 @@ export default function EventPlannerProfile() {
     budget: "200000",
   };
 
-  // Fetch checklists for the planner
   useEffect(() => {
     const fetchChecklists = async () => {
       try {
-        const plannerName = plannerData.name;
-        const response = await fetch(`http://localhost:5000/api/checklists/planner/${plannerName}`);
-
+        const response = await fetch(
+          `http://localhost:5000/api/checklists/planner/${plannerData.name}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch checklists");
         }
-
         const checklistsData = await response.json();
-        setChecklists(checklistsData); // Update the state with fetched checklists
+        setChecklists(checklistsData);
       } catch (error) {
         console.error("Error fetching checklists:", error);
-        setChecklists([]); // Fallback to empty array if error occurs
+        setChecklists([]);
       } finally {
-        setLoading(false); // Stop loading once the fetch is complete
+        setLoading(false);
       }
     };
-
     fetchChecklists();
   }, [plannerData.name]);
+
+  const updateTaskStatus = async (checklistId, taskIndex, newStatus) => {
+    try {
+      const updatedChecklists = checklists.map((checklist) => {
+        if (checklist._id === checklistId) {
+          checklist.tasks[taskIndex].status = newStatus;
+        }
+        return checklist;
+      });
+
+      setChecklists(updatedChecklists);
+
+      await fetch(`http://localhost:5000/api/checklists/update-task-status`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ checklistId, taskIndex, newStatus }),
+      });
+    } catch (error) {
+      console.error("Error updating task status:", error);
+    }
+  };
 
   return (
     <div>
@@ -68,7 +83,6 @@ export default function EventPlannerProfile() {
             </Link>
           </div>
 
-          {/* Display Checklists */}
           <div className={styles.checklistSection}>
             <h2>Checklists</h2>
             {loading ? (
@@ -81,8 +95,8 @@ export default function EventPlannerProfile() {
                   <li key={index} className={styles.checklistItem}>
                     <h3>{checklist.checklistName}</h3>
                     <p>Organizer: {checklist.organizerName}</p>
-                    <button 
-                      className={styles.viewChecklistButton} 
+                    <button
+                      className={styles.viewChecklistButton}
                       onClick={() => setSelectedChecklist(checklist)}
                     >
                       View Checklist
@@ -91,33 +105,70 @@ export default function EventPlannerProfile() {
                 ))}
               </ul>
             )}
-          </div><br/><br/>
+          </div>
 
-          {/* Popup Window for Checklist Details */}
           {selectedChecklist && (
-            <div className={styles.popupOverlay} onClick={() => setSelectedChecklist(null)}>
-              <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
+            <div
+              className={styles.popupOverlay}
+              onClick={() => setSelectedChecklist(null)}
+            >
+              <div
+                className={styles.popupContent}
+                onClick={(e) => e.stopPropagation()}
+              >
                 <h2>{selectedChecklist.checklistName}</h2>
-                <p><strong>Organizer:</strong> {selectedChecklist.organizerName}</p>
+                <p>
+                  <strong>Organizer:</strong> {selectedChecklist.organizerName}
+                </p>
 
                 <h3>Task Details:</h3>
                 {selectedChecklist.tasks && selectedChecklist.tasks.length > 0 ? (
-                <ul>
-                  {selectedChecklist.tasks.map((task, idx) => (
-                    <li key={idx}>
-                      <strong>{task.name}</strong> - {task.status} ({task.dueDate}) - {task.priority}
-                    </li>
-                  ))}
-                </ul>
+                  <table className={styles.taskTable}>
+                    <thead>
+                      <tr>
+                        <th>Task</th>
+                        <th>Due Date</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {selectedChecklist.tasks.map((task, idx) => (
+                        <tr key={idx}>
+                          <td>{task.name}</td>
+                          <td>{new Date(task.dueDate).toLocaleDateString()}</td>
+                          <td>{task.priority}</td>
+                          <td>
+                            <select
+                              value={task.status}
+                              onChange={(e) =>
+                                updateTaskStatus(selectedChecklist._id, idx, e.target.value)
+                              }
+                            >
+                              <option value="Pending">Pending</option>
+                              <option value="In Progress">In Progress</option>
+                              <option value="Completed">Completed</option>
+                            </select>
+                          </td>
+                          <td>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 ) : (
-                <p>No tasks available.</p>
+                  <p>No tasks available.</p>
                 )}
 
-                <button onClick={() => setSelectedChecklist(null)}>Close</button>
+                <button
+                  className={styles.closeButton}
+                  onClick={() => setSelectedChecklist(null)}
+                >
+                  Close
+                </button>
               </div>
             </div>
           )}
-
 
           <div className={styles.profileInfo}>
             <div className={styles.infoSection}>
@@ -154,19 +205,18 @@ export default function EventPlannerProfile() {
                   <p>LKR {parseInt(plannerData.budget).toLocaleString()}</p>
                 </div>
                 <div className={styles.infoItem}>
-                  <label>Experience:</label>
-                  <p>{plannerData.experience}</p>
-                </div>
-                <div className={styles.infoItem}>
                   <label>Gender:</label>
                   <p>{plannerData.gender}</p>
-                  <button className={styles.b1} onClick={() => navigate('/')}>Log out</button>
+                  <button
+                    className={styles.b1}
+                    onClick={() => navigate("/")}
+                  >
+                    Log out
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-
-          
         </div>
       </div>
       <Footer />

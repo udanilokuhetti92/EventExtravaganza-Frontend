@@ -7,6 +7,7 @@ import Template2 from './Template2';
 import Template3 from './Template3';
 import styles from './invitation_send.module.css';
 
+
 emailjs.init("1SLJDJFAIftTWfyS1");
 
 const compressImage = (base64String, maxWidth = 800) => {
@@ -272,7 +273,10 @@ export default function EventInvitation() {
             {isLoading ? 'Sending...' : 'Generate & Send Invitation'}
           </button>
         </form>
+
       </div>
+      <Footer/>
+
     </>
   );
 }

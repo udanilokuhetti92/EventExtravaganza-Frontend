@@ -1,29 +1,26 @@
-
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from '../event_planner_login/event_planner_login.module.css';
-
 import { useNavigate } from "react-router-dom";
-import GoogleMapEditableMakerComponent from '../../../map/google_map_editable_maker_component';
 
 export default function EventPlannerLogin() {
-  const [latitude, setLatitude] = useState([]); // To store the coordinates
-  const [longitude, setLongitude] = useState(null); // To store error message
   const navigate = useNavigate();
 
+  // State to store form data
   const [formData, setFormData] = useState({
     FullName: '',
     Email: '',
-    ContactNumber: '',
+    ContactNumber: '', // Added Contact Number
     Password: '',
     ConfirmPassword: '',
     Address: '',
     City: '',
     Gender: '',
-    Speciality: 'Weddings',
+    Speciality: 'Weddings', // Default value for the dropdown
     Budget: '',
     Experience: '',
   });
 
+  // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -32,18 +29,21 @@ export default function EventPlannerLogin() {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
 
+    // Validate passwords match
     if (formData.Password !== formData.ConfirmPassword) {
       alert('Passwords do not match!');
       return;
     }
 
+    // Prepare data to send to the backend
     const dataToSend = {
       FullName: formData.FullName,
       Email: formData.Email,
-      ContactNumber: formData.ContactNumber,
+      ContactNumber: formData.ContactNumber, // Include Contact Number
       Password: formData.Password,
       Address: formData.Address,
       City: formData.City,
@@ -51,11 +51,10 @@ export default function EventPlannerLogin() {
       Speciality: formData.Speciality,
       Budget: formData.Budget,
       Experience: formData.Experience,
-      latitude,
-      longitude
     };
 
     try {
+      // Send POST request to the backend
       const response = await fetch('http://localhost:5000/plannerProfile/create', {
         method: 'POST',
         headers: {
@@ -64,6 +63,7 @@ export default function EventPlannerLogin() {
         body: JSON.stringify(dataToSend),
       });
 
+      // Handle response
       const result = await response.json();
       if (response.ok) {
         alert('Account created successfully!');
@@ -72,16 +72,16 @@ export default function EventPlannerLogin() {
         localStorage.setItem('planner', JSON.stringify({
           name: formData.FullName,
           email: formData.Email,
-          contactNumber: formData.ContactNumber,
-          password: formData.Password,
-          confirmPassword: formData.ConfirmPassword,
+          contactNumber:formData.ContactNumber,
+          password: formData.Password, // Optional (avoid storing plaintext passwords)
+          confirmPassword: formData.ConfirmPassword, // Optional
           address: formData.Address,
           city: formData.City,
           gender: formData.Gender,
           speciality: formData.Speciality,
           budget: formData.Budget,
           experience: formData.Experience
-        }));
+      }));
 
         navigate('/Home_PAGE');
       } else {
@@ -93,29 +93,14 @@ export default function EventPlannerLogin() {
     }
   };
 
-      // Function to handle city name update from child component
-      const handleCityUpdate = (cityName, latitude, longitude) => {
-        // Update the city state
-        setFormData({
-          ...formData,
-          ['City']: cityName,
-        });
-
-        setLatitude(latitude);
-        setLongitude(longitude);
-
-      };
-
   return (
     <div className={styles.main}>
-      
+      <h1 className={styles.h1}>Create Event Planner Account</h1>
+      <p className={styles.p1}>Provide correct information to setup your account</p>
 
       <div className={styles.container}>
         <form className={styles.container2} onSubmit={handleSubmit}>
           <div className={styles.box1}>
-          <h1 className={styles.h1}>Create Event Planner Account</h1>
-          <p className={styles.p1}>Provide correct information to setup your account</p>
-
             <label className={styles.l1} htmlFor="FullName">Full Name</label> <br />
             <input
               className={styles.i1}
@@ -136,6 +121,19 @@ export default function EventPlannerLogin() {
               name="Email"
               placeholder="Enter your email"
               value={formData.Email}
+              onChange={handleInputChange}
+              required
+            />
+
+            <br /> <br />
+
+            <label className={styles.l1} htmlFor="ContactNumber">Contact Number</label> <br />
+            <input
+              className={styles.i1}
+              type="tel"
+              name="ContactNumber"
+              placeholder="Enter your contact number"
+              value={formData.ContactNumber}
               onChange={handleInputChange}
               required
             />
@@ -191,13 +189,7 @@ export default function EventPlannerLogin() {
               onChange={handleInputChange}
               required
             />
-
-            <div className={styles.l1} >
-                <h1>Select your location</h1>
-                <GoogleMapEditableMakerComponent onCityUpdate={handleCityUpdate} />
-              </div>
           </div>
-          
 
           <div className={styles.box2}>
             <label className={styles.l1} htmlFor="Gender">Gender</label> <br />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './event_organizer_login.module.css';
+import styles from '../event_organizer_login/event_organizer_login.module.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function EventOrganizerLogin() {
@@ -25,11 +25,13 @@ export default function EventOrganizerLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate passwords match
     if (formData.Password !== formData.ConfirmPassword) {
       alert('Passwords do not match!');
       return;
     }
 
+    // Prepare data to send to the backend
     const dataToSend = {
       FullName: formData.FullName,
       Email: formData.Email,
@@ -39,6 +41,7 @@ export default function EventOrganizerLogin() {
     };
 
     try {
+      // Send POST request to the backend
       const response = await fetch('http://localhost:5000/organizerProfile/create', {
         method: 'POST',
         headers: {
@@ -47,10 +50,12 @@ export default function EventOrganizerLogin() {
         body: JSON.stringify(dataToSend),
       });
 
+      // Handle response
       const result = await response.json();
       if (response.ok) {
         alert('Account created successfully!');
 
+        // Store organizer data in local storage
         localStorage.setItem('organizer', JSON.stringify({
           name: formData.FullName,
           city: formData.City,
@@ -58,6 +63,8 @@ export default function EventOrganizerLogin() {
           contactNumber: formData.ContactNumber,
         }));
 
+
+        // Navigate to the home page or another desired page
         navigate('/Home');
       } else {
         alert(`Error: ${result.message}`);
@@ -74,12 +81,13 @@ export default function EventOrganizerLogin() {
         <h1 className={styles.h1}>Create Event Organizer Account</h1>
         <p className={styles.p1}>Provide correct information to setup your account</p>
 
+        <br />
+
         <form onSubmit={handleSubmit}>
-          <label className={styles.l1} htmlFor="FullName">Full Name</label>
+          <label className={styles.l1} htmlFor="FullName">Full Name</label> <br />
           <input
             className={styles.i1}
             type="text"
-            id="FullName"
             name="FullName"
             placeholder="Enter your name"
             value={formData.FullName}
@@ -87,11 +95,12 @@ export default function EventOrganizerLogin() {
             required
           />
 
-          <label className={styles.l1} htmlFor="Email">Email</label>
+          <br /> <br />
+
+          <label className={styles.l1} htmlFor="Email">Email</label> <br />
           <input
             className={styles.i1}
             type="email"
-            id="Email"
             name="Email"
             placeholder="Enter your email"
             value={formData.Email}
@@ -99,11 +108,12 @@ export default function EventOrganizerLogin() {
             required
           />
 
-          <label className={styles.l1} htmlFor="Password">Create Password</label>
+          <br /> <br />
+
+          <label className={styles.l1} htmlFor="Password">Create Password</label> <br />
           <input
             className={styles.i1}
             type="password"
-            id="Password"
             name="Password"
             placeholder="Enter a password"
             value={formData.Password}
@@ -111,11 +121,12 @@ export default function EventOrganizerLogin() {
             required
           />
 
-          <label className={styles.l1} htmlFor="ConfirmPassword">Confirm Password</label>
+          <br /> <br />
+
+          <label className={styles.l1} htmlFor="ConfirmPassword">Confirm Password</label> <br />
           <input
             className={styles.i1}
             type="password"
-            id="ConfirmPassword"
             name="ConfirmPassword"
             placeholder="Enter password again"
             value={formData.ConfirmPassword}
@@ -123,11 +134,12 @@ export default function EventOrganizerLogin() {
             required
           />
 
-          <label className={styles.l1} htmlFor="City">City</label>
+          <br /> <br />
+
+          <label className={styles.l1} htmlFor="City">City</label> <br />
           <input
             className={styles.i1}
             type="text"
-            id="City"
             name="City"
             placeholder="Enter city"
             value={formData.City}
@@ -135,11 +147,12 @@ export default function EventOrganizerLogin() {
             required
           />
 
-          <label className={styles.l1} htmlFor="ContactNumber">Contact Number</label>
+          <br /> <br />
+
+          <label className={styles.l1} htmlFor="ContactNumber">Contact Number</label> <br />
           <input
             className={styles.i1}
-            type="tel"
-            id="ContactNumber"
+            type="text"
             name="ContactNumber"
             placeholder="Enter your contact number"
             value={formData.ContactNumber}
@@ -147,7 +160,9 @@ export default function EventOrganizerLogin() {
             required
           />
 
-          <button className={styles.b1} type="submit">Create Account</button>
+          <br />
+
+          <button className={styles.b1} type="submit">Sign up</button>
         </form>
 
         <p className={styles.p2}>

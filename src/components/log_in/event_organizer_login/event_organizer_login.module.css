@@ -1,86 +1,140 @@
-.h1{
-    font-size: 30px;
-    text-align: center;
-    margin-top: 60px;
-    font-family: 'Poppins', sans-serif;
-    color: black;
-}
-
-.p1{
-    color: grey;
-    margin-top: -20px;
-    text-align: center;
-    font-size: 15px;
-}
-
-.l1{
-    font-size: 15px;
-    font-family: 'Poppins', sans-serif;
-    color: black;
-
-}
-
-.i1{
-    height: 30px;
-    width: 500px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 2px solid #0073e5;
-    padding: 2px;
-    font-family: 'Poppins', sans-serif;
-    background-color: white;
-    color: black;
-}
-
-.b1{
-    margin-top: 30px;
-    height: 45px;
-    width: 500px;
-    font-size: 15px;
-    background-color: #0073e5;
-    color: white;
-    border-radius: 5px;
-    border: 0px solid #560bad;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
-    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
-}
-
-.b1:hover{
-    color: black;
-}
-
-.p2{
-    text-align: center;
-    margin-top: 5px;
-    color:grey;
-}
-
-.span{
-    color: blue;
-    cursor: pointer;
-}
-
-.h2{
-    font-size: 50px;
-}
-
-.box1{
-    height: 700px;
-    width: auto;
-    border: 0px solid black;
-}
-
-
-.container{
-    background-color:#f5f7ff ;
+:root {
+    --background-color: #ffffff;
+    --primary-color: #284b63;
+    --secondary-color: #3c6e71;
+    --accent-color: #353535;
+    --neutral-color: #d9d9d9;
+    --primary-text: #353535;
+    --secondary-text: #284b63;
+  }
+  
+  .container {
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    /* background-image: url('../images/budget9.jpg'); */
-    /* background-size: cover;  */
-    background-position: center; 
-    background-repeat: no-repeat; 
-    width: auto; 
-    height: auto;
-}
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 2rem;
+  }
+  
+  .box1 {
+    background: var(--background-color);
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .h1 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  
+  .p1 {
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .l1 {
+    display: block;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .i1 {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--neutral-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+  }
+  
+  .i1:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(60, 110, 113, 0.2);
+  }
+  
+  .i1::placeholder {
+    color: #999;
+  }
+  
+  .b1 {
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+  }
+  
+  .b1:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+  }
+  
+  .b1:active {
+    transform: translateY(0);
+  }
+  
+  .p2 {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+  }
+  
+  .span {
+    color: var(--secondary-color);
+    margin-left: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .span:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    .box1 {
+      padding: 1.5rem;
+    }
+  
+    .h1 {
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .box1 {
+      padding: 1.25rem;
+    }
+  
+    .i1 {
+      padding: 0.6rem;
+    }
+  
+    .b1 {
+      padding: 0.8rem;
+    }
+  }

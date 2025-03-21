@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import styles from "./event_organizer_signin.module.css";
-import { useNavigate } from "react-router-dom";
+import styles from "./event_planner_signin.module.css";
+import { useNavigate } from "react-router-dom"; // For navigation
 
-export default function EventOrganizerSignin() {
+export default function EventPlannerSignin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [error, setError] = useState(""); // Error state
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent page reload
 
     if (!email || !password) {
       setError("Please enter both email and password.");
@@ -18,7 +18,7 @@ export default function EventOrganizerSignin() {
 
     try {
       // Step 1: Authenticate the user
-      const loginResponse = await fetch("http://localhost:5000/organizerLogin/start", {
+      const loginResponse = await fetch("http://localhost:5000/plannerLogin/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ Email: email, Password: password }),
@@ -31,30 +31,35 @@ export default function EventOrganizerSignin() {
         return;
       }
 
-      // Step 2: Fetch organizer details using the email
-      const organizerResponse = await fetch("http://localhost:5000/organizerProfile2/getOrganizerByMail", {
+      // Step 2: Fetch planner details using the email
+      const plannerResponse = await fetch("http://localhost:5000/plannerProfile2/getPlannerByMail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email }), // Send email in the request body
       });
 
-      const organizerData = await organizerResponse.json();
+      const plannerData = await plannerResponse.json();
 
-      if (!organizerResponse.ok) {
-        setError("Failed to fetch organizer details.");
+      if (!plannerResponse.ok) {
+        setError("Failed to fetch planner details.");
         return;
       }
 
-      // Step 3: Store organizer details in local storage
-      localStorage.setItem('organizer', JSON.stringify({
-        name: organizerData.FullName,
-        city: organizerData.City,
-        email: organizerData.Email,
-        contactNumber: organizerData.ContactNumber,
+      // Step 3: Store planner details in local storage
+      localStorage.setItem('planner', JSON.stringify({
+        name: plannerData.FullName,
+        email: plannerData.Email,
+        contactNumber: plannerData.ContactNumber,
+        address: plannerData.Address,
+        city: plannerData.City,
+        gender: plannerData.Gender,
+        speciality: plannerData.Speciality,
+        budget: plannerData.Budget,
+        experience: plannerData.Experience,
       }));
 
       // Step 4: Redirect to the profile page
-      navigate("/Home");
+      navigate("/Home_PAGE");
     } catch (error) {
       setError("An error occurred. Please try again later.");
     }
@@ -63,16 +68,13 @@ export default function EventOrganizerSignin() {
   return (
     <div className={styles.container}>
       <div className={styles.box1}>
-        <h1 className={styles.h1}>Event Organizer Sign In</h1>
-        <br />
-        <p className={styles.p1}>Provide correct information to sign in</p>
-        <br />
+        <h1 className={styles.h1}>Event Planner Sign In</h1> <br />
+        <p className={styles.p1}>Provide correct information to sign in</p> <br />
 
-        {error && <p className={styles.error}>{error}</p>}
+        {error && <p className={styles.error}>{error}</p>} {/* Show error message */}
 
         <form onSubmit={handleSubmit}>
-          <label className={styles.l1} htmlFor="email">Email</label>
-          <br />
+          <label className={styles.l1} htmlFor="email">Email</label> <br />
           <input
             className={styles.i1}
             type="email"
@@ -83,11 +85,9 @@ export default function EventOrganizerSignin() {
             required
           />
 
-          <br />
-          <br />
+          <br /> <br />
 
-          <label className={styles.l1} htmlFor="password">Password</label>
-          <br />
+          <label className={styles.l1} htmlFor="password">Password</label> <br />
           <input
             className={styles.i1}
             type="password"

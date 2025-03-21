@@ -1,3 +1,5 @@
+//This is the frontend file created for the Chatbot
+
 import {useState,useRef,useEffect} from 'react';
 import axios from 'axios';
 import './chatbot.css'

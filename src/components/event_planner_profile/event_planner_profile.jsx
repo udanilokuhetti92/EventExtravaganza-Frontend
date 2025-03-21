@@ -10,6 +10,7 @@ export default function EventPlannerProfile() {
   const navigate = useNavigate();
   const [checklists, setChecklists] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedChecklist, setSelectedChecklist] = useState(null);
 
   // Fetch planner data from localStorage
   const plannerData = JSON.parse(localStorage.getItem('planner')) || {
@@ -79,15 +80,44 @@ export default function EventPlannerProfile() {
                 {checklists.map((checklist, index) => (
                   <li key={index} className={styles.checklistItem}>
                     <h3>{checklist.checklistName}</h3>
-                    <p>Created on: {new Date(checklist.createdAt).toLocaleDateString()}</p>
-                    <Link to={`/checklist/${checklist.checklist_id}`} className={styles.viewChecklistButton}>
+                    <p>Organizer: {checklist.organizerName}</p>
+                    <button 
+                      className={styles.viewChecklistButton} 
+                      onClick={() => setSelectedChecklist(checklist)}
+                    >
                       View Checklist
-                    </Link>
+                    </button>
                   </li>
                 ))}
               </ul>
             )}
           </div><br/><br/>
+
+          {/* Popup Window for Checklist Details */}
+          {selectedChecklist && (
+            <div className={styles.popupOverlay} onClick={() => setSelectedChecklist(null)}>
+              <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
+                <h2>{selectedChecklist.checklistName}</h2>
+                <p><strong>Organizer:</strong> {selectedChecklist.organizerName}</p>
+
+                <h3>Task Details:</h3>
+                {selectedChecklist.tasks && selectedChecklist.tasks.length > 0 ? (
+                <ul>
+                  {selectedChecklist.tasks.map((task, idx) => (
+                    <li key={idx}>
+                      <strong>{task.name}</strong> - {task.status} ({task.dueDate}) - {task.priority}
+                    </li>
+                  ))}
+                </ul>
+                ) : (
+                <p>No tasks available.</p>
+                )}
+
+                <button onClick={() => setSelectedChecklist(null)}>Close</button>
+              </div>
+            </div>
+          )}
+
 
           <div className={styles.profileInfo}>
             <div className={styles.infoSection}>

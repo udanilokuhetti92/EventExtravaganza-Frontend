@@ -1,41 +1,73 @@
-import {useState} from 'react';
-import axios from 'axios';
+
+//This is the frontend file created for the Chatbot
+//Created by Sanuka Dabare
+
+//Importing neccessary dependencies from the React and other Libraries for the use
+import {useState,useRef,useEffect} from 'react';
+import axios from 'axios';//importing axios for managing HTTP requests
+
+//importing neccessary css files for styling purposes
+
 import './chatbot.css'
 import '../components/navigation/navigation'
 import '../components/navigation/navigation.module.css'
 import '../components/footer/footer'
 import '../components/footer/footer.module.css'
 
-const API_BASED_URL=import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+const OPENAI_BASE_URL= "http://localhost:5001";//setting the base URL for managing API requests
 
+//Defining the main Chatbot Component
 export default function Chatbot() {
-  const[messages,setMessages]=useState([]);
-  const[input,setInput]=useState('');
+  const[messages,setMessages]=useState([]);//This is the array to Store the chat messages
+  const[input,setInput]=useState('');//This is for managing the user input
   const[loading,setLoading]=useState(false);
-  const[error,setError]=useState(null);
+  const[error,setError]=useState(null);//stores the error messages if any error occured
+  const messagesEndRef=useRef(null);
 
+  const scrollToBottom=()=>{
+    messagesEndRef.current?.scrollIntoView({behavior:'smooth'});
+  };
+
+  useEffect(()=>{
+    scrollToBottom();
+  },[messages])
+
+
+  //This is the function respomsible for sending messages to the chatbot
   const sendMessage=async () => {
-    if(!input.trim()) return;
+    if(!input.trim()) return;//This prevents user from sending empty messages
+
 
     const userMessage={role: 'user',content: input};
     setMessages(prevMessages=> [...prevMessages,userMessage]);
 
     setInput('');
-    setLoading(true);
+
+    setLoading(true);//Shows the loading indicator to the user
     setError(null);
 
-    try{
-      const response = await axios.post(`${API_BASED_URL}/api/chat`,{message:input});
-      const botMessage ={role: 'bot',content: response.data.reply};
-      setMessages(prevMessages=> [...prevMessages,botMessage]);
-    }catch(err){
-      console.log("Error: " , err);
-      setError("Failed to get response from Chatbot.Please try again.");
-    }finally{
-      setLoading(false);
+    try {
+      //sends the user input to the openai which is the chatbot api
+      const response = await axios.post(`${OPENAI_BASE_URL}/api/chat`, {
+          message: input,
+      });
+
+      if (response.data?.reply) {
+          const botMessage = { role: "bot", content: response.data.reply };
+          setMessages((prevMessages) => [...prevMessages, botMessage]);
+      } else {
+          setError('Invalid response from the chatbot.');
+      }
+    } catch (err) {
+        console.error('Error: ', err);
+        setError(err.response?.data?.error||"Error generating response");
+    } finally {
+        setLoading(false);
     }
   };
+
+  
 
 
   return (
@@ -51,6 +83,9 @@ export default function Chatbot() {
         {error && <p className="error">{error}</p>}
         
       </div>
+
+      {/* Input field for user to send messages and the send button */}
+
       <div className="input-container">
         <input
           type="text"
@@ -63,4 +98,8 @@ export default function Chatbot() {
       </div>
     </div>
   );
-}
+
+
+};
+
+

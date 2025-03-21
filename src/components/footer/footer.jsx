@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import { Instagram, Linkedin, MessageCircle, Phone, Mail, MapPin } from 'lucide-react';
 import styles from './footer.module.css';
@@ -76,6 +78,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
     </footer>
   );
 }

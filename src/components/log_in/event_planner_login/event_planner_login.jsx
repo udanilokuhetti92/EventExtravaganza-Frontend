@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import styles from './event_planner_login.module.css';
+
+import React, { useState,useEffect } from 'react';
+import styles from '../event_planner_login/event_planner_login.module.css';
+
 import { useNavigate } from "react-router-dom";
+import GoogleMapEditableMakerComponent from '../../../map/google_map_editable_maker_component';
 
 export default function EventPlannerLogin() {
+  const [latitude, setLatitude] = useState([]); // To store the coordinates
+  const [longitude, setLongitude] = useState(null); // To store error message
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -46,6 +51,8 @@ export default function EventPlannerLogin() {
       Speciality: formData.Speciality,
       Budget: formData.Budget,
       Experience: formData.Experience,
+      latitude,
+      longitude
     };
 
     try {
@@ -86,166 +93,168 @@ export default function EventPlannerLogin() {
     }
   };
 
+      // Function to handle city name update from child component
+      const handleCityUpdate = (cityName, latitude, longitude) => {
+        // Update the city state
+        setFormData({
+          ...formData,
+          ['City']: cityName,
+        });
+
+        setLatitude(latitude);
+        setLongitude(longitude);
+
+      };
+
   return (
-    <div className={styles.container}>
-      <div className={styles.box1}>
-        <h1 className={styles.h1}>Create Event Planner Account</h1>
-        <p className={styles.p1}>Provide correct information to setup your account</p>
+    <div className={styles.main}>
+      <h1 className={styles.h1}>Create Event Planner Account</h1>
+      <p className={styles.p1}>Provide correct information to setup your account</p>
 
-        <br />
+      <div className={styles.container}>
+        <form className={styles.container2} onSubmit={handleSubmit}>
+          <div className={styles.box1}>
+            <label className={styles.l1} htmlFor="FullName">Full Name</label> <br />
+            <input
+              className={styles.i1}
+              type="text"
+              name="FullName"
+              placeholder="Enter your name"
+              value={formData.FullName}
+              onChange={handleInputChange}
+              required
+            />
 
-        <form onSubmit={handleSubmit}>
-          <label className={styles.l1} htmlFor="FullName">Full Name</label> <br />
-          <input
-            className={styles.i1}
-            type="text"
-            name="FullName"
-            placeholder="Enter your name"
-            value={formData.FullName}
-            onChange={handleInputChange}
-            required
-          />
+            <br /> <br />
 
-          <br /> <br />
+            <label className={styles.l1} htmlFor="Email">Email</label> <br />
+            <input
+              className={styles.i1}
+              type="email"
+              name="Email"
+              placeholder="Enter your email"
+              value={formData.Email}
+              onChange={handleInputChange}
+              required
+            />
 
-          <label className={styles.l1} htmlFor="Email">Email</label> <br />
-          <input
-            className={styles.i1}
-            type="email"
-            name="Email"
-            placeholder="Enter your email"
-            value={formData.Email}
-            onChange={handleInputChange}
-            required
-          />
+            <br /> <br />
 
-          <br /> <br />
+            <label className={styles.l1} htmlFor="Password">Create Password</label> <br />
+            <input
+              className={styles.i1}
+              type="password"
+              name="Password"
+              placeholder="Enter a password"
+              value={formData.Password}
+              onChange={handleInputChange}
+              required
+            />
 
-          <label className={styles.l1} htmlFor="ContactNumber">Contact Number</label> <br />
-          <input
-            className={styles.i1}
-            type="tel"
-            name="ContactNumber"
-            placeholder="Enter your contact number"
-            value={formData.ContactNumber}
-            onChange={handleInputChange}
-            required
-          />
+            <br /> <br />
 
-          <br /> <br />
+            <label className={styles.l1} htmlFor="ConfirmPassword">Confirm Password</label> <br />
+            <input
+              className={styles.i1}
+              type="password"
+              name="ConfirmPassword"
+              placeholder="Enter password again"
+              value={formData.ConfirmPassword}
+              onChange={handleInputChange}
+              required
+            />
 
-          <label className={styles.l1} htmlFor="Password">Create Password</label> <br />
-          <input
-            className={styles.i1}
-            type="password"
-            name="Password"
-            placeholder="Enter a password"
-            value={formData.Password}
-            onChange={handleInputChange}
-            required
-          />
+            <br /> <br />
 
-          <br /> <br />
+            <label className={styles.l1} htmlFor="Address">Address</label> <br />
+            <input
+              className={styles.i1}
+              type="text"
+              name="Address"
+              placeholder="Enter address"
+              value={formData.Address}
+              onChange={handleInputChange}
+              required
+            />
 
-          <label className={styles.l1} htmlFor="ConfirmPassword">Confirm Password</label> <br />
-          <input
-            className={styles.i1}
-            type="password"
-            name="ConfirmPassword"
-            placeholder="Enter password again"
-            value={formData.ConfirmPassword}
-            onChange={handleInputChange}
-            required
-          />
+            <br /> <br />
 
-          <br /> <br />
+            <label className={styles.l1} htmlFor="City">City</label> <br />
+            <input
+              className={styles.i1}
+              type="text"
+              name="City"
+              placeholder="Enter city"
+              value={formData.City}
+              onChange={handleInputChange}
+              required
+            />
 
-          <label className={styles.l1} htmlFor="Address">Address</label> <br />
-          <input
-            className={styles.i1}
-            type="text"
-            name="Address"
-            placeholder="Enter address"
-            value={formData.Address}
-            onChange={handleInputChange}
-            required
-          />
+          <div className={styles.l1} >
+                <h1>Select your location</h1>
+                <GoogleMapEditableMakerComponent onCityUpdate={handleCityUpdate} />
+              </div>
+          </div>
 
-          <br /> <br />
+          <div className={styles.box2}>
+            <label className={styles.l1} htmlFor="Gender">Gender</label> <br />
+            <input
+              className={styles.i1}
+              type="text"
+              name="Gender"
+              placeholder="Enter your gender"
+              value={formData.Gender}
+              onChange={handleInputChange}
+              required
+            />
 
-          <label className={styles.l1} htmlFor="City">City</label> <br />
-          <input
-            className={styles.i1}
-            type="text"
-            name="City"
-            placeholder="Enter city"
-            value={formData.City}
-            onChange={handleInputChange}
-            required
-          />
+            <br /> <br />
 
-          <br /> <br />
+            <label className={styles.l1} htmlFor="Speciality">Speciality</label> <br />
+            <select
+              className={styles.i1}
+              name="Speciality"
+              value={formData.Speciality}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="Weddings">Weddings</option>
+              <option value="Parties">Parties</option>
+              <option value="Both">Both</option>
+            </select>
 
-          <label className={styles.l1} htmlFor="Gender">Gender</label> <br />
-          <select
-            className={styles.i1}
-            name="Gender"
-            value={formData.Gender}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
+            <br /> <br />
 
-          <br /> <br />
+            <label className={styles.l1} htmlFor="Budget">Highest Budget Value</label> <br />
+            <input
+              className={styles.i1}
+              type="number"
+              name="Budget"
+              placeholder="Enter your highest budget value"
+              value={formData.Budget}
+              onChange={handleInputChange}
+              required
+            />
 
-          <label className={styles.l1} htmlFor="Speciality">Speciality</label> <br />
-          <select
-            className={styles.i1}
-            name="Speciality"
-            value={formData.Speciality}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="Weddings">Weddings</option>
-            <option value="Parties">Parties</option>
-            <option value="Both">Both</option>
-          </select>
+            <br /> <br />
 
-          <br /> <br />
+            <label className={styles.l1} htmlFor="Experience">Your Experience</label> <br />
+            <textarea
+              className={styles.textarea}
+              name="Experience"
+              placeholder="Enter your experience"
+              value={formData.Experience}
+              onChange={handleInputChange}
+              required
+            />
 
-          <label className={styles.l1} htmlFor="Budget">Highest Budget Value</label> <br />
-          <input
-            className={styles.i1}
-            type="number"
-            name="Budget"
-            placeholder="Enter your highest budget value"
-            value={formData.Budget}
-            onChange={handleInputChange}
-            required
-          />
+            <br />
 
-          <br /> <br />
-
-          <label className={styles.l1} htmlFor="Experience">Your Experience</label> <br />
-          <textarea
-            className={styles.textarea}
-            name="Experience"
-            placeholder="Enter your experience"
-            value={formData.Experience}
-            onChange={handleInputChange}
-            required
-          />
-
-          <br />
-
-          <button className={styles.b1} type="submit">Sign up</button>
-          <p className={styles.p2}>
-            Already have an account? <span onClick={() => navigate('/planner_signin')} className={styles.span}>Login</span>
-          </p>
+            <button className={styles.b1} type="submit">Sign up</button>
+            <p className={styles.p2}>
+              Already have an account? <span onClick={()=> navigate('/planner_signin')} className={styles.span}>Login</span>
+            </p>
+          </div>
         </form>
       </div>
     </div>

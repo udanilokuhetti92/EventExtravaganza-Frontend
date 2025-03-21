@@ -17,6 +17,7 @@ import Packages from './event_planner_site/packages/packages'
 import LocationFiltering from './location_filtering/location_filtering'
 import Event_Organizer_Profile from './components/event_organizer_profile/event_organizer_profile'
 import Event_Planner_Profile from './components/event_planner_profile/event_planner_profile'
+import Chatbot from './chatbot/chatbot'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -47,7 +48,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/LocationBase_Filtering' element={<LocationFiltering/>} />
         <Route path='/Organizer_Profile' element={<Event_Organizer_Profile/>}/>
         <Route path='/Planner_Profile' element={<Event_Planner_Profile/>}/>
-
+        <Route path='/Chatbot' element={<Chatbot/>}/>
         
 
 

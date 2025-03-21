@@ -51,7 +51,7 @@ export default function Navigation() {
                   <Send size={16} />
                   <span>Send Invitations</span>
                 </li>
-                <li>
+                <li onClick={() => navigate('/Chatbot')}>
                   <MessageCircle size={16} />
                   <span>Chat Bot</span>
                 </li>

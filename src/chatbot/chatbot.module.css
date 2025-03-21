@@ -1,0 +1,197 @@
+.chatbotContainer {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chatHeader {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(52, 152, 219, 0.1);
+  }
+  
+  .chatTitle {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+  
+  .chatSubtitle {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+  }
+  
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    margin: 1rem 0;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .message {
+    max-width: 80%;
+    margin: 1rem 0;
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    line-height: 1.5;
+    position: relative;
+    animation: messageAppear 0.3s ease-out;
+  }
+  
+  @keyframes messageAppear {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .user {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 5px;
+  }
+  
+  .user::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: -10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid #2980b9;
+    border-top: 10px solid transparent;
+  }
+  
+  .bot {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    color: #2c3e50;
+    margin-right: auto;
+    border-bottom-left-radius: 5px;
+  }
+  
+  .bot::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-right: 10px solid #e9ecef;
+    border-top: 10px solid transparent;
+  }
+  
+  .typing {
+    color: #7f8c8d;
+    font-style: italic;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .typingDots {
+    display: flex;
+    gap: 3px;
+  }
+  
+  .dot {
+    width: 6px;
+    height: 6px;
+    background: #7f8c8d;
+    border-radius: 50%;
+    animation: dotPulse 1.5s infinite;
+  }
+  
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+  
+  @keyframes dotPulse {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.2); opacity: 1; }
+  }
+  
+  .error {
+    background: #fff5f5;
+    color: #c0392b;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    text-align: center;
+    border: 1px solid #fab1a0;
+  }
+  
+  .inputContainer {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: 2px solid #e1e1e1;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  }
+  
+  .input:disabled {
+    background: #f1f2f3;
+    cursor: not-allowed;
+  }
+  
+  .sendButton {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .sendButton:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+  }
+  
+  .sendButton:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  .sendButton:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+    transform: none;
+  }

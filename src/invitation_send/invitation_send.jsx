@@ -6,6 +6,7 @@ import Template1 from './Template1';
 import Template2 from './Template2';
 import Template3 from './Template3';
 import styles from './invitation_send.module.css';
+import Footer from '../components/footer/footer';
 
 
 emailjs.init("1SLJDJFAIftTWfyS1");

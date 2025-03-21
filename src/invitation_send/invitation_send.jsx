@@ -156,22 +156,28 @@ export default function EventInvitation() {
   
     const inviteesArray = eventDetails.invitees.split(',').map(email => email.trim());
   
-    const templateParams = {
-      to_email: inviteesArray[0], // Send to first email in list
-      event_name: eventDetails.eventName,
-      event_date: eventDetails.eventDate,
-      event_time: eventDetails.eventTime,
-      event_location: eventDetails.eventLocation,
-      invitation_image: image
-    };
-  
     try {
-      const response = await emailjs.send(serviceID, templateID, templateParams, userID);
-      console.log('Email sent successfully:', response);
-      return response;
+      //Loop through each invitee and send an email
+      const emailPromises = inviteesArray.map(async (email) => { 
+          const templateParams = {
+              to_email: email, 
+              event_name: eventDetails.eventName,
+              event_date: eventDetails.eventDate,
+              event_time: eventDetails.eventTime,
+              event_location: eventDetails.eventLocation,
+              invitation_image: image
+          };
+
+          return emailjs.send(serviceID, templateID, templateParams, userID);
+      });
+
+      //Wait for all emails to be sent
+      const responses = await Promise.all(emailPromises); //Used Promise.all() to send emails in parallel
+      console.log('Emails sent successfully:', responses);
+      return responses;
     } catch (error) {
-      console.error('EmailJS Error:', error);
-      throw new Error('Failed to send invitation. Please try again.');
+        console.error('EmailJS Error:', error);
+        throw new Error('Failed to send invitations. Please try again.');
     }
   };
 

@@ -3,6 +3,7 @@ import html2canvas from 'html2canvas';
 import emailjs from 'emailjs-com';
 import Navigation from '../components/navigation/navigation';
 import styles from '../invitation_send/invitation_send.module.css';
+import Footer from '../components/footer/footer';
 
 emailjs.init("1SLJDJFAIftTWfyS1");
 
@@ -317,7 +318,10 @@ export default function EventInvitation() {
             {isLoading ? 'Sending...' : 'Generate & Send Invitation'}
           </button>
         </form>
+
       </div>
+      <Footer/>
+
     </>
   );
 }

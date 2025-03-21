@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   z-index: 1000;
-  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  background: linear-gradient(to right, #ffffff, #f8f9fa);
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -41,7 +41,7 @@
 
 .navItem {
   position: relative;
-  color: #ffffff;
+  color: #4b5563;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;

@@ -3,7 +3,11 @@ import { Calendar, MapPin, DollarSign, MessageCircle, CheckSquare, Star, Package
 import Navigation from '../navigation/navigation';
 import Footer from '../footer/footer';
 import styles from './home.module.css';
+import { useNavigate } from "react-router-dom";
+
+
 export default function Home() {
+    const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
   const [isVisible, setIsVisible] = useState({});
   const [expandedFaq, setExpandedFaq] = useState(null);
@@ -63,13 +67,13 @@ export default function Home() {
             Connect with top planners and bring your dream events to life.
           </p>
           <div className={styles.heroCta}>
-            <button className={styles.primaryButton}>
+            <button className={styles.primaryButton} onClick={()=>navigate('/Budget_Filtering')}>
               Book Now
               <ArrowRight className={styles.buttonIcon} />
             </button>
-            <button className={styles.secondaryButton}>
+            <a href="#features"> <button  className={styles.secondaryButton}>
               Explore Services
-            </button>
+            </button> </a>
           </div>
         </div>
         <div className={styles.heroImage}>
@@ -121,10 +125,10 @@ export default function Home() {
       <section className={`${styles.featuresSection} ${isVisible.features ? styles.visible : ''}`} data-section="features">
         <h2>Key Features</h2>
         <div className={styles.sectionDivider}></div>
-        <p className={styles.sectionSubtitle}>
+        <p id="features" className={styles.sectionSubtitle}>
           Seamlessly plan your perfect event with our powerful platform features
         </p>
-        <div className={styles.featuresGrid}>
+        <div  className={styles.featuresGrid}>
           {features.map((feature, index) => (
             <div key={index} className={styles.featureCard}>
               <div className={styles.featureIconWrapper}>

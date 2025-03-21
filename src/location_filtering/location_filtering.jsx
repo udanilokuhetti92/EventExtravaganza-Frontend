@@ -8,19 +8,35 @@ export default function LocationFiltering() {
   const [location, setLocation] = useState("");
   const [searchedLocation, setSearchedLocation] = useState("");
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Function to receive nameData from child
+  // Function to receive data from child
   const handlePlannerData = (data) => {
+    setIsLoading(false);
     if (Array.isArray(data)) {
-      setEventPlanners(data); // Ensure data is an array before setting state
+      console.log("Received event planners:", data.length);
+      setEventPlanners(data);
     } else {
       console.error("Invalid data received: ", data);
+      setEventPlanners([]);
     }
   };
 
   function handleSearch() {
-    setSearchedLocation(location); // Trigger search with the inputted location
+    if (!location.trim()) {
+      alert("Please enter a valid location.");
+      return;
+    }
+    setIsLoading(true);
+    setSearchedLocation(location);
   }
+
+  // Handle Enter key press in search input
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   return (
     <div className="box1">
@@ -35,9 +51,12 @@ export default function LocationFiltering() {
           Built for <span className={styles["box-text"]}>Location Filtering</span>
         </p>
 
-        {/* Accordion for p2 */}
+        {/* Accordion */}
         <div className={styles.accordion}>
-          <button className={styles.accordionButton} onClick={() => setIsAccordionOpen(!isAccordionOpen)}>
+          <button
+            className={styles.accordionButton}
+            onClick={() => setIsAccordionOpen(!isAccordionOpen)}
+          >
             About Location Filtering {isAccordionOpen ? "▲" : "▼"}
           </button>
           {isAccordionOpen && (
@@ -51,6 +70,32 @@ export default function LocationFiltering() {
           )}
         </div>
 
+        {/* Search Input */}
+        <div className={styles.searchContainer}>
+          <label className={styles.span1} htmlFor="location-input">
+            Location:
+          </label>
+          <input
+            id="location-input"
+            className="input1"
+            type="text"
+            placeholder="Enter Your Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            onKeyPress={handleKeyPress}
+            aria-label="Enter your location"
+          />
+          <button
+            className="button1"
+            onClick={handleSearch}
+            disabled={isLoading}
+            aria-label="Search for event planners"
+          >
+            {isLoading ? "Searching..." : "Search"}
+          </button>
+        </div>
+
+        {/* Google Map */}
         <div className={styles["google-map"]}>
           <GoogleMapComponent
             location={searchedLocation}
@@ -58,21 +103,12 @@ export default function LocationFiltering() {
           />
         </div>
 
-        <label className={styles.span1} htmlFor="location-input">Location:</label>
-        <input
-          id="location-input"
-          className="input1"
-          type="text"
-          placeholder="Enter Your Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          aria-label="Enter your location"
-        />
-        <button className="button1" onClick={handleSearch} aria-label="Search for event planners">
-          Search
-        </button>
-        <p className={styles["event-count"]}>Total Event Planners Found: {eventPlanners.length}</p>
+        {/* Event Count */}
+        <p className={styles["event-count"]}>
+          Total Event Planners Found: {eventPlanners.length}
+        </p>
 
+        {/* Event Planners Table */}
         <div className={styles.tablediv}>
           <table className={styles.table}>
             <thead>
@@ -86,22 +122,28 @@ export default function LocationFiltering() {
               {eventPlanners.length > 0 ? (
                 eventPlanners.map((planner, index) => (
                   <tr key={index}>
-                    <td>{planner.FullName || "N/A"}</td>
-                    <td>{planner.City || "N/A"}</td>
+                    <td>{planner.FullName || "No Data Available"}</td>
+                    <td>{planner.City || "No Data Available"}</td>
                     <td>
                       {planner.profile ? (
-                        <a href={planner.profile} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={planner.profile}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           View Profile
                         </a>
                       ) : (
-                        "No Profile"
+                        "No Profile Available"
                       )}
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="3" style={{ textAlign: "center" }}>No event planners found</td>
+                  <td colSpan="3" style={{ textAlign: "center" }}>
+                    {searchedLocation ? "No event planners found" : "Search for a location to see event planners"}
+                  </td>
                 </tr>
               )}
             </tbody>

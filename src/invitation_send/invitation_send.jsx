@@ -2,8 +2,11 @@ import React, { useState, useRef } from 'react';
 import html2canvas from 'html2canvas';
 import emailjs from 'emailjs-com';
 import Navigation from '../components/navigation/navigation';
-import styles from '../invitation_send/invitation_send.module.css';
-import Footer from '../components/footer/footer';
+import Template1 from './Template1';
+import Template2 from './Template2';
+import Template3 from './Template3';
+import styles from './invitation_send.module.css';
+
 
 emailjs.init("1SLJDJFAIftTWfyS1");
 
@@ -66,7 +69,6 @@ export default function EventInvitation() {
   };
 
   const validateForm = () => {
-    // Check for empty fields
     const emptyFields = Object.entries(eventDetails)
       .filter(([key, value]) => !value)
       .map(([key]) => key);
@@ -76,14 +78,12 @@ export default function EventInvitation() {
       return false;
     }
 
-    // Validate email addresses
     const invalidEmails = validateEmails(eventDetails.invitees);
     if (invalidEmails) {
       setError(`Invalid email addresses: ${invalidEmails.join(', ')}`);
       return false;
     }
 
-    // Check template selection
     if (!selectedTemplate) {
       setError('Please select a template');
       return false;
@@ -93,41 +93,17 @@ export default function EventInvitation() {
   };
 
   const handleGenerateInvitation = async () => {
+    if (!validateForm()) return;
+
+    setIsLoading(true);
     try {
-      if (!selectedTemplate) {
-        alert('Please select a template!');
-        return;
-      }
-
-      // Ensure all fields are filled out
-      if (!eventDetails.eventName || !eventDetails.eventDate || 
-          !eventDetails.eventTime || !eventDetails.eventLocation || 
-          !eventDetails.invitees) {
-        alert('Please fill out all fields!');
-        return;
-      }
-
-      // Show loading state
-      const button = document.querySelector(`.${styles.button1}`);
-      if (button) {
-        button.textContent = 'Sending...';
-        button.disabled = true;
-      }
-
-      // Render and compress the invitation preview
-      console.log('Generating image...');
       const canvas = await html2canvas(invitationRef.current);
       const originalImage = canvas.toDataURL('image/jpeg');
-      console.log('Compressing image...');
       const compressedImage = await compressImage(originalImage);
       
-      // Send email
-      console.log('Sending email...');
       await sendEmail(compressedImage);
       
-      alert('Invitation sent successfully!');
-      
-      // Clear form
+      setSuccess('Invitation sent successfully!');
       setEventDetails({
         eventName: '',
         eventDate: '',
@@ -138,14 +114,9 @@ export default function EventInvitation() {
       setSelectedTemplate(null);
     } catch (err) {
       console.error('Error sending invitation:', err);
-      alert(err.message || 'Failed to send invitation. Please try again.');
+      setError(err.message || 'Failed to send invitation. Please try again.');
     } finally {
-      // Reset button state
-      const button = document.querySelector(`.${styles.button1}`);
-      if (button) {
-        button.textContent = 'Generate & Send Invitation';
-        button.disabled = false;
-      }
+      setIsLoading(false);
     }
   };
 
@@ -157,62 +128,36 @@ export default function EventInvitation() {
     const inviteesArray = eventDetails.invitees.split(',').map(email => email.trim());
   
     try {
-      //Loop through each invitee and send an email
       const emailPromises = inviteesArray.map(async (email) => { 
-          const templateParams = {
-              to_email: email, 
-              event_name: eventDetails.eventName,
-              event_date: eventDetails.eventDate,
-              event_time: eventDetails.eventTime,
-              event_location: eventDetails.eventLocation,
-              invitation_image: image
-          };
+        const templateParams = {
+          to_email: email, 
+          event_name: eventDetails.eventName,
+          event_date: eventDetails.eventDate,
+          event_time: eventDetails.eventTime,
+          event_location: eventDetails.eventLocation,
+          invitation_image: image
+        };
 
-          return emailjs.send(serviceID, templateID, templateParams, userID);
+        return emailjs.send(serviceID, templateID, templateParams, userID);
       });
 
-      //Wait for all emails to be sent
-      const responses = await Promise.all(emailPromises); //Used Promise.all() to send emails in parallel
+      const responses = await Promise.all(emailPromises);
       console.log('Emails sent successfully:', responses);
       return responses;
     } catch (error) {
-        console.error('EmailJS Error:', error);
-        throw new Error('Failed to send invitations. Please try again.');
+      console.error('EmailJS Error:', error);
+      throw new Error('Failed to send invitations. Please try again.');
     }
   };
 
-  const getTemplatePreview = () => {
+  const getTemplateComponent = () => {
     switch (selectedTemplate) {
       case 'template1':
-        return (
-          <div className={styles.template1}>
-            <h2>You're Cordially Invited to {eventDetails.eventName}</h2>
-            <p><strong>Date:</strong> {eventDetails.eventDate}</p>
-            <p><strong>Time:</strong> {eventDetails.eventTime}</p>
-            <p><strong>Location:</strong> {eventDetails.eventLocation}</p>
-            <p>We look forward to celebrating with you!</p>
-          </div>
-        );
+        return <Template1 eventDetails={eventDetails} />;
       case 'template2':
-        return (
-          <div className={styles.template2}>
-            <h2>Invitation to {eventDetails.eventName}</h2>
-            <p><strong>Date:</strong> {eventDetails.eventDate}</p>
-            <p><strong>Time:</strong> {eventDetails.eventTime}</p>
-            <p><strong>Location:</strong> {eventDetails.eventLocation}</p>
-            <p>We are excited to have you join us for this special event!</p>
-          </div>
-        );
+        return <Template2 eventDetails={eventDetails} />;
       case 'template3':
-        return (
-          <div className={styles.template3}>
-            <h2>{eventDetails.eventName}</h2>
-            <p><strong>Date:</strong> {eventDetails.eventDate}</p>
-            <p><strong>Time:</strong> {eventDetails.eventTime}</p>
-            <p><strong>Location:</strong> {eventDetails.eventLocation}</p>
-            <p>We would be honored to have you celebrate with us.</p>
-          </div>
-        );
+        return <Template3 eventDetails={eventDetails} />;
       default:
         return null;
     }
@@ -227,86 +172,96 @@ export default function EventInvitation() {
           <span className={styles['green-pipe']}>|</span> Event Invitation Generator
         </h3>
         <p className={styles.p1}>
-          Event Owners can generate and send invitations via email.
+          Create and send beautiful event invitations to your guests via email.
         </p>
 
         {error && <div className={styles['error-message']}>{error}</div>}
         {success && <div className={styles['success-message']}>{success}</div>}
 
         <form className={styles['event-form']}>
-          <label>Event Name:</label>
-          <input
-            type="text"
-            name="eventName"
-            placeholder="Enter event name"
-            value={eventDetails.eventName}
-            onChange={handleChange}
-            required
-          />
+          <div>
+            <label>Event Name</label>
+            <input
+              type="text"
+              name="eventName"
+              placeholder="Enter event name"
+              value={eventDetails.eventName}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label>Event Date:</label>
-          <input
-            type="date"
-            name="eventDate"
-            value={eventDetails.eventDate}
-            onChange={handleChange}
-            required
-          />
+          <div>
+            <label>Event Date</label>
+            <input
+              type="date"
+              name="eventDate"
+              value={eventDetails.eventDate}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label>Event Time:</label>
-          <input
-            type="time"
-            name="eventTime"
-            value={eventDetails.eventTime}
-            onChange={handleChange}
-            required
-          />
+          <div>
+            <label>Event Time</label>
+            <input
+              type="time"
+              name="eventTime"
+              value={eventDetails.eventTime}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label>Event Location:</label>
-          <input
-            type="text"
-            name="eventLocation"
-            placeholder="Enter location"
-            value={eventDetails.eventLocation}
-            onChange={handleChange}
-            required
-          />
+          <div>
+            <label>Event Location</label>
+            <input
+              type="text"
+              name="eventLocation"
+              placeholder="Enter location"
+              value={eventDetails.eventLocation}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label>Invitee Emails (comma-separated):</label>
-          <textarea
-            name="invitees"
-            placeholder="Enter invitee email addresses"
-            value={eventDetails.invitees}
-            onChange={handleChange}
-            required
-          />
+          <div>
+            <label>Invitee Emails (comma-separated)</label>
+            <textarea
+              name="invitees"
+              placeholder="Enter invitee email addresses"
+              value={eventDetails.invitees}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <h4>Select Invitation Template:</h4>
+          <h4>Select Invitation Template</h4>
           <div className={styles['template-container']}>
             <ul>
               <li
                 className={`${styles.template} ${selectedTemplate === 'template1' ? styles.selected : ''}`}
                 onClick={() => handleTemplateSelect('template1')}
               >
-                Template 1
+                Elegant
               </li>
               <li
                 className={`${styles.template} ${selectedTemplate === 'template2' ? styles.selected : ''}`}
                 onClick={() => handleTemplateSelect('template2')}
               >
-                Template 2
+                Modern
               </li>
               <li
                 className={`${styles.template} ${selectedTemplate === 'template3' ? styles.selected : ''}`}
                 onClick={() => handleTemplateSelect('template3')}
               >
-                Template 3
+                Classic
               </li>
             </ul>
           </div>
 
-          <div ref={invitationRef} className={`${styles['invitation-preview']} ${selectedTemplate ? styles[selectedTemplate] : ''}`}>
-            {getTemplatePreview()}
+          <div ref={invitationRef} className={styles['invitation-preview']}>
+            {getTemplateComponent()}
           </div>
 
           <button 

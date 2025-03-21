@@ -108,12 +108,14 @@ export default function EventPlannerLogin() {
 
   return (
     <div className={styles.main}>
-      <h1 className={styles.h1}>Create Event Planner Account</h1>
-      <p className={styles.p1}>Provide correct information to setup your account</p>
+      
 
       <div className={styles.container}>
         <form className={styles.container2} onSubmit={handleSubmit}>
           <div className={styles.box1}>
+          <h1 className={styles.h1}>Create Event Planner Account</h1>
+          <p className={styles.p1}>Provide correct information to setup your account</p>
+
             <label className={styles.l1} htmlFor="FullName">Full Name</label> <br />
             <input
               className={styles.i1}
@@ -190,11 +192,12 @@ export default function EventPlannerLogin() {
               required
             />
 
-          <div className={styles.l1} >
+            <div className={styles.l1} >
                 <h1>Select your location</h1>
                 <GoogleMapEditableMakerComponent onCityUpdate={handleCityUpdate} />
               </div>
           </div>
+          
 
           <div className={styles.box2}>
             <label className={styles.l1} htmlFor="Gender">Gender</label> <br />

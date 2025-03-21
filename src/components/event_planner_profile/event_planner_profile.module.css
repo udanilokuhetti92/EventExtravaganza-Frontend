@@ -196,6 +196,92 @@
   background-color: blue;
 }
 
+/* Checklist Section */
+.checklistSection {
+  background-color: #f8f9fa;
+  margin-top: 40px;
+  padding: 20px;
+  border-top: 2px solid #f0f0f0;
+}
+
+.checklistSection h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #551488;
+  margin-bottom: 20px;
+}
+
+.checklistSection p {
+  font-size: 16px;
+  color: #777;
+  margin: 10px 0;
+}
+
+/* Loading message */
+.checklistSection p {
+  font-style: italic;
+}
+
+/* Checklist list */
+.checklistSection ul {
+  list-style: none;
+  padding: 0;
+}
+
+.checklistItem {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.checklistItem:hover {
+  border: 2px solid #29084e;
+  transform: translateY(-5px);
+}
+
+/* Checklist Title */
+.checklistItem h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 10px;
+}
+
+/* Checklist created date */
+.checklistItem p {
+  font-size: 14px;
+  color: black;
+}
+
+/* View Checklist Button */
+.viewChecklistButton {
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 10px;
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: #29084e;
+  border: 2px solid #e5f4ff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.viewChecklistButton:hover {
+  background-color: #e5f4ff;
+  color: #29084e;
+  border: 2px solid #29084e;
+}
+
+.viewChecklistButton:active {
+  border: 2px solid #29084e;
+}
+
+
 
 
 

@@ -1,18 +1,17 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Star } from "lucide-react";
 import RatingSystem from "../../rating_system/rating_system"; // Import rating system
 import styles from "./event_planner_profile.module.css";
 import Navigation from "../../event_planner_site/navigation/navigation";
 import Footer from "../../event_planner_site/footer/planner_footer";
-import { useNavigate } from 'react-router-dom';
-
 
 export default function EventPlannerProfile() {
+  const navigate = useNavigate();
+  const [checklists, setChecklists] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    const navigate = useNavigate();
-  
-
+  // Fetch planner data from localStorage
   const plannerData = JSON.parse(localStorage.getItem('planner')) || {
     name: "Udani Lokuhetti",
     city: "Colombo",
@@ -24,10 +23,33 @@ export default function EventPlannerProfile() {
     budget: "200000",
   };
 
+  // Fetch checklists for the planner
+  useEffect(() => {
+    const fetchChecklists = async () => {
+      try {
+        const plannerName = plannerData.name;
+        const response = await fetch(`http://localhost:5000/api/checklists/planner/${plannerName}`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch checklists");
+        }
+
+        const checklistsData = await response.json();
+        setChecklists(checklistsData); // Update the state with fetched checklists
+      } catch (error) {
+        console.error("Error fetching checklists:", error);
+        setChecklists([]); // Fallback to empty array if error occurs
+      } finally {
+        setLoading(false); // Stop loading once the fetch is complete
+      }
+    };
+
+    fetchChecklists();
+  }, [plannerData.name]);
 
   return (
     <div>
-      <Navigation/>
+      <Navigation />
       <div className={styles.profileContainer}>
         <div className={styles.profileCard}>
           <div className={styles.profileHeader}>
@@ -39,11 +61,33 @@ export default function EventPlannerProfile() {
               />
             </div>
             <h1 className={styles.profileName}>{plannerData.name}</h1>
-            
+
             <Link to="/Checklist" className={styles.checklistButton}>
               Go to Checklist
             </Link>
           </div>
+
+          {/* Display Checklists */}
+          <div className={styles.checklistSection}>
+            <h2>Checklists</h2>
+            {loading ? (
+              <p>Loading your checklists...</p>
+            ) : checklists.length === 0 ? (
+              <p>No checklists available. Start by creating a new one!</p>
+            ) : (
+              <ul>
+                {checklists.map((checklist, index) => (
+                  <li key={index} className={styles.checklistItem}>
+                    <h3>{checklist.checklistName}</h3>
+                    <p>Created on: {new Date(checklist.createdAt).toLocaleDateString()}</p>
+                    <Link to={`/checklist/${checklist.checklist_id}`} className={styles.viewChecklistButton}>
+                      View Checklist
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div><br/><br/>
 
           <div className={styles.profileInfo}>
             <div className={styles.infoSection}>
@@ -86,16 +130,16 @@ export default function EventPlannerProfile() {
                 <div className={styles.infoItem}>
                   <label>Gender:</label>
                   <p>{plannerData.gender}</p>
-                  <button className={styles.b1} onClick={()=>navigate('/')}>Log out</button>
-                  
+                  <button className={styles.b1} onClick={() => navigate('/')}>Log out</button>
                 </div>
               </div>
             </div>
+          </div>
 
-            </div>
+          
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

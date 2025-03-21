@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import styles from "./event_organizer_signin.module.css";
-import { useNavigate } from "react-router-dom";
+import styles from "../event_organizer_signin/event_organizer_signin.module.css";
+import { useNavigate } from "react-router-dom"; // For navigation
 
 export default function EventOrganizerSignin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [error, setError] = useState(""); // Error state
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent page reload
 
     if (!email || !password) {
       setError("Please enter both email and password.");
@@ -35,7 +35,7 @@ export default function EventOrganizerSignin() {
       const organizerResponse = await fetch("http://localhost:5000/organizerProfile2/getOrganizerByMail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email }), // Send email in the request body
       });
 
       const organizerData = await organizerResponse.json();
@@ -47,10 +47,10 @@ export default function EventOrganizerSignin() {
 
       // Step 3: Store organizer details in local storage
       localStorage.setItem('organizer', JSON.stringify({
-        name: organizerData.FullName,
-        city: organizerData.City,
-        email: organizerData.Email,
-        contactNumber: organizerData.ContactNumber,
+        name: organizerData.FullName, // Map FullName to name
+        city: organizerData.City,     // Map City to city
+        email: organizerData.Email,   // Map Email to email
+        contactNumber: organizerData.ContactNumber, // Map ContactNumber to contactNumber
       }));
 
       // Step 4: Redirect to the profile page
@@ -63,16 +63,13 @@ export default function EventOrganizerSignin() {
   return (
     <div className={styles.container}>
       <div className={styles.box1}>
-        <h1 className={styles.h1}>Event Organizer Sign In</h1>
-        <br />
-        <p className={styles.p1}>Provide correct information to sign in</p>
-        <br />
+        <h1 className={styles.h1}>Event Organizer Sign In</h1> <br />
+        <p className={styles.p1}>Provide correct information to sign in</p> <br />
 
-        {error && <p className={styles.error}>{error}</p>}
+        {error && <p className={styles.error}>{error}</p>} {/* Show error message */}
 
         <form onSubmit={handleSubmit}>
-          <label className={styles.l1} htmlFor="email">Email</label>
-          <br />
+          <label className={styles.l1} htmlFor="email">Email</label> <br />
           <input
             className={styles.i1}
             type="email"
@@ -83,11 +80,9 @@ export default function EventOrganizerSignin() {
             required
           />
 
-          <br />
-          <br />
+          <br /> <br />
 
-          <label className={styles.l1} htmlFor="password">Password</label>
-          <br />
+          <label className={styles.l1} htmlFor="password">Password</label> <br />
           <input
             className={styles.i1}
             type="password"

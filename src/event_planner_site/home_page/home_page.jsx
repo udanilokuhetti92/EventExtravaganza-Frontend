@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '../home_page/home_page.module.css'
 import Navigation from '../navigation/navigation'
+import Footer from '../footer/planner_footer'
 
 export default function home_page() {
   return (
@@ -22,6 +23,8 @@ export default function home_page() {
                 </div>
             </div>
         </div>
+
+        <Footer/>
     </div>
   )
 }

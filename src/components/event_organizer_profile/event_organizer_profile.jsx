@@ -2,21 +2,22 @@ import React from 'react';
 import styles from './event_organizer_profile.module.css';
 import Navigation from '../navigation/navigation';
 import Footer from '../footer/footer';
+import { useNavigate } from 'react-router-dom';
 
 export default function EventOrganizerProfile() {
-  // This would typically come from backend/API
-  const organizer = {
+  const navigate = useNavigate();
+  // Retrieve organizer data from local storage
+  const organizer = JSON.parse(localStorage.getItem('organizer')) || {
     name: "Udani Lokuhetti",
     city: "Colombo",
     email: "udanilokuhetti22@gmail.com",
-    contactNumber: "+94(76) 0876 502"
+    contactNumber: "+94(76) 0876 502",
   };
 
   return (
     <div>
-      <Navigation/>
+      <Navigation />
       <div className={styles.profileContainer}>
-        
         <div className={styles.profileHeader}>
           <div className={styles.profileImage}>
             <div className={styles.imagePlaceholder}>
@@ -40,13 +41,13 @@ export default function EventOrganizerProfile() {
               <div className={styles.infoItem}>
                 <label>Contact Number</label>
                 <p>{organizer.contactNumber}</p>
-                <button className={styles.b1}>Log out</button>
+                <button className={styles.b1} onClick={()=>navigate('/')}>Log out</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

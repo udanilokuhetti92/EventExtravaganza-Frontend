@@ -1,100 +1,160 @@
-import React, { useState } from 'react';
-import Navigation from '../components/navigation/navigation';
-import  './budget_filtering.css';
-import Footer from '../components/footer/footer'
+import React, { useState } from "react";
+import Navigation from "../components/navigation/navigation";
+import Footer from "../components/footer/footer";
+import styles from "./budget_filtering.module.css";
+import { Search, DollarSign, Users } from "lucide-react";
 
 export default function BudgetFiltering() {
-  const [budget, setBudget] = useState(''); // State to store the user's input
-  const [eventPlanners, setEventPlanners] = useState([]); // State to store the response data
+  const [budget, setBudget] = useState("");
+  const [eventPlanners, setEventPlanners] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Function to handle the "Search" button click
   const handleSearch = async () => {
-    try {
-      // Send a POST request to the server
-      const response = await fetch('http://localhost:5000/budgetFilter/budget', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ Budget: budget }), // Send the budget value in the request body
-      });
+    if (!budget) {
+      setError("Please enter a budget amount");
+      return;
+    }
 
-      // Check if the response is successful
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/budgetFilter/budget",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ Budget: budget }),
+        }
+      );
+
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Failed to fetch event planners");
       }
 
-      // Parse the JSON response
       const data = await response.json();
-
-      // Update the state with the fetched event planners
       setEventPlanners(data);
     } catch (error) {
-      console.error('Error fetching event planners:', error);
+      setError(
+        "An error occurred while fetching event planners. Please try again."
+      );
+      console.error("Error fetching event planners:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
   };
 
   return (
-    <div className='container'>
+    <div className={styles.container}>
       <Navigation />
 
-      <div className='container2'>
-        <div className='box1'>
-          <h3 className='h3'><span className='green-pipe'>|</span> Extravaganza unit</h3>
-          <p className='p1'>Loved By Event Organizers.<br />Built for <span className="box-text">Budget Filtering</span></p>
+      <div className={styles.hero}>
+        <div className={styles.heroContent}>
+          <div className={styles.titleWrapper}>
+            <div className={styles.pipe}></div>
+            <h3 className={styles.subtitle}>Extravaganza unit</h3>
+          </div>
 
-          <p className='p2'>
-            Finding the perfect event planner within your budget has never been easier! Simply <br />
-            enter your desired budget range, and our system will instantly display a list of <br />
-            available event planners that match your price preferences. This feature ensures <br />
-            that you can plan your dream event without exceeding your financial limits,<br />
-            making event planning hassle-free and affordable.
+          <h1 className={styles.title}>
+            Loved By Event Organizers.
+            <br />
+            Built for <span className={styles.highlight}>Budget Filtering</span>
+          </h1>
+
+          <p className={styles.description}>
+            Finding the perfect event planner within your budget has never been
+            easier! Simply enter your desired budget range, and our system will
+            instantly display a list of available event planners that match your
+            price preferences.
           </p>
         </div>
 
-
-        <div className='box6'>
-        
+        <div className={styles.heroImage}>
+          <img
+            src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80"
+            alt="Event Planning"
+            className={styles.image}
+          />
         </div>
       </div>
 
-      <div className='container3'>
-
-        {/* Budget input and search button */}
-        <div>
-        <span className='span1'>Rs:</span>
-          <input
-            className='input1'
-            type="number"
-            placeholder='Enter Your Budget Range'
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)} // Update the budget state as the user types
-          />
-          <button className='button1' onClick={handleSearch}>Search</button>
+      <div className={styles.searchSection}>
+        <div className={styles.searchContainer}>
+          <div className={styles.inputWrapper}>
+            <DollarSign className={styles.currencyIcon} />
+            <input
+              type="number"
+              placeholder="Enter Your Budget Range"
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className={styles.input}
+            />
+          </div>
+          <button
+            className={styles.searchButton}
+            onClick={handleSearch}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              "Searching..."
+            ) : (
+              <>
+                <Search className={styles.searchIcon} />
+                Search
+              </>
+            )}
+          </button>
         </div>
-        <div className='box2'>
-            <h1 className='box2h1'>Available Event Planners</h1>
-        
 
-          <hr style={{ border: "2px solid #0073e5" }} />
+        {error && <p className={styles.error}>{error}</p>}
 
-          {/* Display the fetched event planners */}
-          <div className='smallbox'>
+        <div className={styles.resultsContainer}>
+          <div className={styles.resultsHeader}>
+            <h2 className={styles.resultsTitle}>
+              <Users className={styles.usersIcon} />
+              Available Event Planners
+            </h2>
+            <div className={styles.divider}></div>
+          </div>
+
+          <div className={styles.plannerGrid}>
             {eventPlanners.length > 0 ? (
               eventPlanners.map((planner, index) => (
-                <div key={index}>
-                  <b><p>Full Name: {planner.FullName}</p></b>
-                  <b><p>Email: {planner.Email}</p></b>
-                  <button className="profile">View Profile</button>
+                <div key={index} className={styles.plannerCard}>
+                  <div className={styles.plannerAvatar}>
+                    {planner.FullName.charAt(0)}
+                  </div>
+                  <div className={styles.plannerInfo}>
+                    <h3 className={styles.plannerName}>{planner.FullName}</h3>
+                    <p className={styles.plannerEmail}>{planner.Email}</p>
+                  </div>
+                  <button className={styles.viewProfileButton}>
+                    View Profile
+                  </button>
                 </div>
               ))
             ) : (
-              <p className='boxp1'>No event planners found within the specified budget.</p>
+              <p className={styles.noResults}>
+                {isLoading
+                  ? "Searching for event planners..."
+                  : "No event planners found within the specified budget."}
+              </p>
             )}
           </div>
         </div>
       </div>
-      <Footer/>
+
+      <Footer />
     </div>
   );
 }

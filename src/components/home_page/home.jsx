@@ -1,164 +1,422 @@
-import React from 'react'
-import styles from './home.module.css'
-import Navigation from '../navigation/navigation'
-import Footer from '../footer/footer'
+import React, { useEffect, useState, useRef } from 'react';
+import { Calendar, MapPin, DollarSign, MessageCircle, CheckSquare, Star, Package, Clock, Users, ChevronDown, ChevronUp, ArrowRight, Mail, Phone } from 'lucide-react';
+import Navigation from '../navigation/navigation';
+import Footer from '../footer/footer';
+import styles from './home.module.css';
+import { useNavigate } from "react-router-dom";
 
-export default function home() {
+
+export default function Home() {
+    const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState(0);
+  const [isVisible, setIsVisible] = useState({});
+  const [expandedFaq, setExpandedFaq] = useState(null);
+  const testimonialsRef = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          setIsVisible(prev => ({
+            ...prev,
+            [entry.target.dataset.section]: entry.isIntersecting
+          }));
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('[data-section]').forEach((element) => {
+      observer.observe(element);
+    });
+    // Auto-rotate testimonials
+    const interval = setInterval(() => {
+      setActiveTab((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => {
+      observer.disconnect();
+      clearInterval(interval);
+    };
+  }, []);
+  const toggleFaq = (index) => {
+    setExpandedFaq(expandedFaq === index ? null : index);
+  };
+  const scrollToTestimonial = (index) => {
+    setActiveTab(index);
+    if (testimonialsRef.current) {
+      const scrollAmount = index * testimonialsRef.current.offsetWidth;
+      testimonialsRef.current.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
   return (
-    <div>
-      
-      {/* <div className={styles.container}>
-        <Navigation/>
-        <p className={styles.p1}>Event</p>
-        <p className={styles.p2}>Extravaganza</p>
-        <p className={styles.p3}>Weddings & Parties</p>
-        <div class={styles.spinner}>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+    <div className={styles.container}>
+      <Navigation />
+      <section className={styles.heroSection}>
+        <div className={styles.heroContent}>
+          <div className={styles.heroTitleWrapper}>
+            <h1>
+              <span className={styles.heroTitleFirst}>Event</span>
+              <span className={styles.heroTitleSecond}>Extravaganza</span>
+            </h1>
+            <div className={styles.decorativeLine}></div>
+          </div>
+          <h2 className={styles.heroSubtitle}>Weddings & Parties</h2>
+          <p className={styles.heroDescription}>
+            Transform your special moments into unforgettable experiences with our seamless event planning platform.
+            Connect with top planners and bring your dream events to life.
+          </p>
+          <div className={styles.heroCta}>
+            <button className={styles.primaryButton} onClick={()=>navigate('/Budget_Filtering')}>
+              Book Now
+              <ArrowRight className={styles.buttonIcon} />
+            </button>
+            <a href="#features"> <button  className={styles.secondaryButton}>
+              Explore Services
+            </button> </a>
+          </div>
         </div>
-
-        <p className={styles.p4}>Design a system that enables quick and easy access to Event <br /> Planners, ensuring efficient task completion.</p>
-
-        <div className={styles.buttons}>
-          <button className={styles.b1}>About</button> 
-          <button className={styles.b1}>Contact</button>
+        <div className={styles.heroImage}>
+          <img 
+            src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" 
+            alt="Event celebration with elegant decorations and lighting"
+          />
+          <div className={styles.imageOverlay}></div>
+          <div className={styles.floatingBadge}>
+            <span>Premium Planning</span>
+          </div>
         </div>
-        
-        <div className={styles.card}>
-          <a className={`${styles.socialContainer} ${styles.containerOne}`} href="https://www.instagram.com/event_extravaganza?igsh=cmRuOXpxaXZyMHM4">
-            <svg viewBox="0 0 16 16" className={`${styles.socialSvg} ${styles.instagramSvg}`}> <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" /> </svg>
-          </a>
-          <a className={`${styles.socialContainer} ${styles.containerThree}`} href="https://www.linkedin.com/company/eventextravaganza/" target='_blank'>
-            <svg viewBox="0 0 448 512" className={`${styles.socialSvg} ${styles.linkedinSvg}`}><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" /></svg>
-          </a>
-          <a className={`${styles.socialContainer} ${styles.containerFour}`} href="#">
-            <svg viewBox="0 0 16 16" className={`${styles.socialSvg} ${styles.whatsappSvg}`}> <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" /> </svg>
-          </a>
+      </section>
+      <section className={styles.statsSection} data-section="stats">
+        <div className={styles.statsOverlay}></div>
+        <div className={`${styles.statCard} ${isVisible.stats ? styles.visible : ''}`}>
+          <Users className={styles.statIcon} />
+          <div className={styles.statContent}>
+            <h3>5,000+</h3>
+            <div className={styles.statBar}><div className={styles.statProgress} style={{width: '80%'}}></div></div>
+            <p>Event Organizers</p>
+          </div>
         </div>
-
-        <b><p className={styles.aboutus}>About Us</p></b>
-        <p className={styles.p5}>Easier your life with smart choices and simple steps</p>
-
-        <div className={styles.container2}>
-
-          <div className={styles.box1}>
-            <b><p className={styles.p6}>Hello, We're</p></b>
-            <p className={styles.p7}>Team Extravaganza</p>
-            <p className={styles.p8}>Utilize our comprehensive filtering options, including budget and location filters, 
-              to <br /> effortlessly find the perfect event planner for your needs. With just a few simple 
-              steps,<br /> you can streamline your event planning process and ensure a smooth, successful <br /> experience from start to finish.</p>
-
-            <div className={styles.buttons}>
-              <button className={styles.b2}>Budget Filtering</button> 
-              <button className={styles.b2}>Location Filtering</button>
-              <button className={styles.b2}>Chat Bot</button>
+        <div className={`${styles.statCard} ${isVisible.stats ? styles.visible : ''}`}>
+          <Calendar className={styles.statIcon} />
+          <div className={styles.statContent}>
+            <h3>2,000+</h3>
+            <div className={styles.statBar}><div className={styles.statProgress} style={{width: '65%'}}></div></div>
+            <p>Event Planners</p>
+          </div>
+        </div>
+        <div className={`${styles.statCard} ${isVisible.stats ? styles.visible : ''}`}>
+          <Star className={styles.statIcon} />
+          <div className={styles.statContent}>
+            <h3>8.1/10</h3>
+            <div className={styles.statBar}><div className={styles.statProgress} style={{width: '81%'}}></div></div>
+            <p>User Feedback</p>
+          </div>
+        </div>
+        <div className={`${styles.statCard} ${isVisible.stats ? styles.visible : ''}`}>
+          <CheckSquare className={styles.statIcon} />
+          <div className={styles.statContent}>
+            <h3>12,000+</h3>
+            <div className={styles.statBar}><div className={styles.statProgress} style={{width: '90%'}}></div></div>
+            <p>Events Completed</p>
+          </div>
+        </div>
+      </section>
+      <section className={`${styles.featuresSection} ${isVisible.features ? styles.visible : ''}`} data-section="features">
+        <h2>Key Features</h2>
+        <div className={styles.sectionDivider}></div>
+        <p id="features" className={styles.sectionSubtitle}>
+          Seamlessly plan your perfect event with our powerful platform features
+        </p>
+        <div  className={styles.featuresGrid}>
+          {features.map((feature, index) => (
+            <div key={index} className={styles.featureCard}>
+              <div className={styles.featureIconWrapper}>
+                {feature.icon}
+              </div>
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+              <div className={styles.featureCardOverlay}></div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className={`${styles.howItWorks} ${isVisible.howItWorks ? styles.visible : ''}`} data-section="howItWorks">
+        <h2>How It Works</h2>
+        <div className={styles.sectionDivider}></div>
+        <p className={styles.sectionSubtitle}>Planning your dream event is just four simple steps away</p>
+        <div className={styles.stepsContainer}>
+          {steps.map((step, index) => (
+            <div key={index} className={styles.stepCard}>
+              <div className={styles.stepNumber}>{index + 1}</div>
+              <div className={styles.stepConnector}></div>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className={`${styles.eventTypes} ${isVisible.eventTypes ? styles.visible : ''}`} data-section="eventTypes">
+        <h2>Event Types We Cover</h2>
+        <div className={styles.sectionDivider}></div>
+        <p className={styles.sectionSubtitle}>From intimate gatherings to grand celebrations</p>
+        <div className={styles.eventTypesGrid}>
+          {eventTypes.map((type, index) => (
+            <div key={index} className={styles.eventTypeCard}>
+              <div className={styles.eventTypeImageWrapper}>
+                <img src={type.image} alt={type.title} />
+                <div className={styles.eventTypeOverlay}></div>
+              </div>
+              <div className={styles.eventTypeContent}>
+                <h3>{type.title}</h3>
+                <p>{type.description}</p>
+                <button className={styles.eventTypeButton}>Learn More</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className={`${styles.testimonials} ${isVisible.testimonials ? styles.visible : ''}`} data-section="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div className={styles.sectionDivider}></div>
+        <div className={styles.testimonialTabs}>
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              className={`${styles.testimonialTab} ${activeTab === index ? styles.active : ''}`}
+              onClick={() => scrollToTestimonial(index)}
+            >
+              <div className={styles.tabDot}></div>
+            </button>
+          ))}
+        </div>
+        <div className={styles.testimonialCardsContainer}>
+          <div className={styles.testimonialCards} ref={testimonialsRef}>
+            {testimonials.map((testimonial, index) => (
+              <div 
+                key={index} 
+                className={`${styles.testimonialCard} ${activeTab === index ? styles.activeCard : ''}`}
+              >
+                <div className={styles.testimonialQuote}>"</div>
+                <div className={styles.testimonialRating}>
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className={styles.starIcon}
+                      fill={i < testimonial.rating ? "#284b63" : "#d9d9d9"}
+                    />
+                  ))}
+                </div>
+                <p>{testimonial.text}</p>
+                <div className={styles.testimonialAuthor}>
+                  <img src={testimonial.avatar} alt={testimonial.name} />
+                  <div>
+                    <h4>{testimonial.name}</h4>
+                    <p>{testimonial.event}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className={`${styles.faqSection} ${isVisible.faq ? styles.visible : ''}`} data-section="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div className={styles.sectionDivider}></div>
+        <div className={styles.faqContainer}>
+          {faqData.map((faq, index) => (
+            <div
+              key={index}
+              className={`${styles.faqItem} ${expandedFaq === index ? styles.expanded : ''}`}
+              onClick={() => toggleFaq(index)}
+            >
+              <div className={styles.faqQuestion}>
+                <h3>{faq.question}</h3>
+                {expandedFaq === index ? (
+                  <ChevronUp className={styles.faqIcon} />
+                ) : (
+                  <ChevronDown className={styles.faqIcon} />
+                )}
+              </div>
+              <div className={styles.faqAnswer}>
+                <p>{faq.answer}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className={`${styles.contactSection} ${isVisible.contact ? styles.visible : ''}`} data-section="contact">
+        <h2>Get In Touch</h2>
+        <div className={styles.sectionDivider}></div>
+        <p className={styles.sectionSubtitle}>Have questions or feedback? We'd love to hear from you!</p>
+        <div className={styles.contactContainer}>
+          <form className={styles.contactForm}>
+            <div className={styles.formGroup}>
+              <input type="text" placeholder="Your Name" required />
+            </div>
+            <div className={styles.formGroup}>
+              <input type="email" placeholder="Your Email" required />
+            </div>
+            <div className={styles.formGroup}>
+              <select className={styles.formSelect}>
+                <option value="" disabled selected>Select Event Type</option>
+                <option value="wedding">Wedding</option>
+                <option value="birthday">Birthday Party</option>
+                <option value="corporate">Corporate Event</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div className={styles.formGroup}>
+              <textarea placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" className={styles.submitButton}>
+              Send Message
+            </button>
+          </form>
+          <div className={styles.contactInfo}>
+            <h3>Other Ways to Reach Us</h3>
+            <div className={styles.contactMethod}>
+              <div className={styles.contactIconWrapper}>
+                <Mail className={styles.contactIcon} />
+              </div>
+              <p>support@eventextravaganza.com</p>
+            </div>
+            <div className={styles.contactMethod}>
+              <div className={styles.contactIconWrapper}>
+                <Clock className={styles.contactIcon} />
+              </div>
+              <p>Monday-Friday: 9am-6pm</p>
+            </div>
+            <div className={styles.contactMethod}>
+              <div className={styles.contactIconWrapper}>
+                <MapPin className={styles.contactIcon} />
+              </div>
+              <p>123 Event Street, Planning City</p>
+            </div>
+            <div className={styles.contactMap}>
+              <div className={styles.mapPlaceholder}>
+                <MapPin className={styles.mapIcon} />
+                <p>Visit Our Office</p>
+              </div>
             </div>
           </div>
-
-          <div className={styles.box2}>
-            <div className={styles.card2}>THANKS FOR USING EXTRAVAGANZA</div>
-          </div>
-          
         </div>
-
-        <p className={styles.p9}>Contact Us</p>
-        <p className={styles.p10}>Got a question? Send us a messages, and we'll get back to you soon</p>
-
-        <div className={styles.container3 }>
-          <div className={styles.box3}>
-            <b> <p className={styles.p11}>Get in Touch</p> </b>
-            <p className={styles.p12}>Have something to discuss? Send us a message and let's talk</p>
-            <input placeholder="Your Name" className={styles.input} name="text1" type="text"></input>
-            <input placeholder="Your Email" className={styles.input} name="text2" type="text"></input>
-            <textarea placeholder="Your Message" className={styles.input2} name="text3" type="textbox"></textarea>
-            <button className={styles.btn}>Submit</button>
-          </div>
-
-          <div className={styles.box4}>
-            <p className={styles.p13}>Comments</p>
-            <hr />
-            <br />
-            <label htmlFor="" className={styles.l1}>Name</label> <br />
-            <input placeholder="Your Name" className={styles.input3} name="text4" type="text"></input> <br /><br />
-
-            <label htmlFor="" className={styles.l1}>Message</label> <br />
-            <textarea placeholder="Your Message" className={styles.input4} name="text5" type="text"></textarea>
-            <button className={styles.btn}>Post Comment</button>
-          </div>
-
-        </div>
-
-        <Footer/>
-        
-
-      </div> */}
-      <Navigation/>
-      <div className={styles.c1}>
-        <div className={styles.box1}>
-          <p className={styles.p1}>Event</p>
-          <p className={styles.p2}>Extravaganza</p>
-          <p className={styles.p3}>Weddings & Parties</p>
-          <p className={styles.p4}>Design a system that enables quick and easy access to Event <br /> Planners, ensuring efficient task completion.</p>
-          <button className={styles.b1}>Book Now</button>
-
-        </div>
-
-        <div className={styles.box2}>
-
-        </div>
-      </div>
-
-      <p className={styles.p6}>Here are the key Features</p>
-      <p className={styles.p7}>Now, you can easily book your planner and receive daily updates.</p>
-
-      <div className={styles.c2}>
-        <div className={styles.box3}>
-          <p className={styles.p8}>Location Filter</p>
-          <p className={styles.p9}>Easily search for event planners in your desired area. This helps you find local professionals who are best suited to your event location.</p>
-        </div>
-        <div className={styles.box3}>
-          <p className={styles.p8}>Budget Filter</p>
-          <p className={styles.p9}>Set a budget range to discover event planners who fit within your financial plan. This ensures you get the best options within your budget.</p>
-        </div>
-        <div className={styles.box3}>
-          <p className={styles.p8}>Chat Bot</p>
-          <p className={styles.p9}>Instantly interact with a chatbot to receive tailored recommendations and answers for your event planning needs.</p>
-        </div>
-      </div>
-
-      <div className={styles.box4}>
-        <div className={styles.box5}>
-          <p className={styles.p10}>5000+</p>
-          <p className={styles.p11}> Event Organizers</p>
-        </div>
-        <div className={styles.box5}>
-          <p className={styles.p10}>2000+</p>
-          <p className={styles.p11}> Event Planners</p>
-        </div>
-        <div className={styles.box5}>
-          <p className={styles.p10}>8.1/10</p>
-          <p className={styles.p11}>User Feedback</p>
-        </div>
-      </div>
-
-      <p className={styles.p6}>Send your comments</p>
-      <p className={styles.p7}>If you have any doubts, please send them to us, and we will check.</p>
-
-      
-
-      <div className={styles.box7}>
-        <input className={styles.i1} type="text" placeholder='Enter your Name'/> <br /> 
-        <input className={styles.i1} type="text" placeholder='Enter your Email'/> <br /> 
-        <textarea className={styles.i2} type="text" placeholder='Enter your Message'/> <br /> 
-        <button className={styles.b2}>Submit</button>
-
-      </div>
-
-    <Footer/>
+      </section>
+      <Footer />
     </div>
-  )
+  );
 }
+const features = [
+  {
+    icon: <MapPin />,
+    title: "Location Filter",
+    description: "Find the perfect local event planners who understand your venue and area requirements."
+  },
+  {
+    icon: <DollarSign />,
+    title: "Budget Filter",
+    description: "Discover planners that match your budget constraints without compromising on quality."
+  },
+  {
+    icon: <MessageCircle />,
+    title: "Chat Bot",
+    description: "Get instant answers and recommendations from our AI-powered assistant."
+  },
+  {
+    icon: <CheckSquare />,
+    title: "Task Management",
+    description: "Keep track of all planning tasks with customized checklists and timelines."
+  },
+  {
+    icon: <Users />,
+    title: "RSVP Tracking",
+    description: "Manage guest lists and responses with our streamlined invitation system."
+  },
+  {
+    icon: <Package />,
+    title: "Planner Packages",
+    description: "Choose from tiered service packages to match your specific event needs."
+  }
+];
+const steps = [
+  {
+    title: "Define Your Event",
+    description: "Select your event type and customize preferences to match your vision."
+  },
+  {
+    title: "Browse Planners",
+    description: "Filter planners by location, budget, and reviews to find your perfect match."
+  },
+  {
+    title: "Collaborate",
+    description: "Use our platform to communicate, share ideas, and track progress."
+  },
+  {
+    title: "Enjoy Your Event",
+    description: "Relax as your planner handles the details for your perfect celebration."
+  }
+];
+const eventTypes = [
+  {
+    title: "Weddings",
+    description: "Create the perfect day with our specialized wedding planners.",
+    image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+  },
+  {
+    title: "Birthday Parties",
+    description: "Make your birthday memorable with custom themes and activities.",
+    image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+  },
+  {
+    title: "Corporate Events",
+    description: "Impress clients and team members with professional gatherings.",
+    image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"
+  },
+  {
+    title: "Anniversaries",
+    description: "Celebrate your special milestones with thoughtfully planned events.",
+    image: "https://images.unsplash.com/photo-1471967183320-ee018f6e114a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
+  }
+];
+const testimonials = [
+  {
+    rating: 5,
+    text: "Event Extravaganza made planning our wedding so much easier! We found an amazing planner within our budget who understood exactly what we wanted.",
+    name: "Sarah J.",
+    event: "Wedding, June 2023",
+    avatar: "https://randomuser.me/api/portraits/women/65.jpg"
+  },
+  {
+    rating: 5,
+    text: "The task management feature was a lifesaver! Nothing was forgotten and our corporate event went off without a hitch. Highly recommend!",
+    name: "Michael T.",
+    event: "Corporate Event, March 2023",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+  },
+  {
+    rating: 4,
+    text: "I was able to plan my daughter's sweet sixteen party in just a week! The platform connected me with a planner who worked miracles on short notice.",
+    name: "Lisa M.",
+    event: "Birthday Party, May 2023",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+  }
+];
+const faqData = [
+  {
+    question: "How do I choose the right event planner?",
+    answer: "Our platform allows you to filter planners by location, budget, and ratings. You can also view their portfolios and read reviews from previous clients to find your perfect match."
+  },
+  {
+    question: "What types of events can I plan on this platform?",
+    answer: "We support a wide range of events including weddings, birthday parties, corporate events, anniversaries, baby showers, and more. Our planners specialize in different event types."
+  },
+  {
+    question: "How far in advance should I book a planner?",
+    answer: "For large events like weddings, we recommend booking 6-12 months in advance. For smaller events, 2-3 months is usually sufficient, but we also have planners who specialize in last-minute events."
+  },
+  {
+    question: "Can I communicate with planners before booking?",
+    answer: "Yes! Our platform offers a messaging system that allows you to discuss your needs with potential planners before making any commitments."
+  }
+];

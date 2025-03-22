@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import styles from './home_page.module.css';
 import video from './images/home2.mp4';
@@ -7,15 +7,31 @@ import { Calendar, Users } from 'lucide-react';
 export default function HomePage() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Add fade-in animation when component mounts
+    document.body.classList.add(styles.loaded);
+    return () => document.body.classList.remove(styles.loaded);
+  }, []);
+
   return (
     <div className={styles.pageContainer}>
       <div className={styles.videoOverlay}></div>
+      <div className={styles.gradientOverlay}></div>
       <video autoPlay loop muted playsInline className={styles.backgroundVideo}>
         <source src={video} type="video/mp4" />
       </video>
 
+      <div className={styles.particles}>
+        {[...Array(20)].map((_, index) => (
+          <div key={index} className={styles.particle}></div>
+        ))}
+      </div>
+
       <main className={styles.mainContent}>
-        <h1 className={styles.title}>WELCOME TO EXTRAVAGANZA</h1>
+        <h1 className={styles.title}>
+          <span className={styles.titleLine}>WELCOME TO</span>
+          <span className={styles.titleHighlight}>EXTRAVAGANZA</span>
+        </h1>
         
         <div className={styles.buttonContainer}>
           <div className={styles.buttonWrapper}>

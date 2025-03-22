@@ -3,9 +3,11 @@ import Navigation from "../components/navigation/navigation";
 import Footer from "../components/footer/footer";
 import styles from "./budget_filtering.module.css";
 import { Search, DollarSign, Users, X } from "lucide-react";
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 // Modal component
-function PlannerProfileModal({ planner, onClose }) {
+function PlannerProfileModal({ planner, onClose }) {  
   if (!planner) return null;
 
   return (
@@ -28,11 +30,11 @@ function PlannerProfileModal({ planner, onClose }) {
             <p>{planner.City}</p>
           </div>
           
-          <div className={styles.detailItem}>
+          {/* <div className={styles.detailItem}>
             <label>Gender:</label>
             <p>{planner.Gender}</p>
           </div>
-          
+           */}
           <div className={styles.detailItem}>
             <label>Speciality:</label>
             <p>{planner.Speciality}</p>
@@ -125,6 +127,9 @@ export default function BudgetFiltering() {
     }
   };
 
+  const navigate = useNavigate();
+
+
   return (
     <div className={styles.container}>
       <Navigation />
@@ -216,6 +221,8 @@ export default function BudgetFiltering() {
                   >
                     View Profile
                   </button>
+                  <br /> <br />
+                  <button className={styles.viewProfileButton} onClick={()=>navigate("/Organizer_Inbox")}>Contact</button>
                 </div>
               ))
             ) : (

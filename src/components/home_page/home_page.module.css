@@ -1,29 +1,8 @@
-/* Color Variables */
-:root {
-  --background-color: #ffffff;
-  --primary-color: #284b63;
-  --secondary-color: #3c6e71;
-  --accent-color: #353535;
-  --neutral-color: #d9d9d9;
-  --primary-text: #353535;
-  --secondary-text: #284b63;
-}
-
 .pageContainer {
   position: relative;
   min-height: 100vh;
-  width: 100%;
   overflow: hidden;
-}
-
-.backgroundVideo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
+  background: #000;
 }
 
 .videoOverlay {
@@ -32,8 +11,34 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(40, 75, 99, 0.7);
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.gradientOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(76, 0, 255, 0.15),
+    rgba(255, 0, 128, 0.15)
+  );
   z-index: 2;
+}
+
+.backgroundVideo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
 }
 
 .mainContent {
@@ -41,59 +46,67 @@
   z-index: 3;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  color: var(--background-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+  padding: 4rem 2rem;
+  animation: fadeIn 1s ease-out;
 }
 
 .title {
-  font-size: 3.5rem;
-  font-weight: 700;
   text-align: center;
-  margin: 4rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  letter-spacing: 2px;
+  margin-bottom: 4rem;
+  font-family: 'Arial', sans-serif;
+}
+
+.titleLine {
+  display: block;
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.5rem;
+}
+
+.titleHighlight {
+  display: block;
+  font-size: 4rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #4c00ff, #ff0080);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  letter-spacing: 0.2em;
 }
 
 .buttonContainer {
   display: flex;
-  gap: 3rem;
   justify-content: center;
-  margin: 2rem 0;
-  flex-wrap: wrap;
+  gap: 3rem;
+  margin-bottom: 4rem;
 }
 
 .buttonWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  text-align: center;
 }
 
 .actionButton {
-  background-color: var(--secondary-color);
-  color: var(--background-color);
-  border: none;
-  border-radius: 12px;
-  padding: 1.5rem 2.5rem;
-  font-size: 1.25rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 1rem;
-  min-width: 250px;
-  justify-content: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .actionButton:hover {
-  background-color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .buttonIcon {
@@ -102,66 +115,113 @@
 }
 
 .buttonDescription {
-  font-size: 1rem;
-  text-align: center;
-  color: var(--neutral-color);
-  max-width: 200px;
+  margin-top: 1rem;
+  color: #fff;
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 
 .descriptionBox {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 2rem;
-  margin: 3rem auto;
   max-width: 800px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  animation: slideUp 0.8s ease-out;
 }
 
 .description {
-  font-size: 1.1rem;
+  color: #fff;
   line-height: 1.6;
   text-align: center;
-  color: var(--background-color);
-  margin: 0;
+  font-size: 1.1rem;
 }
 
-@media (max-width: 768px) {
-  .title {
-    font-size: 2.5rem;
-    margin: 2rem 0;
-  }
+/* Particles Animation */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  overflow: hidden;
+}
 
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: float 20s infinite linear;
+}
+
+.particle:nth-child(even) {
+  width: 4px;
+  height: 4px;
+  animation-duration: 25s;
+}
+
+/* Generate random positions for particles */
+@for $i from 1 through 20 {
+  .particle:nth-child($i) {
+    left: random(100) + '%';
+    top: random(100) + '%';
+    animation-delay: random(5) + s;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-100px) translateX(100px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .buttonContainer {
+    flex-direction: column;
     gap: 2rem;
   }
 
-  .actionButton {
-    padding: 1.25rem 2rem;
-    min-width: 220px;
+  .titleHighlight {
+    font-size: 3rem;
   }
 
   .descriptionBox {
-    margin: 2rem 1rem;
-    padding: 1.5rem;
-  }
-
-  .description {
-    font-size: 1rem;
+    margin: 0 1rem;
   }
 }
 
-@media (max-width: 480px) {
-  .title {
-    font-size: 2rem;
-  }
-
-  .mainContent {
-    padding: 1rem;
-  }
-
-  .actionButton {
-    min-width: 200px;
-    font-size: 1.1rem;
-  }
+/* Loading Animation */
+.loaded .mainContent {
+  opacity: 1;
+  transform: translateY(0);
 }

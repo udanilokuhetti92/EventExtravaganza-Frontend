@@ -1,6 +1,13 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Setup Instructions
+
+To set up this project locally, follow these steps:
+
+### **1. Install the dependencies:**
+```
+npm install axios
+```
 
 Currently, two official plugins are available:
 

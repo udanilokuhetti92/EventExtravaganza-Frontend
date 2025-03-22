@@ -9,7 +9,7 @@ import styles from './invitation_send.module.css';
 import Footer from '../components/footer/footer';
 
 
-emailjs.init("1SLJDJFAIftTWfyS1");
+emailjs.init("4Whebqy2IefyJuPHa");
 
 const compressImage = (base64String, maxWidth = 800) => {
   return new Promise((resolve) => {

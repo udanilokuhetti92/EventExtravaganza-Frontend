@@ -122,7 +122,7 @@ export default function EventInvitation() {
   };
 
   const sendEmail = async (image) => {
-    const serviceID = 'service_44creeq';
+    const serviceID = 'service_hh0a5cm';
     const templateID = 'template_id6fdig';
     const userID = '1SLJDJFAIftTWfyS1';
   

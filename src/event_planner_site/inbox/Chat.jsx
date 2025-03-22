@@ -1,98 +1,197 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import io from "socket.io-client";
+import axios from "axios";
 import Navigation from "../../event_planner_site/navigation/navigation";
+import styles from './Chat.module.css'; // Import the CSS Module file
+
+const socket = io("http://localhost:5000");
 
 const Chat = () => {
+  const [clients, setClients] = useState([]);
   const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState('');
-  const [recipient, setRecipient] = useState('');
-  const [sender, setSender] = useState('');
+  const [message, setMessage] = useState("");
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [sender, setSender] = useState("");
+  const [newEmail, setNewEmail] = useState("");
 
-  // Set sender dynamically when the component mounts
   useEffect(() => {
     const getSenderEmail = () => {
-      const planner = localStorage.getItem('planner');
-      return JSON.parse(planner)?.email || '';
+      const planner = localStorage.getItem("planner");
+      const email = JSON.parse(planner)?.email || "";
+      console.log("Sender email:", email); // Log sender email
+      return email;
     };
-  
-    const userEmail = getSenderEmail();
-    setSender(userEmail);
-  }, []); // Runs once when the component mounts
-  
+    setSender(getSenderEmail());
+  }, []);
 
-  // Fetch messages when sender and recipient are set
   useEffect(() => {
-    if (sender && recipient) {
-      console.log(`Fetching messages for Sender: ${sender}, Recipient: ${recipient}`);
-      fetchMessages();
+    if (sender) {
+      fetchClients();
     }
-  }, [sender, recipient]);
+  }, [sender]);
 
-  // Function to fetch messages
-  const fetchMessages = async () => {
+  useEffect(() => {
+    socket.on("newMessage", (newMessage) => {
+      if (selectedClient && newMessage.sender === selectedClient.email) {
+        setMessages((prev) => [...prev, newMessage]);
+      }
+    });
+
+    return () => socket.off("newMessage");
+  }, [selectedClient]);
+
+  const fetchClients = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/chat/getMessages?sender=${sender}&recipient=${recipient}`);
-      setMessages(response.data.messages);
+      const response = await axios.get(
+        `http://localhost:5000/api/chat/clients?sender=${sender}`
+      );
+      console.log("Fetched clients:", response.data);
+  
+      const clientData = response.data.map(email => ({
+        email,
+        name: email.split('@')[0] // Default name using the part before the @
+      }));
+  
+      setClients(clientData);
     } catch (error) {
-      console.error('Error fetching messages:', error);
+      console.error("Error fetching clients:", error);
     }
   };
 
-  // Function to send a new message
+  const fetchMessages = async (client) => {
+    try {
+      setSelectedClient(client);
+      const response = await axios.get(
+        `http://localhost:5000/api/chat/getMessages?sender=${sender}&recipient=${client.email}`
+      );
+      setMessages(response.data.messages);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+  };
+
   const sendMessage = async () => {
-    if (message.trim() === '' || recipient.trim() === '') return;
+    if (!message.trim() || !selectedClient) return;
 
     const messageData = {
       sender,
-      recipient,
+      recipient: selectedClient.email,
       content: message,
-      type: 'text',
+      type: "text",
     };
 
     try {
-      await axios.post('http://localhost:5000/api/chat/sendMessage', messageData);
-      setMessage('');
-      fetchMessages();
+      await axios.post("http://localhost:5000/api/chat/sendMessage", messageData);
+      socket.emit("sendMessage", messageData);
+      setMessage("");
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error("Error sending message:", error);
     }
   };
 
+  const startNewChat = () => {
+    if (!newEmail.trim()) {
+      alert("Please enter a valid email.");
+      return;
+    }
+
+    // Check if chat already exists
+    const existingChat = clients.find(client => client.email === newEmail);
+    if (existingChat) {
+      setSelectedClient(existingChat);
+      fetchMessages(existingChat);
+    } else {
+      // Add new chat
+      const newChat = { email: newEmail, name: newEmail.split("@")[0] }; 
+      setClients([...clients, newChat]);
+      setSelectedClient(newChat);
+      setMessages([]);
+    }
+
+    setNewEmail(""); // Clear input field
+  };
+
   return (
-    <div style={{ padding: '20px' }}>
+    <div className={styles.chatWrapper}>
       <Navigation />
-      <h2>Chat</h2>
-      <p>Logged in as: <strong>{sender}</strong></p>
 
-      {/* Recipient input field */}
-      <input
-        type="email"
-        placeholder="Enter recipient's email"
-        value={recipient}
-        onChange={(e) => setRecipient(e.target.value)}
-        style={{ padding: '10px', width: '80%', marginBottom: '10px' }}
-      />
+      <div className={styles.chatContainer}>
+        {/* Left - Chat List */}
+        <div className={styles.chatList}>
+          <h2 className={styles.chatTitle}>Chats</h2>
 
-      {/* Display messages */}
-      <div style={{ border: '1px solid #ccc', padding: '10px', height: '300px', overflowY: 'scroll' }}>
-        {messages.map((msg) => (
-          <div key={msg._id} style={{ marginBottom: '10px' }}>
-            <strong>{msg.sender}: </strong>
-            <span>{msg.content}</span>
+          {/* New Chat Input */}
+          <div className={styles.newChat}>
+            <input
+              type="email"
+              placeholder="Enter email..."
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              className={styles.newChatInput}
+            />
+            <button onClick={startNewChat} className={styles.newChatButton}>
+              Start Chat
+            </button>
           </div>
-        ))}
-      </div>
 
-      {/* Message input */}
-      <div style={{ marginTop: '10px' }}>
-        <input
-          type="text"
-          placeholder="Type a message..."
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          style={{ padding: '10px', width: '80%' }}
-        />
-        <button onClick={sendMessage} style={{ padding: '10px' }}>Send</button>
+          {/* Chat List */}
+          {clients.length > 0 ? (
+            clients.map((client) => (
+              <div
+                key={client.email}
+                className={`${styles.clientItem} ${
+                  selectedClient?.email === client.email ? styles.clientItemSelected : ''
+                }`}
+                onClick={() => fetchMessages(client)}
+              >
+                {client.name || client.email}
+              </div>
+            ))
+          ) : (
+            <p>No clients found</p>
+          )}
+        </div>
+
+        {/* Right - Chat Window */}
+        <div className={styles.chatArea}>
+          {selectedClient ? (
+            <>
+              <h2 className={styles.chatAreaTitle}>
+                Chat with {selectedClient.name || selectedClient.email}
+              </h2>
+              <div className={styles.messageContainer}>
+                {messages.length > 0 ? (
+                  messages.map((msg, index) => (
+                    <div
+                      key={msg._id || `${msg.sender}-${index}`}
+                      className={`${styles.message} ${
+                        msg.sender === sender ? styles.messageSent : styles.messageReceived
+                      }`}
+                    >
+                      <strong>{msg.sender === sender ? "You" : selectedClient.name}:</strong> {msg.content}
+                    </div>
+                  ))
+                ) : (
+                  <p className={styles.noMessages}>No messages yet</p>
+                )}
+              </div>
+              <div className={styles.messageInput}>
+                <input
+                  type="text"
+                  placeholder="Type a message..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className={styles.messageInputField}
+                />
+                <button onClick={sendMessage} className={styles.messageSendButton}>
+                  Send
+                </button>
+              </div>
+            </>
+          ) : (
+            <p className={styles.chatInstruction}>Select a chat to start messaging.</p>
+          )}
+        </div>
       </div>
     </div>
   );

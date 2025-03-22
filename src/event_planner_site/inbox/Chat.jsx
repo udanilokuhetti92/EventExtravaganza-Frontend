@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import axios from "axios";
 import Navigation from "../../event_planner_site/navigation/navigation";
-import styles from './Chat.module.css'; // Import the CSS Module file
+import styles from "./Chat.module.css"; // Import the CSS Module file
 
 const socket = io("http://localhost:5000");
 
@@ -35,23 +35,29 @@ const Chat = () => {
       if (selectedClient && newMessage.sender === selectedClient.email) {
         setMessages((prev) => [...prev, newMessage]);
       }
+
+      // If message is from a new client, add them to the chat list
+      if (!clients.some(client => client.email === newMessage.sender)) {
+        setClients(prevClients => [...prevClients, {
+          email: newMessage.sender,
+          name: newMessage.sender.split("@")[0]
+        }]);
+      }
     });
 
     return () => socket.off("newMessage");
-  }, [selectedClient]);
+  }, [selectedClient, clients]);
 
   const fetchClients = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5000/api/chat/clients?sender=${sender}`
-      );
+      const response = await axios.get(`http://localhost:5000/api/chat/clients?sender=${sender}`);
       console.log("Fetched clients:", response.data);
-  
+
       const clientData = response.data.map(email => ({
         email,
-        name: email.split('@')[0] // Default name using the part before the @
+        name: email.split("@")[0] // Default name using the part before @
       }));
-  
+
       setClients(clientData);
     } catch (error) {
       console.error("Error fetching clients:", error);
@@ -70,24 +76,48 @@ const Chat = () => {
     }
   };
 
-  const sendMessage = async () => {
-    if (!message.trim() || !selectedClient) return;
-
+  const sendMessage = async (content, type = "text") => {
+    if (!content.trim() || !selectedClient) return;
+  
     const messageData = {
       sender,
       recipient: selectedClient.email,
-      content: message,
-      type: "text",
+      content,
+      type,
+      fileUrl: type === "file" ? content : null, // If the message is a file, send the file URL
     };
-
+  
     try {
       await axios.post("http://localhost:5000/api/chat/sendMessage", messageData);
       socket.emit("sendMessage", messageData);
-      setMessage("");
+      if (type === "text") setMessage("");
     } catch (error) {
       console.error("Error sending message:", error);
     }
   };
+
+  const handleFileUpload = async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    const response = await axios.post("http://localhost:5000/api/chat/upload", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    console.log("File Upload Response:", response.data); // ✅ This should print the response in the frontend console
+
+    if (response.data.file.fileUrl) {
+      sendMessage(response.data.file.fileUrl, "file");
+    }
+  } catch (error) {
+    console.error("Error uploading file:", error.response ? error.response.data : error.message);
+  }
+};
+
 
   const startNewChat = () => {
     if (!newEmail.trim()) {
@@ -101,11 +131,14 @@ const Chat = () => {
       setSelectedClient(existingChat);
       fetchMessages(existingChat);
     } else {
-      // Add new chat
-      const newChat = { email: newEmail, name: newEmail.split("@")[0] }; 
-      setClients([...clients, newChat]);
-      setSelectedClient(newChat);
-      setMessages([]);
+      // Add new chat and fetch messages
+      const newChat = { email: newEmail, name: newEmail.split("@")[0] };
+      setClients(prevClients => {
+        const updatedClients = [...prevClients, newChat];
+        setSelectedClient(newChat);
+        fetchMessages(newChat);
+        return updatedClients;
+      });
     }
 
     setNewEmail(""); // Clear input field
@@ -139,9 +172,7 @@ const Chat = () => {
             clients.map((client) => (
               <div
                 key={client.email}
-                className={`${styles.clientItem} ${
-                  selectedClient?.email === client.email ? styles.clientItemSelected : ''
-                }`}
+                className={`${styles.clientItem} ${selectedClient?.email === client.email ? styles.clientItemSelected : ""}`}
                 onClick={() => fetchMessages(client)}
               >
                 {client.name || client.email}
@@ -164,11 +195,19 @@ const Chat = () => {
                   messages.map((msg, index) => (
                     <div
                       key={msg._id || `${msg.sender}-${index}`}
-                      className={`${styles.message} ${
-                        msg.sender === sender ? styles.messageSent : styles.messageReceived
-                      }`}
+                      className={`${styles.message} ${msg.sender === sender ? styles.messageSent : styles.messageReceived}`}
                     >
-                      <strong>{msg.sender === sender ? "You" : selectedClient.name}:</strong> {msg.content}
+                      <strong>{msg.sender === sender ? "You" : selectedClient.name}:</strong>
+                      {msg.type === "file" ? (
+                    <div>
+                    {/* Display file as a link */}
+                    <a href={`http://localhost:5000${msg.fileUrl || msg.content}`} target="_blank" rel="noopener noreferrer">
+                      {msg.fileUrl ? msg.fileUrl.split("/").pop() : msg.content.split("/").pop()} {/* Extract filename */}
+                    </a>
+                    </div>
+                  ) : (
+                    <span>{msg.content}</span>
+                  )}
                     </div>
                   ))
                 ) : (
@@ -183,9 +222,10 @@ const Chat = () => {
                   onChange={(e) => setMessage(e.target.value)}
                   className={styles.messageInputField}
                 />
-                <button onClick={sendMessage} className={styles.messageSendButton}>
+                <button onClick={() => sendMessage(message)} className={styles.messageSendButton}>
                   Send
                 </button>
+                <input type="file" onChange={handleFileUpload} className={styles.fileInput} />
               </div>
             </>
           ) : (

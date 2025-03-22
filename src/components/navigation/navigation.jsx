@@ -57,7 +57,7 @@ export default function Navigation() {
                 </li>
               </ul>
             </li>
-            <li className={styles.navItem}>
+            <li className={styles.navItem} onClick={() => navigate('/Organizer_Inbox')}>
               <Inbox size={18} />
               <span>Inbox</span>
             </li>

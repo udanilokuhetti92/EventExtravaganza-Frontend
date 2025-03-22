@@ -54,7 +54,7 @@ export default function Navigation() {
             </li>
             
             <li>
-              <button className={styles.navLink}>
+              <button className={styles.navLink} onClick={() => navigate('/Planner_Inbox')}>
                 <Inbox size={18} />
                 <span>Inbox</span>
               </button>

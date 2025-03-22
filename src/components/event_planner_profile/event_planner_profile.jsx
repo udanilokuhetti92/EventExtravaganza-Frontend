@@ -13,7 +13,7 @@ export default function EventPlannerProfile() {
   const plannerData = JSON.parse(localStorage.getItem("planner")) || {
     name: "Udani Lokuhetti",
     city: "Colombo",
-    email: "udanilokuhetti22@gmail.com",
+    email: "udanilokuhetti24@gmail.com",
     contactNumber: "+94(76) 0876 502",
     gender: "Female",
     address: "123 Event Street, Colombo 07",

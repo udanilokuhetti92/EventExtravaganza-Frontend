@@ -18,6 +18,8 @@ import LocationFiltering from './location_filtering/location_filtering'
 import Event_Organizer_Profile from './components/event_organizer_profile/event_organizer_profile'
 import Event_Planner_Profile from './components/event_planner_profile/event_planner_profile'
 import Chatbot from './chatbot/chatbot'
+import Planner_Inbox from './event_planner_site/inbox/Chat'
+import Organizer_Inbox from './components/inbox/Chat'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -49,8 +51,8 @@ createRoot(document.getElementById('root')).render(
         <Route path='/Organizer_Profile' element={<Event_Organizer_Profile/>}/>
         <Route path='/Planner_Profile' element={<Event_Planner_Profile/>}/>
         <Route path='/Chatbot' element={<Chatbot/>}/>
-        
-
+        <Route path='/Planner_Inbox' element={<Planner_Inbox/>}/>
+        <Route path='/Organizer_Inbox' element={<Organizer_Inbox/>}/>
 
 
 
